@@ -1,0 +1,38 @@
+{
+  "name": "eragonova-website",
+  "version": "1.0.0",
+  "private": true,
+  "homepage": "https://Edward-Wonder-Mordey.github.io/eragonova-website",
+  "dependencies": {
+    "@tanstack/react-query": "^5.0.0",
+    "lucide-react": "^0.263.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-scripts": "^5.0.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.18",
+    "autoprefixer": "^10.4.23",
+    "gh-pages": "^5.0.0",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^3.4.19"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
