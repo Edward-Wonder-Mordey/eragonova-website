@@ -1,7 +1,7 @@
 import Header from "../components/Header";
 import HeroSection from "../components/HeroSection.new";
-import ServicesSection from "../components/ServicesSection";
-import ProjectsSection from "../components/ProjectsSection";
+import ServicesSection from "../components/ServicesSection.new";
+import ProjectsSection from "../components/ProjectsSection.new";
 import AboutSection from "../components/AboutSection";
 import ContactSection from "../components/ContactSection";
 
