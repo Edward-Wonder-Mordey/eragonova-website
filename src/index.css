@@ -2,14 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Custom global styles */
-html, body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Inter', sans-serif;
-  background-color: #ffffff;
+html { scroll-behavior: smooth; }
+html, body, #root { margin: 0; min-height: 100%; }
+body { font-family: 'Inter', system-ui, sans-serif; background: #fff; }
+
+@layer components {
+  .glass-nav { @apply border border-white/60 bg-white/80 backdrop-blur-xl shadow-lg shadow-slate-900/10 dark:border-white/10 dark:bg-slate-950/80; }
+  .nav-link { @apply inline-flex items-center px-3 py-2 rounded-lg text-sm font-medium text-slate-600 transition hover:bg-slate-100 hover:text-blue-600 dark:text-slate-300 dark:hover:bg-white/10 dark:hover:text-blue-300; }
+  .icon-button { @apply inline-flex h-10 w-10 items-center justify-center rounded-xl text-slate-600 transition hover:bg-slate-100 hover:text-blue-600 dark:text-slate-300 dark:hover:bg-white/10; }
+  .primary-button { @apply inline-flex items-center gap-2 justify-center rounded-xl bg-blue-600 font-semibold text-white shadow-lg shadow-blue-600/20 transition hover:bg-blue-700 hover:-translate-y-0.5 active:translate-y-0; }
+  .secondary-button { @apply inline-flex items-center justify-center gap-2 rounded-xl border border-slate-300 font-semibold text-slate-700 transition hover:border-blue-400 hover:bg-blue-50 dark:border-white/20 dark:text-white dark:hover:bg-white/10; }
 }
 
-.dark {
-  background-color: #121212;
-}
+.text-gradient { background: linear-gradient(90deg, #60a5fa, #38bdf8); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.hero-grid { background-image: linear-gradient(rgba(255,255,255,.12) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.12) 1px, transparent 1px); background-size: 42px 42px; }
+section { scroll-margin-top: 92px; }
+
+::selection { background: rgba(37, 99, 235, .22); }
