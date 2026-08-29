@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/eragonova-website/static/css/main.e28190b9.css",
-    "main.js": "/eragonova-website/static/js/main.ff26c3b7.js",
+    "main.css": "/eragonova-website/static/css/main.f42758c6.css",
+    "main.js": "/eragonova-website/static/js/main.588b4ea5.js",
     "index.html": "/eragonova-website/index.html",
-    "main.e28190b9.css.map": "/eragonova-website/static/css/main.e28190b9.css.map",
-    "main.ff26c3b7.js.map": "/eragonova-website/static/js/main.ff26c3b7.js.map"
+    "main.f42758c6.css.map": "/eragonova-website/static/css/main.f42758c6.css.map",
+    "main.588b4ea5.js.map": "/eragonova-website/static/js/main.588b4ea5.js.map"
   },
   "entrypoints": [
-    "static/css/main.e28190b9.css",
-    "static/js/main.ff26c3b7.js"
+    "static/css/main.f42758c6.css",
+    "static/js/main.588b4ea5.js"
   ]
 }

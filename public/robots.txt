@@ -1,3 +1,0 @@
-User-agent: *
-Allow: /
-Sitemap: https://edward-wonder-mordey.github.io/eragonova-website/sitemap.xml
