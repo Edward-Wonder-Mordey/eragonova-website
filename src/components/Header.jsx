@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Menu, X, Sun, Moon, ArrowUpRight } from "lucide-react";
 
-const LOGO = "/eragonova.jpeg";
+const LOGO = `${process.env.PUBLIC_URL}/eragonova.jpeg`;
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -26,7 +26,7 @@ export default function Header() {
       <div className="glass-nav rounded-2xl px-4 sm:px-6 py-3">
         <div className="flex items-center justify-between gap-4">
           <a href="#hero" className="flex items-center gap-3 min-w-0" aria-label="Eragonova Enterprise home">
-            <img src={LOGO} alt="Eragonova Enterprise logo" className="h-10 w-10 rounded-xl object-cover shadow-sm" />
+            <img src={LOGO} alt="Eragonova Enterprise logo" className="h-11 w-11 rounded-xl object-contain bg-white shadow-sm" />
             <div className="hidden sm:block leading-tight">
               <span className="block font-bold text-sm tracking-tight text-slate-900 dark:text-white">Eragonova</span>
               <span className="block text-[10px] uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">Enterprise</span>
