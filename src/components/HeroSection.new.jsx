@@ -20,7 +20,7 @@ export default function HeroSection() {
             Practical technology.<br /><span className="text-gradient">Reliable infrastructure.</span>
           </h1>
           <p className="mt-7 max-w-2xl text-base sm:text-lg lg:text-xl leading-relaxed text-white/75">
-            Eragonova Enterprise brings IT systems, data, electrical and electronic engineering, professional documentation, and strategic support together to help organizations build, improve, and operate with confidence.
+            From systems support and data reporting to business documentation and visual design, Eragonova Enterprise helps organizations solve practical problems with clear, dependable work.
           </p>
           <div className="mt-9 flex flex-col sm:flex-row gap-3">
             <a href="#contact" className="primary-button px-6 py-3.5">Start a Project <ArrowRight size={18} /></a>
