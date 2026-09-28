@@ -1,9 +1,9 @@
 import React from "react";
-import { CheckCircle2, Compass, Layers3, HeartHandshake } from "lucide-react";
+import { CheckCircle2, Compass, Layers, HeartHandshake } from "lucide-react";
 
 const principles = [
   [Compass, "Understand", "We start with the problem, environment, constraints, and outcome that matter."],
-  [Layers3, "Design", "We translate requirements into practical systems, workflows, documentation, and plans."],
+  [Layers, "Design", "We translate requirements into practical systems, workflows, documentation, and plans."],
   [CheckCircle2, "Build", "We prioritize reliability, clarity, security, quality assurance, and maintainability."],
   [HeartHandshake, "Support", "We communicate clearly, document what we deliver, and keep improvement in view."],
 ];
