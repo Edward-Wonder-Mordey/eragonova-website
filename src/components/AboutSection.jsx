@@ -1,5 +1,5 @@
 import React from "react";
-import { CheckCircle2, Compass, Layers3, HeartHandshake, ExternalLink } from "lucide-react";
+import { CheckCircle2, Compass, Layers3, HeartHandshake } from "lucide-react";
 
 const principles = [
   [Compass, "Understand", "We start with the problem, environment, constraints, and outcome that matter."],
@@ -14,15 +14,14 @@ export default function AboutSection() {
       <div><p className="eyebrow">About Eragonova</p><h2 className="section-title">Technology should <span className="text-blue-600 dark:text-blue-400">serve people.</span></h2>
         <p className="section-lead mt-6">Eragonova Enterprise is a multidisciplinary solutions firm founded in Kumasi, Ghana. We bring together IT infrastructure, system administration, data analysis, electrical and electronic engineering, professional documentation, and strategic support.</p>
         <p className="mt-5 text-slate-600 dark:text-slate-400 text-lg leading-relaxed">Our approach is shaped by a simple belief: dependable technical work should be understandable, responsible, and useful. Whether the challenge is a network, a data workflow, an engineering requirement, or a business document, we aim to turn complexity into something people can confidently use.</p>
-        <p className="mt-5 text-slate-600 dark:text-slate-400 text-lg leading-relaxed">Founded by Edward Wonder Mordey in 2025, Eragonova draws on his professional work in data analysis and auditing at Springboard, customer-facing digital services and operations at Collins Printing Press, and graphic design at Shalom.Net. His systems and engineering training supports this hands-on experience.</p>
-        <a href="https://edward-wonder-mordey.github.io/portfolio/" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 mt-7 font-semibold text-blue-600 dark:text-blue-400 hover:underline">Meet the founder & view professional portfolio <ExternalLink size={16}/></a>
+        <p className="mt-5 text-slate-600 dark:text-slate-400 text-lg leading-relaxed">Our work brings together experience in data quality, customer-facing digital services, design, technical support, and structured documentation. We focus on understanding the need, delivering clearly, and making the result useful in day-to-day operations.</p>
       </div>
       <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-7 shadow-sm"><p className="text-xs font-bold uppercase tracking-[0.18em] text-blue-600 dark:text-blue-400">Technical foundation</p><div className="mt-6 space-y-5">
         <div><p className="font-semibold">System Administration</p><p className="text-sm text-slate-500 mt-1">Windows Server · Linux · Active Directory · DHCP / DNS · Cloud</p></div>
         <div><p className="font-semibold">Data & Automation</p><p className="text-sm text-slate-500 mt-1">SQL · Python · PowerShell · Bash · Power BI · Tableau</p></div>
         <div><p className="font-semibold">Networking & Security</p><p className="text-sm text-slate-500 mt-1">Network configuration · Nmap · discovery · monitoring · security foundations</p></div>
         <div><p className="font-semibold">Engineering</p><p className="text-sm text-slate-500 mt-1">Electrical systems · electronics · wiring design · technical problem-solving</p></div>
-        <div className="pt-4 border-t border-slate-200 dark:border-slate-800"><p className="text-sm font-semibold">Founder’s professional background</p><p className="text-sm text-slate-500 mt-1">Data analysis & auditing · Digital services & operations · Graphic design · Technical support</p></div>
+        <div className="pt-4 border-t border-slate-200 dark:border-slate-800"><p className="text-sm font-semibold">Practical strengths</p><p className="text-sm text-slate-500 mt-1">Data analysis & auditing · Digital services & operations · Graphic design · Technical support</p></div>
       </div></div>
     </div>
 
