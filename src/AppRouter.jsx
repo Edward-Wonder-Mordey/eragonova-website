@@ -2,17 +2,8 @@ import React, { useEffect, useState } from "react";
 import Header from "./components/Header";
 import HomePage from "./pages/HomePage";
 import AboutPage from "./pages/AboutPage";
-import {
-  ServicesPage,
-  ProjectsPage,
-  AcademyPage,
-  ResourcesPage,
-  CommunityPage,
-  CareersPage,
-  PortalPage,
-  ContactPage,
-  LegalPage,
-} from "./pages/CorporatePages";
+import { AcademyPage, ContactPage, LegalPage } from "./pages/CorporatePages";
+import { ServicesPage, ProjectsPage, ResourcesPage, CommunityPage, CareersPage } from "./pages/ClientFacingPages";
 import PartnersPage from "./pages/PartnersPage";
 import PrivacyPage from "./pages/PrivacyPage";
 import TermsPage from "./pages/TermsPage";
@@ -31,7 +22,6 @@ const routes = {
   community: CommunityPage,
   partners: PartnersPage,
   careers: CareersPage,
-  portal: PortalPage,
   contact: ContactPage,
   legal: LegalPage,
   privacy: PrivacyPage,
