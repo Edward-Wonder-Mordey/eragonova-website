@@ -8,12 +8,12 @@ import {
   AcademyPage,
   ResourcesPage,
   CommunityPage,
-  PartnersPage,
   CareersPage,
   PortalPage,
   ContactPage,
   LegalPage,
 } from "./pages/CorporatePages";
+import PartnersPage from "./pages/PartnersPage";
 import PrivacyPage from "./pages/PrivacyPage";
 import TermsPage from "./pages/TermsPage";
 
