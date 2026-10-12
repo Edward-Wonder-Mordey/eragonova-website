@@ -4,6 +4,11 @@ import HeroSection from "../components/HeroSection.new";
 import ProjectsSection from "../components/ProjectsSection.new";
 import { servicePillars, sectors, academyTracks } from "../data/siteData";
 
+const ELYRA = {
+  site: "https://edward-wonder-mordey.github.io/elyra-suite-website/",
+  logo: "https://raw.githubusercontent.com/Edward-Wonder-Mordey/elyra-suite-website/main/assets/logo-horizontal.webp",
+};
+
 function SectionHeading({ eyebrow, title, copy }) {
   return (
     <div className="max-w-3xl">
@@ -111,10 +116,17 @@ export default function HomePage() {
           </div>
           <div className="graphic-panel rounded-[2rem] bg-slate-950 p-8 text-white border border-fuchsia-400/15">
             <div className="absolute -right-12 -top-12 h-44 w-44 rounded-full bg-fuchsia-500/20 blur-3xl" />
-            <p className="relative text-xs font-bold uppercase tracking-[0.18em] text-fuchsia-300">Strategic Partnerships</p>
-            <h2 className="relative mt-3 text-3xl font-bold">Independent expertise, connected when it adds value.</h2>
-            <p className="relative mt-4 text-base leading-7 text-white/65">Eragonova's partnership model allows complementary organisations to work alongside the enterprise while keeping responsibilities and identities clear.</p>
-            <a href="#/partners" className="relative mt-6 inline-flex items-center gap-2 font-bold text-fuchsia-300">View Partnerships <ArrowRight size={17}/></a>
+            <div className="relative rounded-2xl bg-[#fff8f0] p-4 sm:p-5 mb-6 border border-fuchsia-300/20">
+              <img src={ELYRA.logo} alt="Elyra Suite logo" className="w-full max-w-sm mx-auto object-contain" loading="lazy" />
+            </div>
+            <p className="relative text-xs font-bold uppercase tracking-[0.18em] text-fuchsia-300">Strategic Partnership</p>
+            <h2 className="relative mt-3 text-3xl font-bold">Elyra Suite</h2>
+            <p className="relative mt-2 font-semibold text-fuchsia-300">Beauty • Business • Excellence</p>
+            <p className="relative mt-4 text-base leading-7 text-white/65">Elyra Suite is an independent strategic partner providing complementary beauty, business support, administrative, training and empowerment services.</p>
+            <div className="relative mt-6 flex flex-wrap gap-3">
+              <a href="#/partners" className="inline-flex items-center gap-2 font-bold text-fuchsia-300">View Partnership <ArrowRight size={17}/></a>
+              <a href={ELYRA.site} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 font-bold text-white/80 hover:text-white">Visit Elyra Suite <ArrowRight size={17}/></a>
+            </div>
           </div>
         </div>
       </section>
