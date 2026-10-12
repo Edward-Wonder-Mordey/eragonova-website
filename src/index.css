@@ -222,3 +222,21 @@ section { scroll-margin-top: 92px; }
 }
 .capability-showcase-card:hover { transform: translateY(-5px); box-shadow: 0 22px 50px rgba(15,23,42,.09); }
 .dark .capability-showcase-card:hover { box-shadow: 0 20px 45px rgba(0,0,0,.28); }
+
+/* Native contact select menu readability */
+.contact-select,
+.contact-select option {
+  background-color: #f8fafc;
+  color: #0f172a;
+}
+
+.dark .contact-select {
+  color-scheme: dark;
+  background-color: #0f172a;
+  color: #f8fafc;
+}
+
+.dark .contact-select option {
+  background-color: #0f172a;
+  color: #f8fafc;
+}
