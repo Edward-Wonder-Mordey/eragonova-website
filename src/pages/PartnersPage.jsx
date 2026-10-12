@@ -1,6 +1,13 @@
 import React from "react";
 import { ArrowRight, Users, ShieldCheck, Layers } from "lucide-react";
 
+const ELYRA = {
+  name: "Elyra Suite",
+  tagline: "Beauty • Business • Excellence",
+  site: "https://edward-wonder-mordey.github.io/elyra-suite-website/",
+  logo: "https://raw.githubusercontent.com/Edward-Wonder-Mordey/elyra-suite-website/main/assets/logo-horizontal.webp",
+};
+
 export default function PartnersPage() {
   const principles = [
     [ShieldCheck,"Independent identity","Partners retain their own identity, responsibilities and service boundaries.","fuchsia"],
@@ -25,16 +32,24 @@ export default function PartnersPage() {
       <section className="py-24 bg-white dark:bg-slate-950 relative overflow-hidden">
         <div className="absolute inset-0 dot-field opacity-10 pointer-events-none" />
         <div className="relative max-w-7xl mx-auto px-6 lg:px-12">
-          <div className="accent-card rounded-[2rem] p-8 sm:p-10 grid lg:grid-cols-[.8fr_1.2fr] gap-10" data-accent="fuchsia">
+          <div className="accent-card rounded-[2rem] p-8 sm:p-10 grid lg:grid-cols-[.8fr_1.2fr] gap-10 items-center" data-accent="fuchsia">
             <div className="relative z-10">
-              <div className="accent-icon"><Users size={26}/></div>
-              <p className="accent-kicker mt-5 text-xs font-bold uppercase tracking-[0.16em]">Independent Strategic Partner</p>
-              <h2 className="mt-2 text-3xl font-bold text-slate-950 dark:text-white">Elyra Suite</h2>
-              <p className="accent-kicker mt-1 font-semibold">Beauty • Business • Excellence</p>
+              <a href={ELYRA.site} target="_blank" rel="noopener noreferrer" className="block rounded-3xl border border-fuchsia-200/70 dark:border-fuchsia-400/15 bg-[#fff8f0] p-6 sm:p-8 shadow-sm transition hover:-translate-y-1 hover:shadow-xl">
+                <img src={ELYRA.logo} alt="Elyra Suite logo" className="w-full max-w-md mx-auto object-contain" />
+              </a>
+              <div className="mt-6 flex items-center gap-3">
+                <div className="accent-icon"><Users size={26}/></div>
+                <div>
+                  <p className="accent-kicker text-xs font-bold uppercase tracking-[0.16em]">Independent Strategic Partner</p>
+                  <p className="mt-1 text-sm font-semibold text-fuchsia-700 dark:text-fuchsia-300">{ELYRA.tagline}</p>
+                </div>
+              </div>
             </div>
             <div className="relative z-10">
-              <p className="text-base leading-8 text-slate-600 dark:text-slate-300">Elyra Suite operates independently and provides beauty services, hair and wig solutions, makeup services, nail care, business support, administrative services, training programmes and women's empowerment programmes.</p>
+              <h2 className="text-3xl sm:text-4xl font-bold text-slate-950 dark:text-white">{ELYRA.name}</h2>
+              <p className="mt-5 text-base leading-8 text-slate-600 dark:text-slate-300">Elyra Suite operates independently and provides beauty services, hair and wig solutions, makeup services, nail care, business support, administrative services, training programmes and women's empowerment programmes.</p>
               <p className="mt-4 text-base leading-8 text-slate-600 dark:text-slate-300">Where appropriate, clients requiring complementary beauty, wellness, personal development or related support may be referred to Elyra Suite.</p>
+              <a href={ELYRA.site} target="_blank" rel="noopener noreferrer" className="mt-6 inline-flex items-center gap-2 rounded-xl bg-fuchsia-600 px-5 py-3 font-bold text-white transition hover:bg-fuchsia-500">Visit Elyra Suite <ArrowRight size={17}/></a>
             </div>
           </div>
         </div>
