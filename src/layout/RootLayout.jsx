@@ -30,7 +30,7 @@ export default function RootLayout({ children }) {
                 <a href="#/home" className="text-xl font-bold hover:text-blue-300 transition">Eragonova Enterprise</a>
                 <p className="mt-2 text-sm font-semibold text-blue-300">Technology · Engineering · Growth</p>
                 <p className="mt-4 text-sm leading-6 text-white/55">Practical Technology. Reliable Infrastructure. Sustainable Growth.</p>
-                <p className="mt-4 text-xs leading-5 text-white/35">Ghanaian multidisciplinary solutions company serving organisations and communities through practical, structured delivery.</p>
+                <p className="mt-4 text-xs leading-5 text-white/35">A multidisciplinary technology, engineering and business solutions company based in Ghana and built to serve clients across Africa and internationally.</p>
               </div>
               {footerLinks.map(([heading, links]) => (
                 <div key={heading}>
