@@ -1,5 +1,6 @@
 import React from "react";
 import { ArrowRight, CheckCircle2, GraduationCap, Monitor, BarChart3, Briefcase, Users, Zap } from "lucide-react";
+import CapabilityVisual from "../components/CapabilityVisual";
 import { academyTracks } from "../data/siteData";
 
 const trackAccents = ["blue", "cyan", "emerald", "violet", "amber"];
@@ -10,13 +11,17 @@ export default function AcademyPage() {
     <>
       <section className="accent-band relative overflow-hidden text-white pt-36 pb-20 sm:pt-40 sm:pb-24">
         <div className="absolute -left-20 bottom-0 h-72 w-72 rounded-full bg-violet-500/15 blur-3xl pointer-events-none" />
-        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
-          <div className="max-w-4xl">
+        <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 grid lg:grid-cols-[1.05fr_.95fr] gap-12 items-center">
+          <div>
             <div className="h-14 w-14 rounded-2xl bg-violet-500/15 border border-violet-300/20 text-violet-200 flex items-center justify-center"><GraduationCap size={27}/></div>
             <p className="mt-6 text-violet-300 text-xs font-bold uppercase tracking-[0.22em]">Eragonova Academy</p>
             <h1 className="mt-4 text-4xl sm:text-5xl lg:text-7xl font-bold tracking-[-0.045em] leading-[1.02]">Practical skills for people, teams and organisations.</h1>
             <p className="mt-6 max-w-3xl text-base sm:text-lg leading-8 text-white/70">Eragonova Academy brings together technology, data, business, professional development and engineering learning in practical formats designed around real capability.</p>
             <div className="mt-8"><a href="#/contact" className="inline-flex items-center justify-center gap-2 rounded-xl bg-violet-600 px-6 py-3.5 font-semibold text-white shadow-lg shadow-violet-600/20 transition hover:bg-violet-500 hover:-translate-y-0.5">Request Training <ArrowRight size={18}/></a></div>
+          </div>
+          <div className="rounded-[1.6rem] border border-white/10 bg-white/[0.055] p-3 sm:p-4 shadow-2xl shadow-violet-950/30 backdrop-blur-sm">
+            <CapabilityVisual type="academy" />
+            <div className="mt-3 flex items-center justify-between gap-3 px-1 text-[11px] font-semibold text-white/45"><span>Structured learning</span><span>Tracks • Labs • Progress</span></div>
           </div>
         </div>
       </section>
