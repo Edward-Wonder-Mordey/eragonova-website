@@ -1,6 +1,7 @@
 import React from "react";
 import { ArrowRight, CheckCircle2, Target, BarChart3, FileText, Layers, Users, Briefcase, Globe2, Mail } from "lucide-react";
 import ProjectsSection from "../components/ProjectsSection.new";
+import CapabilityVisual from "../components/CapabilityVisual";
 import { divisions, servicePillars, sectors, resourceTypes, communityPrograms } from "../data/siteData";
 
 const pillarAccents = ["blue", "amber", "emerald"];
@@ -8,6 +9,15 @@ const sectorAccents = ["blue", "emerald", "violet", "amber", "indigo", "teal"];
 const resourceAccents = ["blue", "violet", "emerald", "amber"];
 const communityAccents = ["violet", "cyan", "emerald", "amber", "indigo", "fuchsia"];
 const careerAccents = ["blue", "cyan", "indigo", "amber", "emerald", "violet"];
+
+const serviceShowcase = [
+  ["04", "data", "Data & Analytics", "Dashboard, reporting and decision-support views that turn operational information into something easier to understand.", ["Power BI", "Tableau", "SQL", "KPI Reporting"]],
+  ["02", "network", "Networking & Infrastructure", "Topology, connectivity and infrastructure planning presented through clear technical views and structured implementation.", ["LAN/WAN", "Routing", "Switching", "Wireless"]],
+  ["07", "engineering", "Electrical & Electronic Engineering", "Technical systems, electrical documentation and engineering support represented through clean schematics and operating data.", ["Power", "Electronics", "Drawings", "Smart Systems"]],
+  ["09", "documents", "Documentation & Compliance", "Professional reports, proposals, policies and technical documentation organised for clarity, review and use.", ["Reports", "SOPs", "Proposals", "Policies"]],
+  ["10", "creative", "Branding, Media & Print", "Visual systems that bring identity, campaigns, print materials and digital communication into a consistent brand experience.", ["Branding", "Design", "Print", "Campaigns"]],
+  ["15", "academy", "Eragonova Academy", "Learning experiences that combine structured tracks, progress, practical exercises and organisation-specific capability building.", ["Technology", "Data", "Business", "Engineering"]],
+];
 
 function divisionAccent(number) {
   const n = Number(number);
@@ -103,10 +113,29 @@ export function ServicesPage() {
         </div>
       </section>
 
+      <section className="py-24 bg-slate-50 dark:bg-slate-900/40 border-y border-slate-200 dark:border-white/10">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+          <SectionHeading eyebrow="Visual Capability Showcase" title="See the work in a more tangible way." copy="Selected service areas use clean visual previews to show the kinds of dashboards, systems, technical views, documents and learning experiences that sit behind the service descriptions." />
+          <div className="mt-10 grid lg:grid-cols-2 gap-6">
+            {serviceShowcase.map(([number,type,title,text,tags]) => (
+              <article key={number} className="capability-showcase-card rounded-[1.75rem] border border-slate-200 bg-white p-4 sm:p-5 dark:border-white/10 dark:bg-white/[0.035]">
+                <CapabilityVisual type={type} />
+                <div className="px-1 pt-5 pb-1">
+                  <p className="text-xs font-bold uppercase tracking-[0.18em] text-slate-400">Division {number}</p>
+                  <h3 className="mt-2 text-xl font-bold text-slate-950 dark:text-white">{title}</h3>
+                  <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">{text}</p>
+                  <div className="mt-4 flex flex-wrap gap-2">{tags.map(tag => <span key={tag} className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs font-semibold text-slate-600 dark:border-white/10 dark:bg-white/5 dark:text-slate-300">{tag}</span>)}</div>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {servicePillars.map((pillar,pillarIndex) => {
         const items = divisions.filter(d => pillar.divisions.includes(d.number));
         return (
-          <section key={pillar.title} className={pillarIndex%2===0 ? "py-24 bg-slate-50 dark:bg-slate-900/40 border-y border-slate-200 dark:border-white/10" : "py-24 bg-white dark:bg-slate-950"}>
+          <section key={pillar.title} className={pillarIndex%2===0 ? "py-24 bg-white dark:bg-slate-950" : "py-24 bg-slate-50 dark:bg-slate-900/40 border-y border-slate-200 dark:border-white/10"}>
             <div className="max-w-7xl mx-auto px-6 lg:px-12">
               <SectionHeading eyebrow={`Pillar 0${pillarIndex+1}`} title={pillar.title} copy={pillar.description}/>
               <div className="mt-10 grid lg:grid-cols-2 gap-5">{items.map(division => <DivisionCard key={division.number} division={division}/>)}</div>
