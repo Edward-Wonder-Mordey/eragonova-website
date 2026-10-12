@@ -13,14 +13,14 @@ export default function HeroSection() {
       <div className="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-12 py-20">
         <div className="max-w-5xl">
           <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.16em] text-blue-200 backdrop-blur-sm mb-7">
-            <span className="h-2 w-2 rounded-full bg-blue-400 animate-pulse" /> Ghanaian enterprise · Serving Ghana & beyond
+            <span className="h-2 w-2 rounded-full bg-blue-400 animate-pulse" /> Based in Ghana · Built to serve globally
           </div>
           <p className="text-blue-300 text-sm font-bold uppercase tracking-[0.2em] mb-4">Technology · Engineering · Growth</p>
           <h1 className="font-bold text-white leading-[0.98] tracking-[-0.04em] text-5xl sm:text-6xl lg:text-8xl max-w-5xl">
             Practical technology.<br />Reliable infrastructure.<br /><span className="text-gradient">Sustainable growth.</span>
           </h1>
           <p className="mt-7 max-w-3xl text-base sm:text-lg lg:text-xl leading-relaxed text-white/75">
-            Eragonova Enterprise brings technology, engineering, data, documentation, business support, training and organisational development together to solve practical problems for businesses, institutions and communities.
+            Eragonova Enterprise brings technology, engineering, data, documentation, business support, training and organisational development together to deliver practical solutions for organisations, institutions and communities across industries and borders.
           </p>
           <div className="mt-9 flex flex-col sm:flex-row gap-3">
             <a href="#/contact" className="primary-button px-6 py-3.5">Start a Project <ArrowRight size={18} /></a>
@@ -29,7 +29,7 @@ export default function HeroSection() {
           <div className="mt-14 grid sm:grid-cols-3 gap-5 max-w-4xl">
             {[
               [ShieldCheck, "Professional delivery", "Structured work, clear communication and dependable execution"],
-              [Globe2, "Flexible reach", "Remote, on-site and hybrid support across locations"],
+              [Globe2, "Global-ready delivery", "Remote, on-site and hybrid support across locations and borders"],
               [Layers, "Multidisciplinary", "Connected technology, engineering, business and development capability"],
             ].map(([Icon, title, text]) => (
               <div key={title} className="flex gap-3 items-start">
