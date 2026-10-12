@@ -60,7 +60,7 @@ export default function ContactSection() {
     [MapPin, "Location", "Kumasi, Ghana", null],
   ];
 
-  const fieldClass = "w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-900 outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 dark:border-white/10 dark:bg-white/[0.05] dark:text-white dark:focus:border-blue-400";
+  const fieldClass = "w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-900 outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 dark:border-white/10 dark:bg-slate-900 dark:text-white dark:focus:border-blue-400";
 
   return (
     <section id="contact" className="py-24 sm:py-28 bg-white dark:bg-slate-950">
@@ -96,7 +96,7 @@ export default function ContactSection() {
 
               <div className="grid sm:grid-cols-2 gap-5">
                 <div><label htmlFor="phone" className="block mb-2 text-sm font-semibold text-slate-700 dark:text-slate-300">Phone Number</label><input id="phone" name="phone" type="tel" value={formData.phone} onChange={handleChange} className={fieldClass} placeholder="+233 ..." /></div>
-                <div><label htmlFor="service" className="block mb-2 text-sm font-semibold text-slate-700 dark:text-slate-300">Service / Inquiry *</label><select id="service" name="service" value={formData.service} onChange={handleChange} required className={fieldClass}><option value="">Select...</option>{serviceOptions.map((service) => <option key={service} value={service}>{service}</option>)}</select></div>
+                <div><label htmlFor="service" className="block mb-2 text-sm font-semibold text-slate-700 dark:text-slate-300">Service / Inquiry *</label><select id="service" name="service" value={formData.service} onChange={handleChange} required className={`${fieldClass} contact-select`}><option value="">Select...</option>{serviceOptions.map((service) => <option key={service} value={service}>{service}</option>)}</select></div>
               </div>
 
               <div><label htmlFor="message" className="block mb-2 text-sm font-semibold text-slate-700 dark:text-slate-300">Message *</label><textarea id="message" name="message" value={formData.message} onChange={handleChange} required rows="6" className={fieldClass} placeholder="Tell us about the problem, project, organisation or support you need..." /></div>
