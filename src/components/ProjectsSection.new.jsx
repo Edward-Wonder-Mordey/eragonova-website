@@ -1,11 +1,12 @@
 import React from "react";
 import { ArrowUpRight, BarChart3, Printer, Palette, Building2 } from "lucide-react";
+import CapabilityVisual from "./CapabilityVisual";
 
 const capabilities = [
-  ["Data analysis & quality review", "Data & reporting", "Dataset cleaning, validation, discrepancy review, audit documentation, and reporting that make information easier to trust and use.", BarChart3, "blue"],
-  ["Digital services & operations", "Service operations", "Document preparation, print and digital services, online registrations, customer support, and everyday computer and printer troubleshooting.", Printer, "emerald"],
-  ["Graphic design & production", "Visual communication", "Print and digital materials shaped by clear briefs, careful revisions, production requirements, and organized design files.", Palette, "violet"],
-  ["Enterprise platform & service design", "Digital presence", "Web content, service materials, documentation, and practical processes that help organizations explain their work and connect with customers.", Building2, "amber"],
+  ["Data analysis & quality review", "Data & reporting", "Dataset cleaning, validation, discrepancy review, audit documentation, and reporting that make information easier to trust and use.", BarChart3, "blue", "data"],
+  ["Digital services & operations", "Service operations", "Document preparation, print and digital services, online registrations, customer support, and everyday computer and printer troubleshooting.", Printer, "emerald", "documents"],
+  ["Graphic design & production", "Visual communication", "Print and digital materials shaped by clear briefs, careful revisions, production requirements, and organized design files.", Palette, "violet", "creative"],
+  ["Enterprise platform & service design", "Digital presence", "Web content, service materials, documentation, and practical processes that help organizations explain their work and connect with customers.", Building2, "amber", "portal"],
 ];
 
 export default function ProjectsSection() {
@@ -21,14 +22,17 @@ export default function ProjectsSection() {
           </div>
           <a href="#/contact" className="secondary-button px-5 py-3 shrink-0">Discuss your project <ArrowUpRight size={17}/></a>
         </div>
-        <div className="grid md:grid-cols-2 gap-5">
-          {capabilities.map(([title, context, description, Icon, accent]) => (
+        <div className="grid md:grid-cols-2 gap-6">
+          {capabilities.map(([title, context, description, Icon, accent, visual]) => (
             <article key={title} className="project-card" data-accent={accent}>
-              <div className="project-icon"><Icon size={21}/></div>
-              <div className="mt-10 relative z-10">
-                <p className="project-context text-xs font-bold uppercase tracking-[0.15em]">{context}</p>
-                <h3 className="text-xl font-bold mt-2 text-slate-950 dark:text-white">{title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-400">{description}</p>
+              <CapabilityVisual type={visual} />
+              <div className="mt-6 relative z-10 flex items-start gap-4">
+                <div className="project-icon shrink-0"><Icon size={21}/></div>
+                <div>
+                  <p className="project-context text-xs font-bold uppercase tracking-[0.15em]">{context}</p>
+                  <h3 className="text-xl font-bold mt-2 text-slate-950 dark:text-white">{title}</h3>
+                  <p className="mt-3 text-sm leading-relaxed text-slate-600 dark:text-slate-400">{description}</p>
+                </div>
               </div>
             </article>
           ))}
