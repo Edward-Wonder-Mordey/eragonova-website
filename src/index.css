@@ -191,3 +191,34 @@ section { scroll-margin-top: 92px; }
 .dark .section-lead { color: #cbd5e1; }
 .eyebrow { color: #2563eb; font-size: .72rem; font-weight: 800; text-transform: uppercase; letter-spacing: .2em; }
 .dark .eyebrow { color: #93c5fd; }
+
+/* Capability preview graphics */
+.capability-visual {
+  --visual-rgb: 37, 99, 235;
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.15rem;
+  border: 1px solid rgba(var(--visual-rgb), .20);
+  background: linear-gradient(180deg, rgba(248,250,252,.98), rgba(241,245,249,.94));
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.9), 0 14px 30px rgba(15,23,42,.06);
+}
+.dark .capability-visual { background: linear-gradient(180deg, rgba(15,23,42,.96), rgba(2,6,23,.96)); border-color: rgba(var(--visual-rgb), .26); }
+.capability-visual[data-accent="blue"] { --visual-rgb: 37,99,235; }
+.capability-visual[data-accent="indigo"] { --visual-rgb: 79,70,229; }
+.capability-visual[data-accent="amber"] { --visual-rgb: 217,119,6; }
+.capability-visual[data-accent="emerald"] { --visual-rgb: 5,150,105; }
+.capability-visual[data-accent="fuchsia"] { --visual-rgb: 192,38,211; }
+.capability-visual[data-accent="violet"] { --visual-rgb: 124,58,237; }
+.capability-visual[data-accent="cyan"] { --visual-rgb: 8,145,178; }
+.capability-toolbar { height: 2rem; display:flex; align-items:center; gap:.35rem; padding:0 .7rem; border-bottom:1px solid rgba(var(--visual-rgb),.12); background:rgba(255,255,255,.78); }
+.dark .capability-toolbar { background:rgba(255,255,255,.035); }
+.capability-toolbar > span { width:.42rem; height:.42rem; border-radius:999px; background:rgba(var(--visual-rgb),.38); }
+.capability-address { margin-left:.35rem; height:.5rem; width:34%; max-width:7rem; border-radius:999px; background:rgba(var(--visual-rgb),.09); }
+.capability-canvas { height: 12rem; padding:.75rem; background: radial-gradient(circle at 100% 0%, rgba(var(--visual-rgb),.08), transparent 38%); }
+@media (max-width: 640px) { .capability-canvas { height: 10.5rem; } }
+
+.capability-showcase-card {
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.capability-showcase-card:hover { transform: translateY(-5px); box-shadow: 0 22px 50px rgba(15,23,42,.09); }
+.dark .capability-showcase-card:hover { box-shadow: 0 20px 45px rgba(0,0,0,.28); }
