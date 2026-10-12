@@ -19,6 +19,7 @@ const serviceOptions = [
   "Eragonova Academy",
   "Community Development Programmes",
   "Partnership / Collaboration",
+  "Careers / Collaboration",
   "Client Portal Access",
   "Other / General Inquiry",
 ];
