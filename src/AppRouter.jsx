@@ -13,9 +13,9 @@ import {
   PortalPage,
   ContactPage,
   LegalPage,
-  PrivacyPage,
-  TermsPage,
 } from "./pages/CorporatePages";
+import PrivacyPage from "./pages/PrivacyPage";
+import TermsPage from "./pages/TermsPage";
 
 function getRoute() {
   return window.location.hash.replace(/^#\/?/, "").split("?")[0].replace(/\/$/, "") || "home";
