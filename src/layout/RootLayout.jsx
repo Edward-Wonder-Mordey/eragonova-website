@@ -8,9 +8,9 @@ const queryClient = new QueryClient({
 });
 
 const footerLinks = [
-  ["Company", [["About", "#about"], ["Projects", "#projects"], ["Partners", "#partners"], ["Careers", "#careers"]]],
-  ["Explore", [["Services", "#services"], ["Solutions", "#solutions"], ["Academy", "#academy"], ["Resources", "#resources"]]],
-  ["Connect", [["Community", "#community"], ["Client Portal", "#portal"], ["Contact", "#contact"], ["Legal", "#legal"]]],
+  ["Company", [["About", "#/about"], ["Projects", "#/projects"], ["Partners", "#/partners"], ["Careers", "#/careers"]]],
+  ["Explore", [["Services", "#/services"], ["Academy", "#/academy"], ["Resources", "#/resources"], ["Community", "#/community"]]],
+  ["Connect", [["Client Portal", "#/portal"], ["Contact", "#/contact"], ["Privacy", "#/privacy"], ["Terms", "#/terms"]]],
 ];
 
 export default function RootLayout({ children }) {
@@ -27,9 +27,10 @@ export default function RootLayout({ children }) {
           <div className="max-w-7xl mx-auto px-6 lg:px-12 py-14">
             <div className="grid lg:grid-cols-[1.3fr_.7fr_.7fr_.7fr] gap-10">
               <div className="max-w-md">
-                <p className="text-xl font-bold">Eragonova Enterprise</p>
+                <a href="#/home" className="text-xl font-bold hover:text-blue-300 transition">Eragonova Enterprise</a>
                 <p className="mt-2 text-sm font-semibold text-blue-300">Technology · Engineering · Growth</p>
                 <p className="mt-4 text-sm leading-6 text-white/55">Practical Technology. Reliable Infrastructure. Sustainable Growth.</p>
+                <p className="mt-4 text-xs leading-5 text-white/35">Ghanaian multidisciplinary solutions company serving organisations and communities through practical, structured delivery.</p>
               </div>
               {footerLinks.map(([heading, links]) => (
                 <div key={heading}>
@@ -40,7 +41,7 @@ export default function RootLayout({ children }) {
             </div>
             <div className="mt-12 pt-6 border-t border-white/10 flex flex-col sm:flex-row justify-between gap-3 text-xs text-white/40">
               <p>© {new Date().getFullYear()} Eragonova Enterprise. All rights reserved.</p>
-              <p>Ghana · Serving clients and communities across locations</p>
+              <div className="flex flex-wrap gap-4"><a href="#/legal" className="hover:text-white transition">Legal</a><a href="#/privacy" className="hover:text-white transition">Privacy</a><a href="#/terms" className="hover:text-white transition">Terms</a></div>
             </div>
           </div>
         </footer>
