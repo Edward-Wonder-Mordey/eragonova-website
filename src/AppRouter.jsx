@@ -5,6 +5,7 @@ import AboutPage from "./pages/AboutPage";
 import { AcademyPage, ContactPage, LegalPage } from "./pages/CorporatePages";
 import { ServicesPage, ProjectsPage, ResourcesPage, CommunityPage, CareersPage } from "./pages/ClientFacingPages";
 import PartnersPage from "./pages/PartnersPage";
+import PortalPage from "./pages/PortalPage";
 import PrivacyPage from "./pages/PrivacyPage";
 import TermsPage from "./pages/TermsPage";
 
@@ -22,6 +23,7 @@ const routes = {
   community: CommunityPage,
   partners: PartnersPage,
   careers: CareersPage,
+  portal: PortalPage,
   contact: ContactPage,
   legal: LegalPage,
   privacy: PrivacyPage,
