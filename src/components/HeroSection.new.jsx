@@ -23,8 +23,8 @@ export default function HeroSection() {
             Eragonova Enterprise brings technology, engineering, data, documentation, business support, training and organisational development together to solve practical problems for businesses, institutions and communities.
           </p>
           <div className="mt-9 flex flex-col sm:flex-row gap-3">
-            <a href="#contact" className="primary-button px-6 py-3.5">Start a Project <ArrowRight size={18} /></a>
-            <a href="#services" className="secondary-button px-6 py-3.5 border-white/25 bg-white/10 text-white hover:bg-white/15">Explore Enterprise Services</a>
+            <a href="#/contact" className="primary-button px-6 py-3.5">Start a Project <ArrowRight size={18} /></a>
+            <a href="#/services" className="secondary-button px-6 py-3.5 border-white/25 bg-white/10 text-white hover:bg-white/15">Explore Enterprise Services</a>
           </div>
           <div className="mt-14 grid sm:grid-cols-3 gap-5 max-w-4xl">
             {[
