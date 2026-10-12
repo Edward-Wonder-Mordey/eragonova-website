@@ -1,77 +1,48 @@
 import React, { useState } from "react";
-import { Phone, Mail, MapPin } from "lucide-react";
+import { Phone, Mail, MapPin, Send } from "lucide-react";
+
+const serviceOptions = [
+  "IT & Systems Administration",
+  "Networking & Infrastructure",
+  "Cloud & Digital Transformation",
+  "Data & Analytics",
+  "Cybersecurity & Information Protection",
+  "Software & Digital Solutions",
+  "Electrical & Electronic Engineering",
+  "Administration & Business Support",
+  "Documentation & Compliance Services",
+  "Branding, Media & Print Services",
+  "Research & Intelligence Services",
+  "Organisational Development",
+  "Consulting Services",
+  "Managed Services",
+  "Eragonova Academy",
+  "Community Development Programmes",
+  "Partnership / Collaboration",
+  "Client Portal Access",
+  "Other / General Inquiry",
+];
 
 export default function ContactSection() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    service: "",
-    message: "",
-  });
+  const [formData, setFormData] = useState({ name: "", email: "", phone: "", service: "", message: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState(null);
 
-  const contactInfo = [
-    {
-      icon: Phone,
-      label: "Phone",
-      value: "+233 50 537 4537",
-      href: "tel:+233505374537",
-    },
-    {
-      icon: Mail,
-      label: "Email",
-      value: "Eragonovaenterprise@gmail.com",
-      href: "mailto:Eragonovaenterprise@gmail.com",
-    },
-    {
-      icon: MapPin,
-      label: "Location",
-      value: "Kumasi, Ghana",
-      href: "#",
-    },
-  ];
+  const handleChange = (event) => setFormData({ ...formData, [event.target.name]: event.target.value });
 
-  const serviceOptions = [
-    "IT & Systems Administration",
-    "Data & Analytics",
-    "Electrical & Electronic Engineering",
-    "Professional Branding & Documentation",
-    "Business & Community Development",
-    "Other / General Inquiry",
-  ];
-
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async (event) => {
+    event.preventDefault();
     setIsSubmitting(true);
     setSubmitStatus(null);
-
     try {
       const response = await fetch("https://formspree.io/f/mwvegdqp", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
-
       if (response.ok) {
         setSubmitStatus("success");
-        setFormData({
-          name: "",
-          email: "",
-          phone: "",
-          service: "",
-          message: "",
-        });
+        setFormData({ name: "", email: "", phone: "", service: "", message: "" });
       } else {
         setSubmitStatus("error");
       }
@@ -82,222 +53,57 @@ export default function ContactSection() {
     }
   };
 
+  const contacts = [
+    [Phone, "Phone", "+233 50 537 4537", "tel:+233505374537"],
+    [Mail, "Email", "Eragonovaenterprise@gmail.com", "mailto:Eragonovaenterprise@gmail.com"],
+    [MapPin, "Location", "Kumasi, Ghana", null],
+  ];
+
+  const fieldClass = "w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-900 outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 dark:border-white/10 dark:bg-white/[0.05] dark:text-white dark:focus:border-blue-400";
+
   return (
-    <section
-      id="contact"
-      className="py-16 md:py-20 lg:py-24 bg-white dark:bg-[#121212]"
-    >
+    <section id="contact" className="py-24 sm:py-28 bg-white dark:bg-slate-950">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
-          {/* Left column - Contact Information */}
+        <div className="grid lg:grid-cols-[.85fr_1.15fr] gap-12 lg:gap-20">
           <div>
-            <h2
-              className="mb-6 font-medium leading-tight text-[#000] dark:text-white/90"
-              style={{
-                fontFamily: '"Montserrat", sans-serif',
-                fontSize: "clamp(32px, 4.5vw, 52px)",
-                lineHeight: "1.05",
-              }}
-            >
-              Let's Work
-              <br />
-              Together
-            </h2>
+            <p className="text-blue-600 dark:text-blue-300 text-xs font-bold uppercase tracking-[0.22em]">Contact</p>
+            <h2 className="mt-3 text-4xl sm:text-5xl font-bold tracking-[-0.035em] text-slate-950 dark:text-white">Tell us what you need to solve.</h2>
+            <p className="mt-5 text-base sm:text-lg leading-8 text-slate-600 dark:text-slate-300">Whether the need is technical, operational, administrative, creative, analytical, engineering-focused or community-based, start with the problem. We can discuss the right scope from there.</p>
 
-            <p
-              className="mb-8 text-[#444] dark:text-white/70"
-              style={{
-                fontFamily: '"Rethink Sans", sans-serif',
-                fontSize: "clamp(14px, 1.2vw, 16px)",
-                lineHeight: "1.5",
-              }}
-            >
-              Ready to transform your business with professional IT solutions?
-              Get in touch with us today to discuss how we can help you achieve
-              your goals.
-            </p>
-
-            <div className="space-y-4">
-              {contactInfo.map((contact, index) => {
-                const IconComponent = contact.icon;
-                return (
-                  <a
-                    key={index}
-                    href={contact.href}
-                    className="flex items-start space-x-4 p-4 rounded-lg bg-[#FAFAF6] dark:bg-[#1E1E1E] transition-all duration-200 hover:bg-[#F0F0EC] dark:hover:bg-[#262626] active:scale-[0.99]"
-                  >
-                    <div className="flex items-center justify-center w-12 h-12 rounded-full bg-[#2563eb]/10 dark:bg-[#3b82f6]/10">
-                      <IconComponent
-                        className="w-5 h-5 text-[#2563eb] dark:text-[#3b82f6]"
-                        strokeWidth={2}
-                      />
-                    </div>
-                    <div>
-                      <p
-                        className="text-[#888] dark:text-white/50 mb-1"
-                        style={{
-                          fontFamily: '"Rethink Sans", sans-serif',
-                          fontSize: "12px",
-                        }}
-                      >
-                        {contact.label}
-                      </p>
-                      <p
-                        className="text-[#111] dark:text-white/90 font-medium"
-                        style={{
-                          fontFamily: '"Montserrat", sans-serif',
-                          fontSize: "16px",
-                        }}
-                      >
-                        {contact.value}
-                      </p>
-                    </div>
-                  </a>
+            <div className="mt-8 space-y-3">
+              {contacts.map(([Icon, label, value, href]) => {
+                const content = (
+                  <div className="flex items-center gap-4 rounded-2xl border border-slate-200 p-4 dark:border-white/10 dark:bg-white/[0.03]">
+                    <div className="h-11 w-11 rounded-xl bg-blue-50 text-blue-600 dark:bg-blue-500/10 dark:text-blue-300 flex items-center justify-center"><Icon size={20}/></div>
+                    <div><p className="text-xs font-bold uppercase tracking-[0.13em] text-slate-400">{label}</p><p className="mt-1 font-semibold text-slate-900 dark:text-white break-all">{value}</p></div>
+                  </div>
                 );
+                return href ? <a key={label} href={href} className="block hover:-translate-y-0.5 transition">{content}</a> : <div key={label}>{content}</div>;
               })}
             </div>
           </div>
 
-          {/* Right column - Contact Form */}
-          <div>
-            <h3
-              className="mb-6 font-semibold text-[#111] dark:text-white/90"
-              style={{
-                fontFamily: '"Montserrat", sans-serif',
-                fontSize: "clamp(20px, 2.5vw, 28px)",
-                lineHeight: "1.25",
-              }}
-            >
-              Send Us a Message
-            </h3>
+          <div className="rounded-3xl border border-slate-200 bg-slate-50 p-6 sm:p-8 dark:border-white/10 dark:bg-white/[0.03]">
+            <h3 className="text-2xl font-bold text-slate-950 dark:text-white">Start a conversation</h3>
+            <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-400">Share enough detail for us to understand the request. Specific scope, delivery approach and next steps can be discussed directly.</p>
 
-            <form onSubmit={handleSubmit} className="space-y-5">
-              {/* Name Field */}
-              <div>
-                <label
-                  htmlFor="name"
-                  className="block text-[#444] dark:text-white/70 mb-2"
-                >
-                  Full Name *
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-3 rounded-lg bg-[#FAFAF6] dark:bg-[#1E1E1E] border border-gray-200 dark:border-gray-700 text-[#111] dark:text-white/90 focus:outline-none focus:ring-2 focus:ring-[#2563eb] dark:focus:ring-[#3b82f6]"
-                  placeholder="John Doe"
-                />
+            <form onSubmit={handleSubmit} className="mt-7 space-y-5">
+              <div className="grid sm:grid-cols-2 gap-5">
+                <div><label htmlFor="name" className="block mb-2 text-sm font-semibold text-slate-700 dark:text-slate-300">Full Name *</label><input id="name" name="name" type="text" value={formData.name} onChange={handleChange} required className={fieldClass} placeholder="Your name" /></div>
+                <div><label htmlFor="email" className="block mb-2 text-sm font-semibold text-slate-700 dark:text-slate-300">Email Address *</label><input id="email" name="email" type="email" value={formData.email} onChange={handleChange} required className={fieldClass} placeholder="you@example.com" /></div>
               </div>
 
-              {/* Email Field */}
-              <div>
-                <label
-                  htmlFor="email"
-                  className="block text-[#444] dark:text-white/70 mb-2"
-                >
-                  Email Address *
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-3 rounded-lg bg-[#FAFAF6] dark:bg-[#1E1E1E] border border-gray-200 dark:border-gray-700 text-[#111] dark:text-white/90 focus:outline-none focus:ring-2 focus:ring-[#2563eb] dark:focus:ring-[#3b82f6]"
-                  placeholder="john@example.com"
-                />
+              <div className="grid sm:grid-cols-2 gap-5">
+                <div><label htmlFor="phone" className="block mb-2 text-sm font-semibold text-slate-700 dark:text-slate-300">Phone Number</label><input id="phone" name="phone" type="tel" value={formData.phone} onChange={handleChange} className={fieldClass} placeholder="+233 ..." /></div>
+                <div><label htmlFor="service" className="block mb-2 text-sm font-semibold text-slate-700 dark:text-slate-300">Service / Inquiry *</label><select id="service" name="service" value={formData.service} onChange={handleChange} required className={fieldClass}><option value="">Select...</option>{serviceOptions.map((service) => <option key={service} value={service}>{service}</option>)}</select></div>
               </div>
 
-              {/* Phone Field */}
-              <div>
-                <label
-                  htmlFor="phone"
-                  className="block text-[#444] dark:text-white/70 mb-2"
-                >
-                  Phone Number
-                </label>
-                <input
-                  type="tel"
-                  id="phone"
-                  name="phone"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-lg bg-[#FAFAF6] dark:bg-[#1E1E1E] border border-gray-200 dark:border-gray-700 text-[#111] dark:text-white/90 focus:outline-none focus:ring-2 focus:ring-[#2563eb] dark:focus:ring-[#3b82f6]"
-                  placeholder="+233 50 123 4567"
-                />
-              </div>
+              <div><label htmlFor="message" className="block mb-2 text-sm font-semibold text-slate-700 dark:text-slate-300">Message *</label><textarea id="message" name="message" value={formData.message} onChange={handleChange} required rows="6" className={fieldClass} placeholder="Tell us about the problem, project, organisation or support you need..." /></div>
 
-              {/* Service Selection */}
-              <div>
-                <label
-                  htmlFor="service"
-                  className="block text-[#444] dark:text-white/70 mb-2"
-                >
-                  Service Interest *
-                </label>
-                <select
-                  id="service"
-                  name="service"
-                  value={formData.service}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-4 py-3 rounded-lg bg-[#FAFAF6] dark:bg-[#1E1E1E] border border-gray-200 dark:border-gray-700 text-[#111] dark:text-white/90 focus:outline-none focus:ring-2 focus:ring-[#2563eb] dark:focus:ring-[#3b82f6]"
-                >
-                  <option value="">Select a service...</option>
-                  {serviceOptions.map((service, index) => (
-                    <option key={index} value={service}>
-                      {service}
-                    </option>
-                  ))}
-                </select>
-              </div>
+              <button type="submit" disabled={isSubmitting} className="primary-button w-full sm:w-auto px-6 py-3.5 disabled:opacity-50 disabled:cursor-not-allowed">{isSubmitting ? "Sending..." : "Send Message"} <Send size={17}/></button>
 
-              {/* Message Field */}
-              <div>
-                <label
-                  htmlFor="message"
-                  className="block text-[#444] dark:text-white/70 mb-2"
-                >
-                  Message *
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  required
-                  rows="5"
-                  className="w-full px-4 py-3 rounded-lg bg-[#FAFAF6] dark:bg-[#1E1E1E] border border-gray-200 dark:border-gray-700 text-[#111] dark:text-white/90 focus:outline-none focus:ring-2 focus:ring-[#2563eb] dark:focus:ring-[#3b82f6]"
-                  placeholder="Write your message here..."
-                ></textarea>
-              </div>
-
-              {/* Submit Button */}
-              <div>
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full px-6 py-3 rounded-lg bg-[#2563eb] text-white font-medium hover:bg-[#1d4ed8] transition disabled:opacity-50"
-                >
-                  {isSubmitting ? "Sending..." : "Send Message"}
-                </button>
-              </div>
-
-              {/* Status Messages */}
-              {submitStatus === "success" && (
-                <p className="text-green-600 mt-4">
-                  ✅ Your message has been sent successfully!
-                </p>
-              )}
-              {submitStatus === "error" && (
-                <p className="text-red-600 mt-4">
-                  ❌ Something went wrong. Please try again.
-                </p>
-              )}
+              {submitStatus === "success" && <p className="rounded-xl bg-emerald-50 px-4 py-3 text-sm font-medium text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-300">Your message has been sent successfully. We will review the details and respond using the contact information provided.</p>}
+              {submitStatus === "error" && <p className="rounded-xl bg-red-50 px-4 py-3 text-sm font-medium text-red-700 dark:bg-red-500/10 dark:text-red-300">The message could not be sent. Please try again or use the phone/email details shown here.</p>}
             </form>
           </div>
         </div>
