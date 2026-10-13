@@ -1,0 +1,52 @@
+name: Build Eragonova Owner Handbook
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'docs/.handbook-src-*.b64'
+      - '.github/workflows/build-eragonova-handbook.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install document tools
+        run: python -m pip install --upgrade python-docx Pillow
+
+      - name: Restore handbook generator
+        shell: bash
+        run: |
+          cat docs/.handbook-src-*.b64 | base64 -d | gunzip > docs/generate_handbook.py
+          test -s docs/generate_handbook.py
+          rm -f docs/.handbook-src-*.b64
+
+      - name: Build Word handbook
+        run: python docs/generate_handbook.py
+
+      - name: Commit handbook to repository
+        shell: bash
+        run: |
+          git config user.name "Eragonova Documentation Bot"
+          git config user.email "168056469+Edward-Wonder-Mordey@users.noreply.github.com"
+          git add -A docs
+          if git diff --cached --quiet; then
+            echo "No handbook changes to commit."
+          else
+            git commit -m "Build Eragonova website owner's handbook"
+            git push origin main
+          fi
