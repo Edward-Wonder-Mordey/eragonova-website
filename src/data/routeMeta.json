@@ -35,6 +35,12 @@
     "title": "Resources | Eragonova Enterprise",
     "description": "Practical guides, templates, insights and research across technology, engineering, operations, data, documentation and organisational growth."
   },
+  "digital-health-guide": {
+    "path": "/digital-health-guide/",
+    "label": "Free Technology Health Check",
+    "title": "Free Quick Technology Health Check | Eragonova Enterprise",
+    "description": "Use Eragonova's free technology health check for safe first steps with slow computers, Wi-Fi, printers, storage, missing files, suspicious links, backups and updates."
+  },
   "community": {
     "path": "/community/",
     "label": "Community",
