@@ -5,7 +5,8 @@ on:
   push:
     branches: [main]
     paths:
-      - 'docs/.handbook-src-*.b64'
+      - 'docs/generate_handbook.py'
+      - 'docs/patch_handbook_upgrade.py'
       - '.github/workflows/build-eragonova-handbook.yml'
 
 permissions:
@@ -28,12 +29,13 @@ jobs:
       - name: Install document tools
         run: python -m pip install --upgrade python-docx Pillow
 
-      - name: Restore handbook generator
+      - name: Apply handbook upgrade patch when present
         shell: bash
         run: |
-          cat docs/.handbook-src-*.b64 | base64 -d | gunzip > docs/generate_handbook.py
-          test -s docs/generate_handbook.py
-          rm -f docs/.handbook-src-*.b64
+          if [ -f docs/patch_handbook_upgrade.py ]; then
+            python docs/patch_handbook_upgrade.py
+            rm -f docs/patch_handbook_upgrade.py
+          fi
 
       - name: Build Word handbook
         run: python docs/generate_handbook.py
@@ -47,6 +49,6 @@ jobs:
           if git diff --cached --quiet; then
             echo "No handbook changes to commit."
           else
-            git commit -m "Build Eragonova website owner's handbook"
+            git commit -m "Update Eragonova website owner's handbook"
             git push origin main
           fi
