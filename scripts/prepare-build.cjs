@@ -32,7 +32,12 @@ if (fs.existsSync(portalFile)) {
   if (!source.includes('import PortalClientExtras from "../components/PortalClientExtras";')) {
     source = source.replace(
       'import PortalAdminConsole from "../components/PortalAdminConsole";',
-      'import PortalAdminConsole from "../components/PortalAdminConsole";\nimport PortalClientExtras from "../components/PortalClientExtras";\nimport PortalAdminExtras from "../components/PortalAdminExtras";'
+      'import PortalAdminConsole from "../components/PortalAdminConsole";\nimport PortalClientExtras from "../components/PortalClientExtras";\nimport PortalAdminExtras from "../components/PortalAdminExtras";\nimport PortalMilestonesCard from "../components/PortalMilestonesCard";'
+    );
+  } else if (!source.includes('import PortalMilestonesCard from "../components/PortalMilestonesCard";')) {
+    source = source.replace(
+      'import PortalClientExtras from "../components/PortalClientExtras";',
+      'import PortalClientExtras from "../components/PortalClientExtras";\nimport PortalMilestonesCard from "../components/PortalMilestonesCard";'
     );
   }
 
@@ -83,7 +88,12 @@ if (fs.existsSync(portalFile)) {
   if (!source.includes('<PortalClientExtras activeTab={activeTab}')) {
     source = source.replace(
       '{activeTab === "dashboard" &&',
-      '<PortalClientExtras activeTab={activeTab} session={session} profile={profile} memberships={memberships} onRefresh={() => loadPortalData(session)} />\n\n            {activeTab === "dashboard" &&'
+      '<PortalClientExtras activeTab={activeTab} session={session} profile={profile} memberships={memberships} onRefresh={() => loadPortalData(session)} />\n\n            <PortalMilestonesCard activeTab={activeTab} />\n\n            {activeTab === "dashboard" &&'
+    );
+  } else if (!source.includes('<PortalMilestonesCard activeTab={activeTab}')) {
+    source = source.replace(
+      '<PortalClientExtras activeTab={activeTab} session={session} profile={profile} memberships={memberships} onRefresh={() => loadPortalData(session)} />',
+      '<PortalClientExtras activeTab={activeTab} session={session} profile={profile} memberships={memberships} onRefresh={() => loadPortalData(session)} />\n\n            <PortalMilestonesCard activeTab={activeTab} />'
     );
   }
 
@@ -125,4 +135,20 @@ if (fs.existsSync(adminConsoleFile)) {
   }
 
   fs.writeFileSync(adminConsoleFile, source, "utf8");
+}
+
+const adminExtrasFile = path.join(__dirname, "..", "src", "components", "PortalAdminExtras.jsx");
+
+if (fs.existsSync(adminExtrasFile)) {
+  let source = fs.readFileSync(adminExtrasFile, "utf8");
+
+  // Keep founding-client history visible to both administrators and future staff.
+  if (!source.includes('Founding client history')) {
+    source = source.replace(
+      '{message&&<div className="rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-slate-900 px-4 py-3 text-sm text-slate-600 dark:text-slate-300">{message}</div>}',
+      '{message&&<div className="rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-slate-900 px-4 py-3 text-sm text-slate-600 dark:text-slate-300">{message}</div>}\n    {orgs.filter(o=>o.is_founder).map(o=><div key={`founder-${o.id}`} className="rounded-2xl border border-amber-200 dark:border-amber-500/20 bg-gradient-to-r from-amber-50 to-white dark:from-amber-500/10 dark:to-slate-900 p-5"><div className="flex items-center gap-4">{o.logo_url?<img src={o.logo_url} alt={`${o.name} logo`} className="h-14 w-14 rounded-xl border border-amber-200 bg-white object-contain p-2"/>:<div className="h-14 w-14 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center"><Crown size={24}/></div>}<div><p className="text-xs font-bold uppercase tracking-[0.14em] text-amber-700 dark:text-amber-300">Founding client history</p><h3 className="mt-1 text-lg font-bold text-slate-950 dark:text-white">{o.badge_title || `Client ${String(o.client_number||1).padStart(3,"0")} · ${o.name}`}</h3><p className="mt-1 text-sm text-slate-600 dark:text-slate-300">{o.badge_note || `${o.name} is recognised as an early Eragonova client.`}</p></div></div></div>)}'
+    );
+  }
+
+  fs.writeFileSync(adminExtrasFile, source, "utf8");
 }
