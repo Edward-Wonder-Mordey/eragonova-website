@@ -36,5 +36,6 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
           publish_dir: ./build
+          cname: eragonova.com
           force_orphan: false
           commit_message: "Deploy latest Eragonova website"
