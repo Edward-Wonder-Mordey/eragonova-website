@@ -5,6 +5,7 @@ import AboutPage from "./pages/AboutPage";
 import ServicesPage from "./pages/ServicesPage";
 import AcademyPage from "./pages/AcademyPage";
 import ResourcesPage from "./pages/ResourcesPage";
+import DigitalHealthGuidePage from "./pages/DigitalHealthGuidePage";
 import { ContactPage, LegalPage } from "./pages/CorporatePages";
 import { ProjectsPage, CommunityPage, CareersPage } from "./pages/ClientFacingPages";
 import PartnersPage from "./pages/PartnersPage";
@@ -21,6 +22,7 @@ const routes = {
   projects: ProjectsPage,
   academy: AcademyPage,
   resources: ResourcesPage,
+  "digital-health-guide": DigitalHealthGuidePage,
   community: CommunityPage,
   partners: PartnersPage,
   careers: CareersPage,
