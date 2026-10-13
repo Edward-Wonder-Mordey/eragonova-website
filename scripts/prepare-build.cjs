@@ -40,6 +40,12 @@ if (fs.existsSync(portalFile)) {
       'import PortalClientExtras from "../components/PortalClientExtras";\nimport PortalMilestonesCard from "../components/PortalMilestonesCard";'
     );
   }
+  if (!source.includes('import PortalAccessGuide from "../components/PortalAccessGuide";')) {
+    source = source.replace(
+      'import PortalMilestonesCard from "../components/PortalMilestonesCard";',
+      'import PortalMilestonesCard from "../components/PortalMilestonesCard";\nimport PortalAccessGuide from "../components/PortalAccessGuide";'
+    );
+  }
 
   // Load the extra profile and client metadata used by editable profiles and founding-client badges.
   source = source.replace(
@@ -54,6 +60,14 @@ if (fs.existsSync(portalFile)) {
     'status, progress, start_date, due_date, completed_at',
     'status, progress, received_date, start_date, due_date, completed_at'
   );
+
+  // Keep a permanent, easy-to-find permissions reference in every signed-in portal.
+  if (!source.includes('["guide", ShieldCheck, "Access Guide"]')) {
+    source = source.replace(
+      '["support", MessageSquare, "Support"],\n  ["account", UserCircle2, "Account"],',
+      '["support", MessageSquare, "Support"],\n  ["guide", ShieldCheck, "Access Guide"],\n  ["account", UserCircle2, "Account"],'
+    );
+  }
 
   // Role-aware navigation: administrators get Admin, staff get Operations, clients get only client tabs.
   source = source.replace(
@@ -75,6 +89,12 @@ if (fs.existsSync(portalFile)) {
     source = source.replace(
       '{activeTab === "account" &&',
       '{activeTab === "operations" && profile?.role === "staff" && <PortalAdminExtras session={session} mode="staff" onRefresh={() => loadPortalData(session)} />}\n\n            {activeTab === "account" &&'
+    );
+  }
+  if (!source.includes('<PortalAccessGuide active={activeTab === "guide"}')) {
+    source = source.replace(
+      '{activeTab === "account" &&',
+      '<PortalAccessGuide active={activeTab === "guide"} role={profile?.role || "client"} organizationName={primaryMembership?.client_organizations?.name || ""} />\n\n            {activeTab === "account" &&'
     );
   }
 
