@@ -1,5 +1,5 @@
 import React from "react";
-import { ArrowRight, CheckCircle2, ClipboardCheck, FileText, Monitor, BarChart3, GraduationCap, Users } from "lucide-react";
+import { ArrowRight, CheckCircle2, ClipboardCheck, Download, FileText, Monitor, BarChart3, GraduationCap, ShieldCheck, Users } from "lucide-react";
 import { resourceTypes } from "../data/siteData";
 
 const accents = ["blue", "violet", "emerald", "amber"];
@@ -95,6 +95,29 @@ export default function ResourcesPage() {
             <h1 className="mt-4 text-4xl sm:text-5xl lg:text-7xl font-bold tracking-[-0.045em] leading-[1.02]">Practical knowledge designed to be used.</h1>
             <p className="mt-6 max-w-3xl text-base sm:text-lg leading-8 text-white/70">Guides, checklists and resource areas focused on technology, engineering, operations, data, documentation, training and organisational growth.</p>
             <div className="mt-8"><a href="/contact" className="primary-button px-6 py-3.5">Request a Resource <ArrowRight size={18}/></a></div>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-20 bg-slate-50 dark:bg-slate-900/40 border-b border-slate-200 dark:border-white/10">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+          <div className="graphic-panel rounded-[2rem] bg-gradient-to-br from-slate-950 via-blue-950 to-indigo-950 p-8 sm:p-10 lg:p-12 text-white grid lg:grid-cols-[1.1fr_.9fr] gap-10 items-center">
+            <div className="relative">
+              <p className="text-blue-300 text-xs font-bold uppercase tracking-[0.22em]">Free visitor resource · No signup · No payment</p>
+              <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-bold tracking-[-0.035em]">Quick Technology Health Check</h2>
+              <p className="mt-5 text-base sm:text-lg leading-8 text-white/70">Safe first checks for slow computers, Wi-Fi problems, printers, low storage, missing files, suspicious links, weak account practices, backups, overheating and failed updates.</p>
+              <div className="mt-7 flex flex-wrap gap-3">
+                <a href="/digital-health-guide/" className="inline-flex items-center gap-2 rounded-xl bg-blue-600 px-5 py-3 font-bold text-white hover:bg-blue-500 transition">Read the free guide <ArrowRight size={18}/></a>
+                <a href="/Eragonova_Quick_Technology_Health_Check.pdf" download className="inline-flex items-center gap-2 rounded-xl bg-white px-5 py-3 font-bold text-slate-950 hover:bg-blue-50 transition"><Download size={18}/> Download PDF</a>
+              </div>
+            </div>
+            <div className="relative rounded-3xl border border-white/10 bg-white/5 p-7">
+              <div className="h-14 w-14 rounded-2xl bg-blue-500/15 flex items-center justify-center text-blue-200"><ShieldCheck size={26}/></div>
+              <h3 className="mt-5 text-xl font-bold">The principle: protect first, troubleshoot second.</h3>
+              <div className="mt-5 space-y-3 text-sm leading-6 text-white/70">
+                {["Avoid deleting data or system files just to 'fix' a symptom.","Do not bypass passwords, security controls or administrator restrictions.","Stop when there are electrical, battery, ransomware or critical-system warning signs."].map(item => <div key={item} className="flex gap-3"><CheckCircle2 size={18} className="mt-0.5 shrink-0 text-blue-300"/><span>{item}</span></div>)}
+              </div>
+            </div>
           </div>
         </div>
       </section>
