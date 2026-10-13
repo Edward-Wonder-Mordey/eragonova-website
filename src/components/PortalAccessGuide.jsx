@@ -64,6 +64,50 @@ const guides = {
   },
 };
 
+function PermissionPanel({ title, subtitle, items, type = "can" }) {
+  const positive = type === "can";
+  return (
+    <section className={`rounded-2xl border p-6 ${positive ? "border-emerald-200 dark:border-emerald-500/20 bg-emerald-50/70 dark:bg-emerald-500/5" : "border-rose-200 dark:border-rose-500/20 bg-rose-50/70 dark:bg-rose-500/5"}`}>
+      <div className="flex items-center gap-3">
+        <div className={`h-10 w-10 rounded-xl flex items-center justify-center ${positive ? "bg-emerald-100 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-300" : "bg-rose-100 dark:bg-rose-500/10 text-rose-700 dark:text-rose-300"}`}>
+          {positive ? <CheckCircle2 size={20}/> : <Lock size={20}/>} 
+        </div>
+        <div>
+          <p className={`text-xs font-bold uppercase tracking-[0.14em] ${positive ? "text-emerald-700 dark:text-emerald-300" : "text-rose-700 dark:text-rose-300"}`}>{title}</p>
+          <h3 className="text-lg font-bold text-slate-950 dark:text-white">{subtitle}</h3>
+        </div>
+      </div>
+      <div className="mt-5 space-y-3">
+        {items.map((item) => <div key={item} className="flex gap-3 text-sm leading-6 text-slate-700 dark:text-slate-300">{positive ? <CheckCircle2 size={17} className="mt-1 shrink-0 text-emerald-600 dark:text-emerald-400"/> : <Lock size={16} className="mt-1 shrink-0 text-rose-600 dark:text-rose-400"/>}<span>{item}</span></div>)}
+      </div>
+    </section>
+  );
+}
+
+function RoleReference({ label, guide }) {
+  return (
+    <div className="rounded-2xl border border-slate-200 dark:border-white/10 bg-white dark:bg-slate-900 p-6">
+      <div className="flex items-center gap-3">
+        <div className="h-10 w-10 rounded-xl bg-indigo-50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-300 flex items-center justify-center"><ShieldCheck size={20}/></div>
+        <div>
+          <p className="text-xs font-bold uppercase tracking-[0.14em] text-indigo-600 dark:text-indigo-300">{label}</p>
+          <h3 className="text-lg font-bold text-slate-950 dark:text-white">What this role is supposed to have</h3>
+        </div>
+      </div>
+      <div className="mt-5 grid lg:grid-cols-2 gap-5">
+        <div className="rounded-xl border border-emerald-200 dark:border-emerald-500/20 bg-emerald-50/60 dark:bg-emerald-500/5 p-4">
+          <p className="text-xs font-bold uppercase tracking-[0.12em] text-emerald-700 dark:text-emerald-300">Should have</p>
+          <div className="mt-3 space-y-2.5">{guide.can.map((item) => <div key={item} className="flex gap-2.5 text-sm leading-6 text-slate-700 dark:text-slate-300"><CheckCircle2 size={16} className="mt-1 shrink-0 text-emerald-600 dark:text-emerald-400"/><span>{item}</span></div>)}</div>
+        </div>
+        <div className="rounded-xl border border-rose-200 dark:border-rose-500/20 bg-rose-50/60 dark:bg-rose-500/5 p-4">
+          <p className="text-xs font-bold uppercase tracking-[0.12em] text-rose-700 dark:text-rose-300">Should not have</p>
+          <div className="mt-3 space-y-2.5">{guide.cannot.map((item) => <div key={item} className="flex gap-2.5 text-sm leading-6 text-slate-700 dark:text-slate-300"><Lock size={15} className="mt-1 shrink-0 text-rose-600 dark:text-rose-400"/><span>{item}</span></div>)}</div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function PortalAccessGuide({ active, role = "client", organizationName = "" }) {
   if (!active) return null;
   const guide = guides[role] || guides.client;
@@ -89,29 +133,24 @@ export default function PortalAccessGuide({ active, role = "client", organizatio
       </div>
 
       <div className="grid xl:grid-cols-2 gap-6">
-        <section className="rounded-2xl border border-emerald-200 dark:border-emerald-500/20 bg-emerald-50/70 dark:bg-emerald-500/5 p-6">
-          <div className="flex items-center gap-3">
-            <div className="h-10 w-10 rounded-xl bg-emerald-100 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 flex items-center justify-center"><CheckCircle2 size={20}/></div>
-            <div><p className="text-xs font-bold uppercase tracking-[0.14em] text-emerald-700 dark:text-emerald-300">You can</p><h3 className="text-lg font-bold text-slate-950 dark:text-white">Actions available to your role</h3></div>
-          </div>
-          <div className="mt-5 space-y-3">
-            {guide.can.map((item) => <div key={item} className="flex gap-3 text-sm leading-6 text-slate-700 dark:text-slate-300"><CheckCircle2 size={17} className="mt-1 shrink-0 text-emerald-600 dark:text-emerald-400"/><span>{item}</span></div>)}
-          </div>
-        </section>
-
-        <section className="rounded-2xl border border-rose-200 dark:border-rose-500/20 bg-rose-50/70 dark:bg-rose-500/5 p-6">
-          <div className="flex items-center gap-3">
-            <div className="h-10 w-10 rounded-xl bg-rose-100 dark:bg-rose-500/10 text-rose-700 dark:text-rose-300 flex items-center justify-center"><Lock size={20}/></div>
-            <div><p className="text-xs font-bold uppercase tracking-[0.14em] text-rose-700 dark:text-rose-300">You cannot</p><h3 className="text-lg font-bold text-slate-950 dark:text-white">Protected or restricted actions</h3></div>
-          </div>
-          <div className="mt-5 space-y-3">
-            {guide.cannot.map((item) => <div key={item} className="flex gap-3 text-sm leading-6 text-slate-700 dark:text-slate-300"><Lock size={16} className="mt-1 shrink-0 text-rose-600 dark:text-rose-400"/><span>{item}</span></div>)}
-          </div>
-        </section>
+        <PermissionPanel title="You can" subtitle="Actions available to your role" items={guide.can} type="can" />
+        <PermissionPanel title="You cannot" subtitle="Protected or restricted actions" items={guide.cannot} type="cannot" />
       </div>
 
+      {role === "admin" && (
+        <div className="space-y-5">
+          <div className="rounded-2xl border border-indigo-200 dark:border-indigo-500/20 bg-indigo-50/70 dark:bg-indigo-500/5 p-6">
+            <p className="text-xs font-bold uppercase tracking-[0.14em] text-indigo-700 dark:text-indigo-300">Administrator role reference</p>
+            <h3 className="mt-2 text-xl font-bold text-slate-950 dark:text-white">What Staff and Clients should see and be allowed to do</h3>
+            <p className="mt-2 max-w-4xl text-sm leading-6 text-slate-600 dark:text-slate-300">Use this section as a quick control check. It shows the expected portal boundaries for the other roles, so an Administrator can quickly confirm that Staff and Client accounts have the right level of access and nothing more.</p>
+          </div>
+          <RoleReference label="Staff role" guide={guides.staff} />
+          <RoleReference label="Client role" guide={guides.client} />
+        </div>
+      )}
+
       <div className="rounded-2xl border border-indigo-200 dark:border-indigo-500/20 bg-indigo-50/70 dark:bg-indigo-500/5 px-5 py-4 text-sm leading-6 text-slate-600 dark:text-slate-300">
-        This guide is a quick summary of your current portal role. Your actual access is enforced by your account status, organisation membership, row-level security and private-storage permissions. If something you expect to use is unavailable, contact an Eragonova Administrator through Support.
+        This guide is a quick summary of the current portal role model. Actual access is enforced by account status, organisation membership, row-level security and private-storage permissions. If a Staff or Client account has access outside the boundaries shown here, an Administrator should review that account and its memberships.
       </div>
     </div>
   );
