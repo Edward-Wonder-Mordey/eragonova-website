@@ -48,5 +48,30 @@ if (fs.existsSync(portalFile)) {
     );
   }
 
+  // Distinguish administrators from future staff accounts in the signed-in banner.
+  source = source.replace(
+    '{isStaff ? "Staff access" : primaryMembership?.client_organizations?.name || "Secure client access"}',
+    '{profile?.role === "admin" ? "Administrator access" : profile?.role === "staff" ? "Staff access" : primaryMembership?.client_organizations?.name || "Secure client access"}'
+  );
+
   fs.writeFileSync(portalFile, source, "utf8");
+}
+
+const adminConsoleFile = path.join(__dirname, "..", "src", "components", "PortalAdminConsole.jsx");
+
+if (fs.existsSync(adminConsoleFile)) {
+  let source = fs.readFileSync(adminConsoleFile, "utf8");
+
+  // Keep action feedback visible after the admin data refresh completes.
+  source = source.replace(
+    '  const loadAdminData = async () => {\n    setLoading(true);\n    setMessage("");',
+    '  const loadAdminData = async () => {\n    setLoading(true);'
+  );
+
+  source = source.replace(
+    '    }, "Client invitation sent and organisation access assigned.");',
+    '    }, "Client invitation sent and organisation access assigned. The client will appear in the access overview once the account is created.");'
+  );
+
+  fs.writeFileSync(adminConsoleFile, source, "utf8");
 }
