@@ -2,8 +2,8 @@
   "name": "Eragonova Enterprise",
   "short_name": "Eragonova",
   "description": "Technology, engineering and growth solutions for businesses, institutions and communities.",
-  "start_url": "/",
-  "scope": "/",
+  "start_url": ".",
+  "scope": ".",
   "icons": [
     {
       "src": "android-chrome-192x192.png",
