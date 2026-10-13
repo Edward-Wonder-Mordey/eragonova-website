@@ -1,5 +1,5 @@
 import React from "react";
-import { ArrowRight, CheckCircle2, Users } from "lucide-react";
+import { ArrowRight, CheckCircle2, Download, Monitor, Users } from "lucide-react";
 import HeroSection from "../components/HeroSection.new";
 import ProjectsSection from "../components/ProjectsSection.new";
 import { servicePillars, sectors, academyTracks } from "../data/siteData";
@@ -44,6 +44,27 @@ export default function HomePage() {
             <p className="relative mt-3 text-xl leading-9 font-semibold">Practical Technology. Reliable Infrastructure. Sustainable Growth.</p>
             <div className="relative mt-7 space-y-3 text-sm text-white/70">
               {["Multidisciplinary service delivery","Remote, on-site and hybrid support","Business, institutional and community focus"].map(item => <div key={item} className="flex gap-3"><CheckCircle2 size={18} className="mt-0.5 shrink-0 text-blue-300"/><span>{item}</span></div>)}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-20 bg-slate-50 dark:bg-slate-900/40 border-y border-slate-200 dark:border-white/10">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+          <div className="graphic-panel rounded-[2rem] bg-gradient-to-br from-slate-950 via-blue-950 to-indigo-950 p-8 sm:p-10 lg:p-12 text-white grid lg:grid-cols-[1.1fr_.9fr] gap-10 items-center">
+            <div className="relative">
+              <p className="text-blue-300 text-xs font-bold uppercase tracking-[0.22em]">Free visitor resource · No signup · No payment</p>
+              <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-bold tracking-[-0.035em]">Quick Technology Health Check</h2>
+              <p className="mt-5 text-base sm:text-lg leading-8 text-white/70">Ten safe first checks for everyday computer, Wi-Fi, printer, storage, account, backup and suspicious-link problems.</p>
+              <div className="mt-7 flex flex-wrap gap-3">
+                <a href="/digital-health-guide/" className="inline-flex items-center gap-2 rounded-xl bg-blue-600 px-5 py-3 font-bold text-white hover:bg-blue-500 transition">Read the free guide <ArrowRight size={18}/></a>
+                <a href="/Eragonova_Quick_Technology_Health_Check.pdf" download className="inline-flex items-center gap-2 rounded-xl bg-white px-5 py-3 font-bold text-slate-950 hover:bg-blue-50 transition"><Download size={18}/> Download PDF</a>
+              </div>
+            </div>
+            <div className="relative rounded-3xl border border-white/10 bg-white/5 p-7">
+              <div className="h-16 w-16 rounded-2xl bg-blue-500/15 flex items-center justify-center text-blue-200"><Monitor size={30}/></div>
+              <h3 className="mt-5 text-xl font-bold">Before you make more changes, protect the data and understand the symptom.</h3>
+              <p className="mt-3 text-sm leading-7 text-white/65">The guide is designed for low-risk first checks and makes it clear when to stop and seek qualified technical support.</p>
             </div>
           </div>
         </div>
