@@ -147,10 +147,22 @@ if (fs.existsSync(adminConsoleFile)) {
       'import { supabase, PORTAL_STORAGE_BUCKETS } from "../lib/supabase";\nimport PortalAdminExtras from "./PortalAdminExtras";'
     );
   }
+  if (!source.includes('import PortalStaffInviteCard from "./PortalStaffInviteCard";')) {
+    source = source.replace(
+      'import PortalAdminExtras from "./PortalAdminExtras";',
+      'import PortalAdminExtras from "./PortalAdminExtras";\nimport PortalStaffInviteCard from "./PortalStaffInviteCard";'
+    );
+  }
   if (!source.includes('<PortalAdminExtras session={session} mode="admin"')) {
     source = source.replace(
       '<Notice message={message}/>',
       '<Notice message={message}/>\n\n      <PortalAdminExtras session={session} mode="admin" onRefresh={onRefresh} />'
+    );
+  }
+  if (!source.includes('<PortalStaffInviteCard onComplete={loadAdminData}')) {
+    source = source.replace(
+      '<div className="grid xl:grid-cols-2 gap-6">',
+      '<PortalStaffInviteCard onComplete={loadAdminData} />\n\n      <div className="grid xl:grid-cols-2 gap-6">'
     );
   }
 
@@ -161,6 +173,12 @@ const adminExtrasFile = path.join(__dirname, "..", "src", "components", "PortalA
 
 if (fs.existsSync(adminExtrasFile)) {
   let source = fs.readFileSync(adminExtrasFile, "utf8");
+
+  // Route sensitive role/status changes through the admin-only Edge Function.
+  source = source.replace(
+    '  const updateUser=(id,patch)=>run(`u-${id}`,async()=>{const {error}=await supabase.from("profiles").update(patch).eq("id",id);if(error)throw error;},"User access updated.");',
+    '  const updateUser=(id,patch)=>run(`u-${id}`,async()=>{const current=profileMap[id];if(!current)throw new Error("Portal user not found.");const {data,error}=await supabase.functions.invoke("admin-portal-action",{body:{action:"manage_user",user_id:id,role:patch.role||current.role,status:patch.status||current.status}});if(error)throw error;if(data?.error)throw new Error(data.error);},"User access updated securely.");'
+  );
 
   // Keep founding-client history visible to both administrators and future staff.
   if (!source.includes('Founding client history')) {
