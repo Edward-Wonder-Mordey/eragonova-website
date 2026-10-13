@@ -1,0 +1,86 @@
+{
+  "home": {
+    "path": "/",
+    "label": "Home",
+    "title": "Eragonova Enterprise | Technology • Engineering • Growth",
+    "description": "Practical technology, reliable infrastructure and sustainable growth through multidisciplinary IT, engineering, data and business solutions."
+  },
+  "about": {
+    "path": "/about/",
+    "label": "About",
+    "title": "About Eragonova Enterprise | Technology, Engineering & Growth",
+    "description": "Learn about Eragonova Enterprise, its mission, values, multidisciplinary operating model and global service outlook from Ghana."
+  },
+  "services": {
+    "path": "/services/",
+    "label": "Services",
+    "title": "Services | Eragonova Enterprise",
+    "description": "Explore Eragonova's technology, engineering, data, cybersecurity, software, business support, documentation, training and consulting services."
+  },
+  "projects": {
+    "path": "/projects/",
+    "label": "Projects",
+    "title": "Projects & Capabilities | Eragonova Enterprise",
+    "description": "Explore Eragonova's practical capability areas across data, digital services, operations, design, documentation and enterprise systems."
+  },
+  "academy": {
+    "path": "/academy/",
+    "label": "Academy",
+    "title": "Eragonova Academy | Practical Skills & Training",
+    "description": "Practical technology, data, business, professional development and engineering learning for individuals, teams and organisations."
+  },
+  "resources": {
+    "path": "/resources/",
+    "label": "Resources",
+    "title": "Resources | Eragonova Enterprise",
+    "description": "Practical guides, templates, insights and research across technology, engineering, operations, data, documentation and organisational growth."
+  },
+  "community": {
+    "path": "/community/",
+    "label": "Community",
+    "title": "Community Development | Eragonova Enterprise",
+    "description": "Community development programmes connecting digital skills, entrepreneurship, self-reliance, organisational support and practical service."
+  },
+  "partners": {
+    "path": "/partners/",
+    "label": "Partners",
+    "title": "Strategic Partners | Eragonova Enterprise",
+    "description": "Learn how Eragonova works with independent strategic partners to combine complementary expertise around useful client and community outcomes."
+  },
+  "careers": {
+    "path": "/careers/",
+    "label": "Careers",
+    "title": "Careers & Collaboration | Eragonova Enterprise",
+    "description": "Explore professional collaboration opportunities across technology, engineering, data, operations, administration, design and community development."
+  },
+  "portal": {
+    "path": "/portal/",
+    "label": "Client Portal",
+    "title": "Client Portal | Eragonova Enterprise",
+    "description": "Request controlled client access for project visibility, documents, support and reporting connected to an active Eragonova engagement."
+  },
+  "contact": {
+    "path": "/contact/",
+    "label": "Contact",
+    "title": "Contact Eragonova Enterprise",
+    "description": "Contact Eragonova Enterprise to discuss technology, engineering, data, business support, training, consulting or partnership needs."
+  },
+  "legal": {
+    "path": "/legal/",
+    "label": "Legal",
+    "title": "Legal Information | Eragonova Enterprise",
+    "description": "General legal information and engagement guidance for visitors and prospective clients of Eragonova Enterprise."
+  },
+  "privacy": {
+    "path": "/privacy/",
+    "label": "Privacy",
+    "title": "Privacy Notice | Eragonova Enterprise",
+    "description": "Read how Eragonova Enterprise handles information submitted through website enquiries and client communications."
+  },
+  "terms": {
+    "path": "/terms/",
+    "label": "Terms",
+    "title": "Website & Engagement Terms | Eragonova Enterprise",
+    "description": "Read the general website and engagement terms that guide scope, responsibilities, delivery expectations and authorised use of Eragonova services."
+  }
+}
