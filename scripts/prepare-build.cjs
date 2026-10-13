@@ -14,3 +14,16 @@ if (fs.existsSync(enterpriseFile)) {
 
   fs.writeFileSync(enterpriseFile, source, "utf8");
 }
+
+const portalFile = path.join(__dirname, "..", "src", "pages", "PortalPage.jsx");
+
+if (fs.existsSync(portalFile)) {
+  let source = fs.readFileSync(portalFile, "utf8");
+
+  // lucide-react 0.263.x also predates ReceiptText.
+  // FileText is already supported and keeps the Billing tab build-compatible.
+  source = source.replace(/\s+ReceiptText,\n/, "\n");
+  source = source.replace(/\["billing", ReceiptText, "Billing"\]/g, '["billing", FileText, "Billing"]');
+
+  fs.writeFileSync(portalFile, source, "utf8");
+}
