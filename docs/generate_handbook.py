@@ -129,7 +129,7 @@ p=doc.add_paragraph(); p.alignment=WD_ALIGN_PARAGRAPH.CENTER
 r=p.add_run('A plain-language guide to updating, maintaining and growing the Eragonova Enterprise website'); font(r); r.font.size=Pt(11); r.font.color.rgb=RGBColor.from_string(MUTED)
 p=doc.add_paragraph(); p.alignment=WD_ALIGN_PARAGRAPH.CENTER; p.paragraph_format.space_before=Pt(12)
 r=p.add_run('Practical Technology. Reliable Infrastructure. Sustainable Growth.'); font(r,'Liberation Serif'); r.bold=True; r.font.size=Pt(14); r.font.color.rgb=RGBColor.from_string(BLUE)
-cover=[('Live website','https://eragonova.com/'),('GitHub repository','Edward-Wonder-Mordey/eragonova-website'),('Phone','+233 50 537 4537'),('Email','Eragonovaenterprise@gmail.com'),('Handbook version','Version 1.1 — 13 October 2026')]
+cover=[('Live website','https://eragonova.com/'),('GitHub repository','Edward-Wonder-Mordey/eragonova-website'),('Phone','+233 50 537 4537'),('Email','Eragonovaenterprise@gmail.com'),('Handbook version','Version 1.2 — 13 October 2026')]
 t=doc.add_table(rows=len(cover),cols=2); t.alignment=WD_TABLE_ALIGNMENT.CENTER
 for i,(a,b) in enumerate(cover):
     t.cell(i,0).text=a; t.cell(i,1).text=b; shade(t.cell(i,0),'EFF6FF'); shade(t.cell(i,1),WHITE); borders(t.cell(i,0),'BFDBFE'); borders(t.cell(i,1),'BFDBFE'); style_runs(t.cell(i,0).paragraphs[0],size=8.3,bold=True,color=NAVY); style_runs(t.cell(i,1).paragraphs[0],size=8.3)
@@ -167,8 +167,8 @@ rows=[
 ('Academy','src/pages/AcademyPage.jsx + src/data/siteData.js','Page layout in AcademyPage; track names in siteData.'),
 ('Resources','src/pages/ResourcesPage.jsx','Starter guides and practical checklists are maintained here.'),
 ('Community / Careers','src/pages/ClientFacingPages.jsx','These two pages are exported from this file.'),
-('Elyra partnership','src/pages/PartnersPage.jsx and src/pages/HomePage.jsx','Logo, link and partnership wording appear in both.'),
-('Client Portal','src/pages/PortalPage.jsx','Public portal presentation and access request experience.'),
+('Elyra partnership / first-client history','src/pages/PartnersPage.jsx, src/pages/HomePage.jsx and Supabase Client Portal','Public partnership wording remains independent; the private portal separately records Elyra Suite as Client 001 / Founding Client.'),
+('Client Portal','src/pages/PortalPage.jsx + src/components/PortalAdminConsole.jsx + PortalAdminExtras.jsx + PortalClientExtras.jsx','Secure Supabase-backed portal, client workspace, administrator controls, staff operations and profile tools.'),
 ('Contact page','src/pages/CorporatePages.jsx + ContactSection.jsx','Router uses ContactPage from CorporatePages; actual form/contact details are in ContactSection.'),
 ('Legal page','src/pages/CorporatePages.jsx','Router uses LegalPage from this file.'),
 ('Privacy policy','src/pages/PrivacyPage.jsx','Edit public privacy wording here.'),
@@ -265,10 +265,17 @@ note(doc,'Keep independence clear','Do not change the wording to imply Elyra Sui
 
 # 11 portal
 heading(doc,'11. Client Portal',1)
-body(doc,'The public Client Portal experience is in src/pages/PortalPage.jsx. Treat the current portal as a controlled access / engagement experience. Do not claim there is a full authentication, billing or database backend unless one is actually connected.')
-heading(doc,'11.1 Future portal upgrades',2)
-bullets(doc,['Real user authentication and password reset','Client-specific invoices and documents','Secure training materials','Appointment/project status','Payment records','Role-based access and audit logging'])
-note(doc,'Security rule','Never place client passwords, API keys, payment secrets or private documents directly inside public React source files or the public GitHub repository.','danger')
+body(doc,'The Client Portal is now a live Supabase-backed system rather than a presentation-only page. The React interface is in src/pages/PortalPage.jsx, with administration and staff tools in src/components/PortalAdminConsole.jsx and src/components/PortalAdminExtras.jsx, and client profile/support/billing enhancements in src/components/PortalClientExtras.jsx. Supabase provides authentication, the PostgreSQL database, Row Level Security and private file storage.')
+heading(doc,'11.1 Access roles',2)
+table(doc,['Role','Purpose','Typical access'],[
+('Admin','Owner-level portal administration','Create and edit client organisations, invite users, manage roles/statuses, manage projects, documents, billing, support and notifications.'),
+('Staff','Operational delivery access','Manage projects, milestones, client-visible updates, documents, billing and support without permission to manage administrator/client identities or client-organisation ownership controls.'),
+('Client','Organisation-specific client access','View only records allowed for the client organisation: projects, milestones, updates, private documents, invoices, notifications and support conversations.')],widths=[Cm(3.1),Cm(5.1),Cm(9.3)],small=True)
+heading(doc,'11.2 Main portal capabilities',2)
+bullets(doc,['Secure email/password sign-in and password reset','Dashboard with project/document/support/notification summaries','Client-specific projects, dates, progress and milestones','Private document download through signed URLs','Client-visible billing and invoice status, including browser Print / Save as PDF','Support tickets with client/staff conversation history and internal staff notes','Portal notifications for project updates, invoices and support activity','Editable user profile including full name, phone, job title, profile photo and password','Administrator client search, editing, client numbering, special badges and access management','Separate administrator and future staff workspaces'])
+heading(doc,'11.3 Elyra Suite — founding client',2)
+body(doc,'Elyra Suite is recorded in the portal as Client 001 and receives a permanent Founding Client distinction with a crown-style badge and its logo. Its first recorded project is Elyra Suite Website Development (ELYRA-WEB-001): brief received 11 October 2026, work started 12 October 2026, planned due date 26 October 2026, and completed ahead of schedule on 13 October 2026.')
+note(doc,'Security rule','Never place client passwords, service-role keys, database passwords, payment secrets or private documents inside public React source files or the public GitHub repository. The browser may contain the Supabase publishable key because Row Level Security is the security boundary; the Supabase service-role key must remain server-side only.','danger')
 
 # 12 contact/formspree
 heading(doc,'12. Contact Form and Formspree',1)
@@ -332,11 +339,21 @@ table(doc,['Problem','Likely reason','What to do'],[
 ('I changed a file but nothing changed live','Wrong file or deployment still running','Check the route/file map, then GitHub Actions.'),('Old version still appears','Browser cache','Hard refresh with Ctrl+F5 or test in private/incognito window.'),('Site build failed','Code syntax, missing comma/bracket, dependency issue','Open Actions logs; restore last good edit if necessary.'),('A menu link shows 404','Route metadata/build output missing or route word mismatch','Check routeMeta.json, AppRouter.jsx and the latest deployment. Each public route should have its own generated index.html.'),('Contact form does not send','Formspree/network/endpoint issue','Test Formspree endpoint and check ContactSection.jsx.'),('Dark mode looks wrong','A component lacks dark: classes or global CSS conflict','Check component classes and index.css.'),('Elyra logo does not load','Remote logo URL changed or blocked','Check ELYRA.logo in HomePage.jsx and PartnersPage.jsx.'),('Service changed on one page but not another','Edited a page copy instead of shared data','Update siteData.js if the content is shared.'),('About/Services edit in CorporatePages had no effect','That is an older duplicate','Use AboutPage.jsx / ServicesPage.jsx listed in this handbook.')],widths=[Cm(4.2),Cm(6.1),Cm(7.2)],small=True)
 
 # 20 security/backends
-heading(doc,'20. Security, Client Data and Future Backend Features',1)
-bullets(doc,['Never commit passwords, private API keys, payment secrets or client confidential documents to the public repository.','Do not store real portal usernames/passwords in React source code.','Use a secure backend or trusted service for authentication, payments and private client files.','Limit Formspree access to the appropriate business owners and review spam/security settings.','Use least-privilege access when adding collaborators to GitHub.','Before publishing project/client information, confirm permission and remove confidential details.'])
-heading(doc,'20.1 Features that need real backend systems',2)
-table(doc,['Feature','What is needed'],[
-('Authenticated Client Portal','Identity/authentication service, secure database/storage, access rules, password recovery.'),('Online payments','Payment provider integration, server-side verification/webhooks, terms/refund process.'),('Private documents','Secure storage with client-specific permissions.'),('Real Academy accounts','Learner database, enrolment records, protected materials and completion records.'),('Automated invoicing','Accounting/payment workflow or secure backend/API.')],widths=[Cm(5),Cm(12.5)])
+heading(doc,'20. Security, Client Data and Backend Systems',1)
+body(doc,'The production Client Portal uses Supabase authentication, PostgreSQL, private Storage buckets and Row Level Security (RLS). Client access is organisation-scoped: belonging to one client organisation does not grant visibility into another client organisation. Administrative operations that require elevated privileges use a JWT-protected Supabase Edge Function and database policies.')
+bullets(doc,['Never commit passwords, Supabase service-role keys, database passwords, payment secrets or client confidential documents to the public repository.','The Supabase publishable browser key is not a secret; security must continue to be enforced with RLS and server-side privilege checks.','Keep client documents in private Storage buckets and use authenticated or short-lived signed URLs for downloads.','Keep administrator, staff and client permissions separate. Staff operational access must not silently become administrator access.','Review Supabase Security and Performance Advisors after database/schema changes.','Use least-privilege access for GitHub, Supabase and business systems.','Before publishing project/client information, confirm permission and remove confidential details.'])
+heading(doc,'20.1 Current backend controls',2)
+table(doc,['Control','Current implementation'],[
+('Authentication','Supabase Auth with approved user accounts, password reset and JWT sessions.'),
+('Data isolation','RLS policies restrict client rows by active organisation membership.'),
+('Admin authorization','Administrator-only functions verify the signed-in user has an active admin profile.'),
+('Private documents','client-documents, support-attachments and profile-avatars are private Storage buckets.'),
+('Role separation','Admin, Staff and Client roles have different portal capabilities and database permissions.'),
+('Notifications','Project updates, invoice changes and support activity can create portal notifications.'),
+('Support','Tickets and threaded support messages are organisation-scoped; internal notes are hidden from clients.')],widths=[Cm(5),Cm(12.5)])
+heading(doc,'20.2 Supabase Pro security upgrade',2)
+body(doc,'The project currently uses the Supabase Free plan. Supabase Leaked Password Protection is available on the Pro plan and above. When Eragonova upgrades to Supabase Pro, enable Leaked Password Protection under Authentication password security so compromised passwords can be rejected using the Have I Been Pwned Pwned Passwords service. Also review password-strength and MFA options at that time.')
+note(doc,'Planned security upgrade','Upgrade Supabase to Pro when the portal/client volume justifies the recurring cost, then enable Leaked Password Protection. Until then, continue using strong unique passwords, RLS, private storage and role-based access.','warn')
 
 # 21 maintenance
 heading(doc,'21. Maintenance Checklist',1)
@@ -350,7 +367,7 @@ bullets(doc,['Confirm contact details and business positioning.','Check project 
 # 22 growth roadmap
 heading(doc,'22. Recommended Future Enhancements',1)
 table(doc,['Enhancement','Why it helps','Do when'],[
-('Real project case studies','Builds proof and trust using genuine outcomes.','As verified client/project work becomes available.'),('Analytics','Shows traffic, popular pages and enquiry paths.','When you are ready to manage analytics/privacy.'),('Google Search Console','Helps Google discover and report on eragonova.com search performance.','When Google provides the DNS TXT verification record.'),('Professional domain email','Improves brand consistency.','After domain setup.'),('Portal authentication','Turns public portal concept into real client access.','When recurring clients justify it.'),('Resource library expansion','The current Resources page already includes practical starter checklists; add original downloadable templates and deeper guides as they are produced.','Ongoing as original resources are created.'),('Academy registration system','Supports cohorts, schedules and learner records.','When training volume grows.'),('SEO review and content growth','Keeps route metadata, schema, resources and search targeting aligned with the business.','Review quarterly or when major services change.')],widths=[Cm(4.4),Cm(7.6),Cm(5.5)],small=True)
+('Real project case studies','Builds proof and trust using genuine outcomes.','As verified client/project work becomes available.'),('Analytics','Shows traffic, popular pages and enquiry paths.','When you are ready to manage analytics/privacy.'),('Google Search Console','Helps Google discover and report on eragonova.com search performance.','When Google provides the DNS TXT verification record.'),('Professional domain email','Improves brand consistency.','After domain setup.'),('Supabase Pro security upgrade','Enables Leaked Password Protection and stronger production security options.','When portal/client volume justifies the Pro plan.'),('Resource library expansion','The current Resources page already includes practical starter checklists; add original downloadable templates and deeper guides as they are produced.','Ongoing as original resources are created.'),('Academy registration system','Supports cohorts, schedules and learner records.','When training volume grows.'),('SEO review and content growth','Keeps route metadata, schema, resources and search targeting aligned with the business.','Review quarterly or when major services change.')],widths=[Cm(4.4),Cm(7.6),Cm(5.5)],small=True)
 
 # Appendix A finer services
 heading(doc,'Appendix A. Current Service Catalogue Reference',1)
