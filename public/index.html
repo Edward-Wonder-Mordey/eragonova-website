@@ -4,7 +4,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#0f172a" />
-    <meta name="description" content="Eragonova Enterprise is a multidisciplinary technology, engineering and business solutions company delivering practical services across IT, cloud, data, cybersecurity, software, engineering, documentation, business support, training, research and community development. Based in Ghana and built to serve clients across Africa and internationally." />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="description" content="Eragonova Enterprise is a multidisciplinary technology, engineering and business solutions company delivering practical services across IT, cloud, data, cybersecurity, software, engineering, documentation, business support, training, research and community development." />
     <meta name="keywords" content="Eragonova Enterprise, technology solutions, engineering services, IT services, networking, cloud, data analytics, cybersecurity, software development, electrical engineering, business support, documentation, branding, training, consulting, Ghana, Africa, international services" />
     <meta name="author" content="Eragonova Enterprise" />
     <meta name="robots" content="index,follow" />
@@ -16,6 +17,7 @@
     <meta property="og:image" content="https://eragonova.com/eragonova.jpeg" />
     <meta property="og:image:alt" content="Eragonova Enterprise logo" />
     <meta property="og:site_name" content="Eragonova Enterprise" />
+    <meta property="og:locale" content="en_GH" />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Eragonova Enterprise | Technology • Engineering • Growth" />
@@ -23,6 +25,7 @@
     <meta name="twitter:image" content="https://eragonova.com/eragonova.jpeg" />
 
     <link rel="canonical" href="https://eragonova.com/" />
+    <link rel="preconnect" href="https://formspree.io" crossorigin />
     <title>Eragonova Enterprise | Technology • Engineering • Growth</title>
 
     <link rel="icon" href="%PUBLIC_URL%/favicon.ico" type="image/x-icon" />
@@ -33,6 +36,48 @@
     <link rel="manifest" href="%PUBLIC_URL%/site.webmanifest" />
     <link rel="icon" type="image/png" sizes="192x192" href="%PUBLIC_URL%/android-chrome-192x192.png" />
     <link rel="icon" type="image/png" sizes="512x512" href="%PUBLIC_URL%/android-chrome-512x512.png" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Organization",
+            "@id": "https://eragonova.com/#organization",
+            "name": "Eragonova Enterprise",
+            "url": "https://eragonova.com/",
+            "logo": "https://eragonova.com/eragonova.jpeg",
+            "description": "A multidisciplinary technology, engineering and business solutions company based in Ghana and built to serve clients across Africa and internationally.",
+            "email": "Eragonovaenterprise@gmail.com",
+            "telephone": "+233505374537",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Kumasi",
+              "addressCountry": "GH"
+            },
+            "areaServed": ["Ghana", "Africa", "International"],
+            "contactPoint": {
+              "@type": "ContactPoint",
+              "contactType": "customer enquiries",
+              "telephone": "+233505374537",
+              "email": "Eragonovaenterprise@gmail.com",
+              "availableLanguage": "English"
+            }
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://eragonova.com/#website",
+            "url": "https://eragonova.com/",
+            "name": "Eragonova Enterprise",
+            "publisher": { "@id": "https://eragonova.com/#organization" },
+            "inLanguage": "en"
+          }
+        ]
+      }
+    </script>
+
+    <!-- Google Search Console: use Domain verification with the TXT record supplied by Google. -->
+    <script src="%PUBLIC_URL%/site-config.js"></script>
   </head>
   <body>
     <noscript>Eragonova Enterprise requires JavaScript to provide the full website experience.</noscript>

@@ -1,0 +1,46 @@
+.skip-link {
+  position: fixed;
+  left: 1rem;
+  top: 1rem;
+  z-index: 100;
+  transform: translateY(-180%);
+  border-radius: .75rem;
+  background: #ffffff;
+  color: #0f172a;
+  padding: .7rem 1rem;
+  font-weight: 700;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, .18);
+  transition: transform .18s ease;
+}
+.skip-link:focus { transform: translateY(0); }
+
+:focus-visible {
+  outline: 3px solid #38bdf8;
+  outline-offset: 3px;
+}
+
+#main-content:focus { outline: none; }
+
+.form-honeypot {
+  position: absolute !important;
+  left: -10000px !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto !important; }
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .accent-card:hover,
+  .project-card:hover,
+  .capability-showcase-card:hover,
+  .primary-button:hover {
+    transform: none !important;
+  }
+}

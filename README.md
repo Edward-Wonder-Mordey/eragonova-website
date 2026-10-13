@@ -1,71 +1,112 @@
-# Eragonova Enterprise
+# Eragonova Enterprise Website
 
-## Overview
-Eragonova Enterprise is a Kumasi-based technology and infrastructure firm specializing in advanced IT solutions, electrical and electronic engineering services, professional branding, and strategic business documentation. Founded by Edward Wonder Mordey, the company is built on a vision of versatility, excellence, and contract-readiness across multiple sectors. With scalable systems and remote-service capabilities, Eragonova is positioned to serve clients across Ghana and beyond.
+Official website repository for **Eragonova Enterprise**.
 
----
+**Public website:** https://eragonova.com  
+**Positioning:** Technology • Engineering • Growth  
+**Motto:** Practical Technology. Reliable Infrastructure. Sustainable Growth.
 
-## Core Services
+## Website purpose
 
-### IT & Systems Administration
-- IT Infrastructure Design, Troubleshooting & Optimization *(in-person & remote)*
-- Network Architecture & Cybersecurity Solutions *(remote monitoring + on-site setup)*
-- Cloud Services & Remote Systems Management *(remote)*
-- Server Administration & Virtualization *(remote & in-person)*
-- Systems Integration & Automation *(in-person)*
+The website presents Eragonova as a multidisciplinary technology, engineering and business solutions company based in Ghana and built to serve clients across Africa and internationally. It covers the enterprise service divisions, projects and capabilities, Academy, resources, community development, strategic partners, careers, client portal access, contact information and public legal/privacy information.
 
-### Data & Analytics
-- Remote Data Analysis & Reporting *(remote)*
-- Business Intelligence Dashboards *(remote)*
-- Compliance & Audit-Ready Documentation *(remote)*
-- Predictive Analytics for SMEs and NGOs *(remote)*
+## Main public pages
 
-### Electrical & Electronic Engineering
-- Electrical Systems Design & Installation *(in-person)*
-- Electronic Circuit Design & Troubleshooting *(in-person & remote consultation)*
-- Renewable Energy Solutions (Solar, Hybrid Systems) *(in-person)*
-- Industrial Automation & Control Systems *(in-person)*
-- Power Systems Maintenance & Safety Audits *(in-person)*
+- `/` — Home
+- `/about` — About
+- `/services` — Enterprise services and 16 service divisions
+- `/projects` — Projects and capability areas
+- `/academy` — Eragonova Academy
+- `/resources` — Resources and knowledge areas
+- `/community` — Community development
+- `/partners` — Strategic partners
+- `/careers` — Careers and collaboration
+- `/portal` — Client portal access information
+- `/contact` — Contact and project enquiry form
+- `/legal` — Legal information
+- `/privacy` — Privacy notice
+- `/terms` — Website and engagement terms
 
-### Professional Branding & Documentation
-- Strategic Branding for Contract Eligibility *(remote)*
-- Export-Ready Business Documentation *(remote)*
-- Corporate Profiles, Proposals & Reports *(remote)*
-- Digital Marketing & Presentation Design *(remote)*
+Legacy `#/...` links are automatically converted to the clean URL structure.
 
-### Business & Community Development
-- Business Administration & Strategic Planning *(remote & in-person)*
-- Project Coordination for NGOs, Churches & Community Initiatives *(in-person & remote support)*
-- Training & Capacity-Building Workshops *(in-person & remote webinars)*
-- Self-Reliance & Sustainability Programs *(in-person & remote mentoring)*
+## Hosting and domain
 
----
+The site is built with React and deployed to GitHub Pages through `.github/workflows/deploy-pages.yml`.
 
-## Target Market
-- SMEs and startups seeking scalable tech & engineering solutions  
-- NGOs and community organizations needing structured project support  
-- Corporate and government entities requiring export-ready documentation, IT, and engineering services  
-- International partners seeking reliable, remote-capable service delivery  
-- Renewable energy and industrial clients needing electrical/electronic expertise  
+The custom domain is configured through `public/CNAME` as:
 
----
+```text
+eragonova.com
+```
 
-## Business Strengths
-- Methodical execution with step-by-step technical processes  
-- Clear communication and effective remote work management  
-- Detail-driven feedback and rigorous quality assurance  
-- Strategic branding aligned with contract eligibility and export standards  
-- Cross-border readiness and dependable digital service delivery  
-- Multidisciplinary expertise in IT, data, and engineering  
+The production build creates `build/404.html` from the app shell so direct visits and refreshes on clean client-side routes such as `/services` continue to work on GitHub Pages.
 
----
+## SEO and search
 
-## Vision Statement
-To become a leading contract-ready enterprise in Ghana and across Africa, delivering professional-grade IT, engineering, and branding solutions that empower businesses, communities, and institutions to thrive locally and globally.
+- Page-specific titles, descriptions, canonical URLs and social metadata are managed in `src/data/routeMeta.js` and applied by `src/AppRouter.jsx`.
+- Organisation and website structured data are defined in `public/index.html`.
+- Page and breadcrumb structured data are generated by `src/AppRouter.jsx`.
+- `public/sitemap.xml` lists the public clean URLs.
+- `public/robots.txt` points search engines to the sitemap.
+- Google Search Console Domain verification should be completed with the TXT record Google supplies for `eragonova.com`.
 
----
+## Analytics
 
-## Contact
-**Phone:** +233 50 537 4537  
-**Email:** Eragonovaenterprise@gmail.com  
-**Location:** Kumasi, Ghana
+Google Analytics is prepared but disabled until a real GA4 Measurement ID is available.
+
+To enable it later, edit:
+
+`public/site-config.js`
+
+and change:
+
+```js
+window.ERAGONOVA_CONFIG = {
+  gaMeasurementId: "G-XXXXXXXXXX",
+};
+```
+
+Do not invent or copy another website's Measurement ID.
+
+## Contact form
+
+The contact form is in `src/components/ContactSection.jsx` and currently submits through Formspree. It includes:
+
+- required enquiry details
+- privacy consent
+- a honeypot spam field
+- accessible success/error messages
+- analytics events when GA4 is enabled
+
+Do not place passwords, private API keys or payment credentials in the public source code.
+
+## Accessibility
+
+Accessibility support includes a skip-to-content link, visible keyboard focus, mobile-menu state information, Escape-key menu closing, accessible form status messages and reduced-motion support. The related CSS is in `src/accessibility.css`.
+
+## Documentation
+
+The plain-language owner's handbook is stored at:
+
+`docs/Eragonova_Enterprise_Website_Owners_Handbook.docx`
+
+Its reusable generator is:
+
+`docs/generate_handbook.py`
+
+When the website structure changes significantly, update the handbook or its generator so the management documentation remains aligned with the live site.
+
+## Development
+
+```bash
+npm install
+npm start
+```
+
+Production build:
+
+```bash
+npm run build
+```
+
+The build automatically runs the preparation script before compilation and the clean-route fallback script after compilation.

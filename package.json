@@ -21,6 +21,7 @@
     "start": "node ./node_modules/react-scripts/bin/react-scripts.js start",
     "prebuild": "node scripts/prepare-build.cjs",
     "build": "node ./node_modules/react-scripts/bin/react-scripts.js build",
+    "postbuild": "node scripts/postbuild.cjs",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
