@@ -43,7 +43,7 @@ const pdfParts = [
 
 decodeBase64Files(
   pdfParts,
-  "b4dfc43bf99ea7d6175c283022987adea5c5cecfe1a9491fe6ece1d1e63833d8",
+  "0036b6678a94aad788f7748785f6d5cf7fc1cbc1dbb625c9ce58cdeef42865a5",
   path.join(publicDir, "Eragonova_Quick_Technology_Health_Check.pdf")
 );
 
