@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Menu, X, Sun, Moon, ArrowUpRight, ChevronDown } from "lucide-react";
 
-const LOGO = `${process.env.PUBLIC_URL}/eragonova.jpeg`;
+const LOGO = `${process.env.PUBLIC_URL}/eragonova-logo.jpg`;
 
 const primaryItems = [
   { name: "Home", href: "/", route: "home" },
@@ -50,12 +50,8 @@ export default function Header({ currentRoute = "home" }) {
     <header className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-2rem)] max-w-7xl">
       <div className="glass-nav rounded-2xl px-4 sm:px-5 py-3">
         <div className="flex items-center justify-between gap-4">
-          <a href="/" className="flex items-center gap-3 min-w-0" aria-label="Eragonova Enterprise home">
-            <img src={LOGO} alt="Eragonova Enterprise logo" className="h-11 w-11 rounded-xl object-contain bg-white shadow-sm" />
-            <div className="hidden sm:block leading-tight">
-              <span className="block font-bold text-sm tracking-tight text-slate-900 dark:text-white">Eragonova</span>
-              <span className="block text-[10px] uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">Enterprise</span>
-            </div>
+          <a href="/" className="flex items-center min-w-0" aria-label="Eragonova Enterprise home">
+            <img src={LOGO} alt="Eragonova Enterprise logo" className="h-10 sm:h-11 w-auto max-w-[9.5rem] sm:max-w-[11rem] rounded-xl object-contain bg-white px-1.5 py-1 shadow-sm" />
           </a>
 
           <nav className="hidden xl:flex items-center gap-0.5" aria-label="Main navigation">
