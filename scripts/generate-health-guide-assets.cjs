@@ -26,14 +26,20 @@ function decodeBase64Files(files, expectedHash, outputPath) {
   console.log(`Generated ${path.relative(root, outputPath)} (${buffer.length} bytes)`);
 }
 
-const pdfParts = fs
-  .readdirSync(generatedDir)
-  .filter((name) => /^health-guide-v2\.part\d+\.b64$/.test(name))
-  .sort();
-
-if (!pdfParts.length) {
-  throw new Error("No health-guide-v2 PDF data parts were found.");
-}
+// The first 5,000 base64 characters are split into smaller verified chunks.
+// The older part00.b64 file is intentionally excluded from this list.
+const pdfParts = [
+  "health-guide-v2.part00a.b64",
+  "health-guide-v2.part00b.b64",
+  "health-guide-v2.part00c.b64",
+  "health-guide-v2.part00d.b64",
+  "health-guide-v2.part00e.b64",
+  "health-guide-v2.part01.b64",
+  "health-guide-v2.part02.b64",
+  "health-guide-v2.part03.b64",
+  "health-guide-v2.part04.b64",
+  "health-guide-v2.part05.b64",
+];
 
 decodeBase64Files(
   pdfParts,
