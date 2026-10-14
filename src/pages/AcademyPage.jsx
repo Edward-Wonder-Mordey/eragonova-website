@@ -16,10 +16,18 @@ import {
   CalendarDays,
 } from "lucide-react";
 import CapabilityVisual from "../components/CapabilityVisual";
-import { academyTracks } from "../data/siteData";
 
 const trackAccents = ["blue", "cyan", "emerald", "violet", "amber", "indigo"];
 const trackIcons = [Monitor, BarChart3, Briefcase, Zap, Users, Rocket];
+
+const academyProgrammeTracks = [
+  ["Technology & IT", ["IT Support", "Networking", "Linux", "Windows Server", "Active Directory", "Cloud Computing", "Systems Administration", "Cybersecurity Fundamentals"]],
+  ["Data & Analytics", ["Excel", "SQL", "Power BI", "Tableau", "Data Analysis", "Reporting", "Business Intelligence"]],
+  ["Business & Administration", ["Administrative Support", "Virtual Assistance", "Customer Service", "Business Writing", "Documentation", "Office Productivity"]],
+  ["Engineering & Technical Skills", ["Electrical Fundamentals", "Electronics", "Technical Safety", "Diagnostics", "Technical Documentation"]],
+  ["Professional Development", ["Communication", "Leadership", "Career Readiness", "Project Coordination", "Workplace Skills"]],
+  ["Entrepreneurship", ["Business Fundamentals", "Customer Service", "Business Operations", "Branding", "Digital Tools", "Basic Financial Management", "Business Documentation"]],
+];
 
 const programmes = [
   {
@@ -144,7 +152,7 @@ export default function AcademyPage() {
             <p className="mt-5 text-base sm:text-lg leading-8 text-slate-600 dark:text-slate-300">Learners choose a pathway based on the capability they want to build. Individual subjects and module combinations will depend on programme duration and level.</p>
           </div>
           <div className="mt-10 grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {academyTracks.map(([track,items], index) => {
+            {academyProgrammeTracks.map(([track,items], index) => {
               const Icon = trackIcons[index % trackIcons.length];
               return (
                 <div key={track} className="accent-card rounded-3xl p-7" data-accent={trackAccents[index % trackAccents.length]}>
