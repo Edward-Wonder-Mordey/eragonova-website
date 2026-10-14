@@ -15,7 +15,6 @@ import {
   Target,
   CalendarDays,
 } from "lucide-react";
-import CapabilityVisual from "../components/CapabilityVisual";
 
 const trackAccents = ["blue", "cyan", "emerald", "violet", "amber", "indigo"];
 const trackIcons = [Monitor, BarChart3, Briefcase, Zap, Users, Rocket];
@@ -35,6 +34,8 @@ const programmes = [
     title: "Skills Programme",
     accent: "blue",
     icon: Clock3,
+    image: "/academy/academy-3-month.webp",
+    imageAlt: "Eragonova Academy learners taking part in hands-on technical and networking training",
     description: "Focused practical training for learners who want to develop a specific, usable skill in a shorter period.",
     features: [
       "Focused skill pathway",
@@ -48,6 +49,8 @@ const programmes = [
     title: "Professional Certificate Programme",
     accent: "violet",
     icon: Award,
+    image: "/academy/academy-6-month.webp",
+    imageAlt: "Eragonova Academy learners receiving structured professional computer training",
     description: "Broader job-ready development combining related skills, practical work, structured learning and assessment.",
     features: [
       "Multiple connected modules",
@@ -61,6 +64,8 @@ const programmes = [
     title: "Career Development Programme",
     accent: "emerald",
     icon: Target,
+    image: "/academy/academy-1-year.webp",
+    imageAlt: "Eragonova Academy career development workshop focused on leadership and professional growth",
     description: "A deeper professional pathway for learners who want sustained development across a complete technical or business track.",
     features: [
       "Foundation to advanced modules",
@@ -104,9 +109,22 @@ export default function AcademyPage() {
               <a href="#/contact" className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/10 px-6 py-3.5 font-semibold text-white transition hover:bg-white/15">Request Programme Information</a>
             </div>
           </div>
+
           <div className="rounded-[1.6rem] border border-white/10 bg-white/[0.055] p-3 sm:p-4 shadow-2xl shadow-violet-950/30 backdrop-blur-sm">
-            <CapabilityVisual type="academy" />
-            <div className="mt-3 flex items-center justify-between gap-3 px-1 text-[11px] font-semibold text-white/45"><span>Structured learning</span><span>Tracks • Labs • Projects • Progress</span></div>
+            <div className="relative overflow-hidden rounded-[1.25rem]">
+              <img
+                src="/academy/academy-hero.webp"
+                alt="Eragonova Academy instructor guiding learners in a professional computer training session"
+                className="w-full aspect-[16/9] object-cover"
+                loading="eager"
+                fetchPriority="high"
+              />
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-slate-950/55 to-transparent" />
+            </div>
+            <div className="mt-3 flex items-center justify-between gap-3 px-1 text-[11px] font-semibold text-white/45">
+              <span>Structured learning</span>
+              <span>Tracks • Labs • Projects • Progress</span>
+            </div>
           </div>
         </div>
       </section>
@@ -121,23 +139,34 @@ export default function AcademyPage() {
           </div>
 
           <div className="mt-10 grid lg:grid-cols-3 gap-5">
-            {programmes.map(({ duration, title, accent, icon: Icon, description, features }) => (
-              <article key={duration} className="accent-card rounded-3xl p-7" data-accent={accent}>
-                <div className="relative z-10 flex items-start justify-between gap-4">
-                  <div className="accent-icon"><Icon size={23}/></div>
-                  <span className="accent-kicker text-xs font-bold uppercase tracking-[0.14em]">{duration}</span>
+            {programmes.map(({ duration, title, accent, icon: Icon, image, imageAlt, description, features }) => (
+              <article key={duration} className="accent-card rounded-3xl overflow-hidden" data-accent={accent}>
+                <div className="relative z-10 aspect-[16/9] overflow-hidden border-b border-slate-200/70 dark:border-white/10">
+                  <img
+                    src={image}
+                    alt={imageAlt}
+                    className="h-full w-full object-cover transition duration-500 hover:scale-[1.02]"
+                    loading="lazy"
+                  />
+                  <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-slate-950/35 to-transparent" />
                 </div>
-                <h3 className="relative z-10 mt-5 text-2xl font-bold text-slate-950 dark:text-white">{title}</h3>
-                <p className="relative z-10 mt-3 text-sm leading-7 text-slate-600 dark:text-slate-300">{description}</p>
-                <div className="relative z-10 mt-5 space-y-3">
-                  {features.map(feature => (
-                    <div key={feature} className="flex gap-2.5 text-sm text-slate-700 dark:text-slate-300">
-                      <CheckCircle2 size={17} className="accent-kicker mt-0.5 shrink-0" />
-                      <span>{feature}</span>
-                    </div>
-                  ))}
+                <div className="p-7">
+                  <div className="relative z-10 flex items-start justify-between gap-4">
+                    <div className="accent-icon"><Icon size={23}/></div>
+                    <span className="accent-kicker text-xs font-bold uppercase tracking-[0.14em]">{duration}</span>
+                  </div>
+                  <h3 className="relative z-10 mt-5 text-2xl font-bold text-slate-950 dark:text-white">{title}</h3>
+                  <p className="relative z-10 mt-3 text-sm leading-7 text-slate-600 dark:text-slate-300">{description}</p>
+                  <div className="relative z-10 mt-5 space-y-3">
+                    {features.map(feature => (
+                      <div key={feature} className="flex gap-2.5 text-sm text-slate-700 dark:text-slate-300">
+                        <CheckCircle2 size={17} className="accent-kicker mt-0.5 shrink-0" />
+                        <span>{feature}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <a href="#/contact" className="relative z-10 mt-6 inline-flex items-center gap-2 font-semibold text-sm accent-kicker">Ask about this programme <ArrowRight size={16}/></a>
                 </div>
-                <a href="#/contact" className="relative z-10 mt-6 inline-flex items-center gap-2 font-semibold text-sm accent-kicker">Ask about this programme <ArrowRight size={16}/></a>
               </article>
             ))}
           </div>
@@ -175,6 +204,14 @@ export default function AcademyPage() {
             <p className="text-violet-600 dark:text-violet-300 text-xs font-bold uppercase tracking-[0.22em]">How Learning Works</p>
             <h2 className="mt-3 text-3xl sm:text-4xl font-bold tracking-tight text-slate-950 dark:text-white">Built around capability, not just classroom time.</h2>
             <p className="mt-5 text-base leading-8 text-slate-600 dark:text-slate-300">Programmes combine instruction with practice so learners can apply what they study. Specific requirements will be published for each pathway before enrolment.</p>
+            <div className="mt-7 overflow-hidden rounded-3xl border border-slate-200 dark:border-white/10 shadow-sm">
+              <img
+                src="/academy/academy-3-month.webp"
+                alt="Eragonova Academy learners collaborating with instructor support on practical technical work"
+                className="w-full aspect-[16/9] object-cover"
+                loading="lazy"
+              />
+            </div>
           </div>
           <div className="grid sm:grid-cols-2 gap-4">
             {learningModel.map(([Icon, title, description], index) => (
