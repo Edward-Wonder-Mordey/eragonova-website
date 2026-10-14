@@ -1,5 +1,7 @@
 import React from "react";
-import { AlertTriangle, ArrowRight, CheckCircle2, Download, Monitor, ShieldCheck } from "lucide-react";
+import { AlertTriangle, ArrowRight, CheckCircle2, Download, ShieldCheck } from "lucide-react";
+
+const LOGO = `${process.env.PUBLIC_URL}/eragonova-logo.jpg`;
 
 const checks = [
   ["Slow computer", "Restart first. Close unused apps and browser tabs, check free storage, and install normal system updates. Avoid unknown 'cleaner' apps that promise instant fixes."],
@@ -35,7 +37,9 @@ export default function DigitalHealthGuidePage() {
             </div>
           </div>
           <div className="graphic-panel rounded-[2rem] bg-white/5 border border-white/10 p-8">
-            <div className="h-16 w-16 rounded-2xl bg-blue-500/15 border border-blue-300/20 flex items-center justify-center text-blue-200"><Monitor size={30}/></div>
+            <div className="rounded-2xl bg-white p-4 sm:p-5 border border-blue-200/30 shadow-xl">
+              <img src={LOGO} alt="Eragonova Enterprise official logo" className="w-full max-w-md mx-auto object-contain" loading="eager" />
+            </div>
             <h2 className="mt-6 text-2xl font-bold">Start simple. Protect your data.</h2>
             <p className="mt-3 text-white/65 leading-7">These checks are deliberately low-risk. The goal is to rule out common causes without deleting data, bypassing security, opening electrical equipment, or making uncontrolled changes.</p>
           </div>
