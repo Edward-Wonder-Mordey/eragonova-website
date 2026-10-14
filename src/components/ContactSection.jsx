@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Phone, Mail, MapPin, Send } from "lucide-react";
+import { Phone, Mail, MapPin, Send, MessageCircle } from "lucide-react";
 import { trackEvent } from "../analytics";
 
 const serviceOptions = [
@@ -72,6 +72,7 @@ export default function ContactSection() {
 
   const contacts = [
     [Phone, "Phone", "+233 50 537 4537", "tel:+233505374537", "phone"],
+    [MessageCircle, "WhatsApp", "Message us on WhatsApp", "https://wa.me/233505374537?text=Hello%20Eragonova%20Enterprise%2C%20I%20would%20like%20to%20make%20an%20inquiry.", "whatsapp"],
     [Mail, "Email", "Eragonovaenterprise@gmail.com", "mailto:Eragonovaenterprise@gmail.com", "email"],
     [MapPin, "Location", "Kumasi, Ghana", null, null],
   ];
@@ -95,7 +96,8 @@ export default function ContactSection() {
                     <div><p className="text-xs font-bold uppercase tracking-[0.13em] text-slate-400">{label}</p><p className="mt-1 font-semibold text-slate-900 dark:text-white break-all">{value}</p></div>
                   </div>
                 );
-                return href ? <a key={label} href={href} onClick={() => trackEvent("contact_click", { method: eventName })} className="block hover:-translate-y-0.5 transition">{content}</a> : <div key={label}>{content}</div>;
+                const isExternal = href?.startsWith("http");
+                return href ? <a key={label} href={href} target={isExternal ? "_blank" : undefined} rel={isExternal ? "noopener noreferrer" : undefined} onClick={() => trackEvent("contact_click", { method: eventName })} className="block hover:-translate-y-0.5 transition">{content}</a> : <div key={label}>{content}</div>;
               })}
             </div>
           </div>
@@ -131,7 +133,7 @@ export default function ContactSection() {
 
               <div aria-live="polite" aria-atomic="true">
                 {submitStatus === "success" && <p role="status" className="rounded-xl bg-emerald-50 px-4 py-3 text-sm font-medium text-emerald-700 dark:bg-emerald-500/10 dark:text-emerald-300">Your message has been sent successfully. We will review the details and respond using the contact information provided.</p>}
-                {submitStatus === "error" && <p role="alert" className="rounded-xl bg-red-50 px-4 py-3 text-sm font-medium text-red-700 dark:bg-red-500/10 dark:text-red-300">The message could not be sent. Please try again or use the phone/email details shown here.</p>}
+                {submitStatus === "error" && <p role="alert" className="rounded-xl bg-red-50 px-4 py-3 text-sm font-medium text-red-700 dark:bg-red-500/10 dark:text-red-300">The message could not be sent. Please try again or use the phone, WhatsApp, or email details shown here.</p>}
               </div>
             </form>
           </div>
