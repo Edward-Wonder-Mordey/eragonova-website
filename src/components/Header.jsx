@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Menu, X, Sun, Moon, ArrowUpRight, ChevronDown } from "lucide-react";
 
-const githubPagesBase = typeof window !== "undefined" && window.location.hostname.endsWith("github.io") ? "/eragonova-website" : "";
-const LOGO = `${githubPagesBase}/eragonova-logo.jpg`;
+const LOGO = "https://edward-wonder-mordey.github.io/eragonova-website/eragonova-logo.jpg";
 
 const primaryItems = [
   { name: "Home", href: "/", route: "home" },
