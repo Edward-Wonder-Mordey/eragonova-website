@@ -55,7 +55,7 @@ export default function HomePage() {
             <div className="relative">
               <p className="text-blue-300 text-xs font-bold uppercase tracking-[0.22em]">Free visitor resource · No signup · No payment</p>
               <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-bold tracking-[-0.035em]">Quick Technology Health Check</h2>
-              <p className="mt-5 text-base sm:text-lg leading-8 text-white/70">Ten safe first checks for everyday computer, Wi-Fi, printer, storage, account, backup and suspicious-link problems.</p>
+              <p className="mt-5 text-base sm:text-lg leading-8 text-white/70">Twelve safe first checks for everyday computer, Wi-Fi, printer, storage, backup, suspicious-message and account-security problems.</p>
               <div className="mt-7 flex flex-wrap gap-3">
                 <a href="/digital-health-guide/" className="inline-flex items-center gap-2 rounded-xl bg-blue-600 px-5 py-3 font-bold text-white hover:bg-blue-500 transition">Read the free guide <ArrowRight size={18}/></a>
                 <a href="/Eragonova_Quick_Technology_Health_Check.pdf" download className="inline-flex items-center gap-2 rounded-xl bg-white px-5 py-3 font-bold text-slate-950 hover:bg-blue-50 transition"><Download size={18}/> Download PDF</a>
@@ -64,7 +64,7 @@ export default function HomePage() {
             <div className="relative rounded-3xl border border-white/10 bg-white/5 p-7">
               <div className="h-16 w-16 rounded-2xl bg-blue-500/15 flex items-center justify-center text-blue-200"><Monitor size={30}/></div>
               <h3 className="mt-5 text-xl font-bold">Before you make more changes, protect the data and understand the symptom.</h3>
-              <p className="mt-3 text-sm leading-7 text-white/65">The guide is designed for low-risk first checks and makes it clear when to stop and seek qualified technical support.</p>
+              <p className="mt-3 text-sm leading-7 text-white/65">Version 2.0 adds account-compromise and suspicious-message checks while keeping the focus on low-risk first actions and clear escalation points.</p>
             </div>
           </div>
         </div>
