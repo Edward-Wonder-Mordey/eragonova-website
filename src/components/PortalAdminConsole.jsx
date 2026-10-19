@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import {
   BarChart3,
   CheckCircle2,
+  Download,
   FileText,
   FolderKanban,
   Loader2,
@@ -243,6 +244,12 @@ export default function PortalAdminConsole({ session, onRefresh }) {
 
   return (
     <div className="space-y-6">
+      <AdminCard title="Eragonova business documents" description="Download current company templates for use wherever you are." icon={Download}>
+        <div className="flex flex-col sm:flex-row gap-3">
+          <a className={buttonClass} href="/documents/Eragonova_Official_Receipt.docx" download><Download size={17}/> Download 10-page receipt pad</a>
+          <a className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 dark:border-white/10 px-5 py-3 text-sm font-semibold text-slate-700 dark:text-white hover:bg-slate-50 dark:hover:bg-white/5" href="/documents/Eragonova_Letterhead.docx" download><Download size={17}/> Download letterhead</a>
+        </div>
+      </AdminCard>
       <div className="rounded-2xl border border-indigo-200 dark:border-indigo-500/20 bg-indigo-50 dark:bg-indigo-500/10 p-6">
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
           <div><div className="flex items-center gap-2 text-indigo-700 dark:text-indigo-200"><ShieldCheck size={20}/><span className="text-xs font-bold uppercase tracking-[0.16em]">Administrator Workspace</span></div><h2 className="mt-2 text-2xl font-bold text-slate-950 dark:text-white">Manage the client portal</h2><p className="mt-2 text-sm text-slate-600 dark:text-slate-300">Create clients and projects, publish updates, upload private files, manage billing and follow support requests.</p></div>
