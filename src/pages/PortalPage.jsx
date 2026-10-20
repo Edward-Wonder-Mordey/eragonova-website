@@ -138,8 +138,14 @@ export default function PortalPage() {
   const [portalMessage, setPortalMessage] = useState("");
   const [ticketForm, setTicketForm] = useState({ organization_id: "", project_id: "", subject: "", description: "", priority: "normal" });
   const [submittingTicket, setSubmittingTicket] = useState(false);
+  const [testimonials, setTestimonials] = useState([]);
+  const [testimonialsLoading, setTestimonialsLoading] = useState(false);
+  const [testimonialAction, setTestimonialAction] = useState("");
+  const [testimonialNotice, setTestimonialNotice] = useState("");
 
   const isStaff = ["admin", "staff"].includes(profile?.role);
+  const isAdmin = profile?.role === "admin";
+  const portalTabItems = isAdmin ? [...tabItems, ["testimonials", MessageSquare, "Testimonials"]] : tabItems;
   const primaryMembership = memberships[0];
 
   const loadPortalData = async (currentSession) => {
@@ -192,6 +198,38 @@ export default function PortalPage() {
     return () => listener.subscription.unsubscribe();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const loadTestimonials = async () => {
+    if (!isAdmin) return;
+    setTestimonialsLoading(true);
+    const { data, error } = await supabase.from("testimonials")
+      .select("id, display_name, organization_name, project_name, quote, status, display_consent, created_at, approved_at")
+      .order("created_at", { ascending: false });
+    if (error) setTestimonialNotice(error.message);
+    else { setTestimonials(data || []); setTestimonialNotice(""); }
+    setTestimonialsLoading(false);
+  };
+
+  useEffect(() => {
+    if (isAdmin && activeTab === "testimonials") loadTestimonials();
+  }, [isAdmin, activeTab]);
+
+  const moderateTestimonial = async (item, nextStatus) => {
+    setTestimonialAction(item.id);
+    setTestimonialNotice("");
+    const approved = nextStatus === "approved";
+    const { error } = await supabase.from("testimonials").update({
+      status: nextStatus,
+      approved_at: approved ? new Date().toISOString() : null,
+      approved_by: approved ? session.user.id : null,
+    }).eq("id", item.id);
+    if (error) setTestimonialNotice(error.message);
+    else {
+      setTestimonialNotice(approved ? "Feedback approved and published." : nextStatus === "pending" ? "Feedback returned to review." : "Feedback unpublished.");
+      await loadTestimonials();
+    }
+    setTestimonialAction("");
+  };
 
   const organizationOptions = useMemo(() => memberships.map((m) => ({ id: m.organization_id, name: m.client_organizations?.name || m.organization_id })), [memberships]);
   const openTickets = tickets.filter((ticket) => !["resolved", "closed"].includes(ticket.status)).length;
@@ -271,7 +309,7 @@ export default function PortalPage() {
         <div className="mt-6 grid lg:grid-cols-[230px_1fr] gap-6">
           <aside className="rounded-2xl border border-slate-200 dark:border-white/10 bg-white dark:bg-slate-900 p-3 h-fit lg:sticky lg:top-28">
             <nav className="space-y-1" aria-label="Portal navigation">
-              {tabItems.map(([id, Icon, label]) => <button key={id} onClick={() => setActiveTab(id)} className={`w-full flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-semibold text-left transition ${activeTab === id ? "bg-indigo-600 text-white" : "text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/5"}`}><Icon size={18}/>{label}{id === "support" && openTickets > 0 && <span className="ml-auto text-xs">{openTickets}</span>}{id === "dashboard" && unread > 0 && <span className="ml-auto h-2 w-2 rounded-full bg-amber-400" />}</button>)}
+              {portalTabItems.map(([id, Icon, label]) => <button key={id} onClick={() => setActiveTab(id)} className={`w-full flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-semibold text-left transition ${activeTab === id ? "bg-indigo-600 text-white" : "text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/5"}`}><Icon size={18}/>{label}{id === "support" && openTickets > 0 && <span className="ml-auto text-xs">{openTickets}</span>}{id === "dashboard" && unread > 0 && <span className="ml-auto h-2 w-2 rounded-full bg-amber-400" />}</button>)}
             </nav>
           </aside>
 
@@ -293,6 +331,24 @@ export default function PortalPage() {
             {activeTab === "billing" && <div className="space-y-4"><div><h2 className="text-2xl font-bold text-slate-950 dark:text-white">Billing</h2><p className="mt-1 text-sm text-slate-500">Client-visible invoice and payment status.</p></div>{invoices.length ? invoices.map((invoice) => <div key={invoice.id} className="rounded-2xl border border-slate-200 dark:border-white/10 bg-white dark:bg-slate-900 p-5 grid sm:grid-cols-[1fr_auto_auto] gap-4 items-center"><div><p className="font-bold text-slate-950 dark:text-white">{invoice.invoice_number}</p><p className="mt-1 text-xs text-slate-500">{invoice.description || "Invoice"} · Due {formatDate(invoice.due_date)}</p></div><div className="text-left sm:text-right"><p className="text-lg font-bold text-slate-950 dark:text-white">{invoice.currency} {Number(invoice.amount || 0).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})}</p>{Number(invoice.amount_paid || 0) > 0 && <p className="text-xs text-slate-500">Paid: {invoice.currency} {Number(invoice.amount_paid).toLocaleString()}</p>}</div><StatusPill value={invoice.status}/></div>) : <p className="rounded-2xl border border-slate-200 dark:border-white/10 bg-white dark:bg-slate-900 p-6 text-sm text-slate-500">No invoices are available yet.</p>}</div>}
 
             {activeTab === "support" && <div className="grid xl:grid-cols-[.95fr_1.05fr] gap-6"><div className="rounded-2xl border border-slate-200 dark:border-white/10 bg-white dark:bg-slate-900 p-6"><h2 className="text-xl font-bold text-slate-950 dark:text-white">Create support request</h2>{organizationOptions.length || isStaff ? <form onSubmit={createTicket} className="mt-5 space-y-4"><select required value={ticketForm.organization_id} onChange={(e)=>setTicketForm({...ticketForm,organization_id:e.target.value,project_id:""})} className="w-full rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-slate-950 px-4 py-3 text-sm text-slate-800 dark:text-white"><option value="">Select organisation</option>{organizationOptions.map((org)=><option key={org.id} value={org.id}>{org.name}</option>)}</select><select value={ticketForm.project_id} onChange={(e)=>setTicketForm({...ticketForm,project_id:e.target.value})} className="w-full rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-slate-950 px-4 py-3 text-sm text-slate-800 dark:text-white"><option value="">General / no project</option>{projects.filter((p)=>!ticketForm.organization_id||p.organization_id===ticketForm.organization_id).map((p)=><option key={p.id} value={p.id}>{p.code} — {p.name}</option>)}</select><input required value={ticketForm.subject} onChange={(e)=>setTicketForm({...ticketForm,subject:e.target.value})} className="w-full rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-slate-950 px-4 py-3 text-sm text-slate-800 dark:text-white" placeholder="Subject"/><textarea required rows="5" value={ticketForm.description} onChange={(e)=>setTicketForm({...ticketForm,description:e.target.value})} className="w-full rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-slate-950 px-4 py-3 text-sm text-slate-800 dark:text-white" placeholder="Describe your request"/><select value={ticketForm.priority} onChange={(e)=>setTicketForm({...ticketForm,priority:e.target.value})} className="w-full rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-slate-950 px-4 py-3 text-sm text-slate-800 dark:text-white"><option value="low">Low priority</option><option value="normal">Normal priority</option><option value="high">High priority</option><option value="urgent">Urgent</option></select><button disabled={submittingTicket} className="inline-flex items-center justify-center gap-2 rounded-xl bg-indigo-600 px-5 py-3 text-sm font-semibold text-white hover:bg-indigo-500 disabled:opacity-60">{submittingTicket?<Loader2 className="animate-spin" size={17}/>:<Send size={17}/>} Submit request</button></form> : <p className="mt-4 text-sm text-slate-500">Your account must be linked to a client organisation before support requests can be submitted.</p>}</div><div className="rounded-2xl border border-slate-200 dark:border-white/10 bg-white dark:bg-slate-900 p-6"><h2 className="text-xl font-bold text-slate-950 dark:text-white">Support history</h2><div className="mt-5 space-y-4">{tickets.length ? tickets.map((ticket)=><div key={ticket.id} className="rounded-xl border border-slate-100 dark:border-white/10 p-4"><div className="flex items-start justify-between gap-4"><div><p className="text-xs font-bold text-indigo-500">{ticket.ticket_number}</p><p className="mt-1 font-semibold text-slate-950 dark:text-white">{ticket.subject}</p></div><StatusPill value={ticket.status}/></div><p className="mt-2 text-xs text-slate-500">{statusLabel(ticket.priority)} priority · {formatDate(ticket.created_at)}</p></div>) : <p className="text-sm text-slate-500">No support requests yet.</p>}</div></div></div>}
+
+            {activeTab === "testimonials" && isAdmin && <div className="space-y-5">
+              <div><h2 className="text-2xl font-bold text-slate-950 dark:text-white">Client testimonials</h2><p className="mt-1 text-sm text-slate-500 dark:text-slate-400">Review submissions here. Only approved feedback with consent appears on the public Projects page.</p></div>
+              {testimonialNotice && <p role="status" className="rounded-xl border border-slate-200 dark:border-white/10 bg-white dark:bg-slate-900 px-4 py-3 text-sm text-slate-700 dark:text-slate-300">{testimonialNotice}</p>}
+              {testimonialsLoading ? <div className="flex items-center gap-2 rounded-2xl bg-white p-6 text-sm text-slate-500 dark:bg-slate-900"><Loader2 className="animate-spin" size={17}/> Loading submissions…</div> : testimonials.length ? testimonials.map((item) => <article key={item.id} className="rounded-2xl border border-slate-200 bg-white p-6 dark:border-white/10 dark:bg-slate-900">
+                <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+                  <div><div className="flex flex-wrap items-center gap-2"><h3 className="font-bold text-slate-950 dark:text-white">{item.display_name}</h3><StatusPill value={item.status}/></div><p className="mt-1 text-xs text-slate-500">{[item.organization_name, item.project_name, formatDate(item.created_at)].filter(Boolean).join(" · ")}</p></div>
+                  <span className={item.display_consent ? "text-xs font-semibold text-emerald-600" : "text-xs font-semibold text-amber-600"}>{item.display_consent ? "Publication consent given" : "No publication consent"}</span>
+                </div>
+                <blockquote className="mt-4 whitespace-pre-wrap text-sm leading-7 text-slate-700 dark:text-slate-300">“{item.quote}”</blockquote>
+                <div className="mt-5 flex flex-wrap gap-2">
+                  {item.status !== "approved" && item.display_consent && <button disabled={testimonialAction === item.id} onClick={() => moderateTestimonial(item, "approved")} className="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-4 py-2 text-sm font-semibold text-white hover:bg-emerald-500 disabled:opacity-60">{testimonialAction === item.id ? <Loader2 size={15} className="animate-spin"/> : <CheckCircle2 size={15}/>} Approve &amp; publish</button>}
+                  {item.status === "pending" && <button disabled={testimonialAction === item.id} onClick={() => moderateTestimonial(item, "rejected")} className="rounded-lg border border-slate-200 px-4 py-2 text-sm font-semibold text-slate-700 dark:border-white/10 dark:text-slate-200 disabled:opacity-60">Reject</button>}
+                  {item.status === "approved" && <button disabled={testimonialAction === item.id} onClick={() => moderateTestimonial(item, "rejected")} className="rounded-lg border border-slate-200 px-4 py-2 text-sm font-semibold text-slate-700 dark:border-white/10 dark:text-slate-200 disabled:opacity-60">Unpublish</button>}
+                  {item.status === "rejected" && <button disabled={testimonialAction === item.id} onClick={() => moderateTestimonial(item, "pending")} className="rounded-lg border border-slate-200 px-4 py-2 text-sm font-semibold text-slate-700 dark:border-white/10 dark:text-slate-200 disabled:opacity-60">Return to review</button>}
+                </div>
+              </article>) : <p className="rounded-2xl border border-slate-200 bg-white p-6 text-sm text-slate-500 dark:border-white/10 dark:bg-slate-900">No submissions yet. Approved existing feedback will also appear here.</p>}
+            </div>}
 
             {activeTab === "account" && <div className="rounded-2xl border border-slate-200 dark:border-white/10 bg-white dark:bg-slate-900 p-6"><h2 className="text-2xl font-bold text-slate-950 dark:text-white">Account</h2><div className="mt-6 grid sm:grid-cols-2 gap-5 text-sm"><div><p className="text-xs font-bold uppercase tracking-[0.14em] text-slate-400">Name</p><p className="mt-2 font-semibold text-slate-900 dark:text-white">{profile?.full_name || "Not set"}</p></div><div><p className="text-xs font-bold uppercase tracking-[0.14em] text-slate-400">Email</p><p className="mt-2 font-semibold text-slate-900 dark:text-white">{profile?.email || session.user.email}</p></div><div><p className="text-xs font-bold uppercase tracking-[0.14em] text-slate-400">Access role</p><p className="mt-2 font-semibold text-slate-900 dark:text-white">{statusLabel(profile?.role || "client")}</p></div><div><p className="text-xs font-bold uppercase tracking-[0.14em] text-slate-400">Account status</p><p className="mt-2 font-semibold text-slate-900 dark:text-white">{statusLabel(profile?.status || "active")}</p></div></div>{memberships.length > 0 && <div className="mt-7 border-t border-slate-100 dark:border-white/10 pt-6"><p className="text-xs font-bold uppercase tracking-[0.14em] text-slate-400">Client organisations</p><div className="mt-3 flex flex-wrap gap-2">{memberships.map((membership)=><span key={membership.organization_id} className="rounded-full bg-slate-100 dark:bg-white/5 px-3 py-1.5 text-xs font-semibold text-slate-700 dark:text-slate-300">{membership.client_organizations?.name || membership.organization_id} · {statusLabel(membership.member_role)}</span>)}</div></div>}</div>}
           </main>
