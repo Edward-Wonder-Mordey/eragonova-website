@@ -1,6 +1,7 @@
 import React from "react";
 import { ArrowUpRight, BarChart3, Printer, Palette, Building2 } from "lucide-react";
 import CapabilityVisual from "./CapabilityVisual";
+import TestimonialsSection from "./TestimonialsSection";
 
 const capabilities = [
   ["Data analysis & quality review", "Data & reporting", "Dataset cleaning, validation, discrepancy review, audit documentation, and reporting that make information easier to trust and use.", BarChart3, "blue", "data"],
@@ -63,14 +64,15 @@ export default function ProjectsSection() {
               </a>
             </div>
             <aside className="flex flex-col justify-center border-t border-blue-100 bg-blue-50/70 p-7 dark:border-slate-800 dark:bg-slate-900/70 sm:p-10 lg:border-l lg:border-t-0">
-              <p className="eyebrow">Client testimonial</p>
-              <blockquote className="mt-4 text-xl leading-relaxed text-slate-800 dark:text-slate-100">
-                “Eragonova Enterprise created a website for Elyra Suite that presents our brand and services clearly and professionally. It gives our business a polished online presence and helps visitors understand what we offer. We appreciate the care Eragonova put into bringing Elyra Suite online.”
-              </blockquote>
-              <p className="mt-5 font-bold text-slate-950 dark:text-white">— Elyra Suite</p>
-            </aside>
+              <p className="eyebrow">Project outcome</p>
+              <p className="mt-4 text-xl leading-relaxed text-slate-800 dark:text-slate-100">
+                A responsive, polished online presence that brings Elyra Suite’s services, brand story and customer pathways together.
+              </p>
+              <p className="mt-5 text-sm text-slate-600 dark:text-slate-400">The approved client testimonial appears with other verified feedback below.</p>
+            </aside>    </aside>
           </div>
         </article>
+        <TestimonialsSection />
       </div>
     </section>
   );
