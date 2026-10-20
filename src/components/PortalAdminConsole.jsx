@@ -247,6 +247,7 @@ export default function PortalAdminConsole({ session, onRefresh }) {
       <AdminCard title="Eragonova business documents" description="Download current company templates for use wherever you are." icon={Download}>
         <div className="flex flex-col sm:flex-row gap-3">
           <a className={buttonClass} href="/documents/Eragonova_Official_Receipt.docx" download><Download size={17}/> Download 10-page receipt pad</a>
+          <a className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 dark:border-white/10 px-5 py-3 text-sm font-semibold text-slate-700 dark:text-white hover:bg-slate-50 dark:hover:bg-white/5" href="/documents/Eragonova_Official_Receipt_Print.pdf" download><Download size={17}/> Download print-ready receipt PDF</a>
           <a className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 dark:border-white/10 px-5 py-3 text-sm font-semibold text-slate-700 dark:text-white hover:bg-slate-50 dark:hover:bg-white/5" href="/documents/Eragonova_Letterhead.docx" download><Download size={17}/> Download letterhead</a>
         </div>
       </AdminCard>
