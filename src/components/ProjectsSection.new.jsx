@@ -69,7 +69,7 @@ export default function ProjectsSection() {
                 A responsive, polished online presence that brings Elyra Suite’s services, brand story and customer pathways together.
               </p>
               <p className="mt-5 text-sm text-slate-600 dark:text-slate-400">The approved client testimonial appears with other verified feedback below.</p>
-            </aside>    </aside>
+            </aside>
           </div>
         </article>
         <TestimonialsSection />
