@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { CheckCircle2, Loader2, MessageSquareQuote, Send } from "lucide-react";
+import { CheckCircle2, Loader2, MessageSquare, Send } from "lucide-react";
 import { supabase } from "../lib/supabase";
 
 export default function TestimonialsSection() {
@@ -53,7 +53,7 @@ export default function TestimonialsSection() {
         <div className="mt-5 space-y-4">
           {loading ? <p className="text-sm text-slate-500">Loading approved feedback…</p> : items.length ? items.map((item) => (
             <figure key={item.id} className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-white/10 dark:bg-slate-950">
-              <MessageSquareQuote size={21} className="text-blue-600 dark:text-blue-400" />
+              <MessageSquare size={21} className="text-blue-600 dark:text-blue-400" />
               <blockquote className="mt-3 text-sm leading-7 text-slate-700 dark:text-slate-300">“{item.quote}”</blockquote>
               <figcaption className="mt-4 font-bold text-slate-950 dark:text-white">{item.display_name}</figcaption>
               {(item.organization_name || item.project_name) && <p className="mt-1 text-xs text-slate-500">{[item.organization_name, item.project_name].filter(Boolean).join(" · ")}</p>}
