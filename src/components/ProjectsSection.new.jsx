@@ -37,6 +37,40 @@ export default function ProjectsSection() {
             </article>
           ))}
         </div>
+
+        <article id="elyra-suite-case-study" className="mt-8 overflow-hidden rounded-3xl border border-blue-200/70 bg-white shadow-xl dark:border-slate-700 dark:bg-slate-950">
+          <div className="grid lg:grid-cols-[1.1fr_0.9fr]">
+            <div className="p-7 sm:p-10 lg:p-12">
+              <p className="eyebrow">Featured client project · October 2026</p>
+              <h3 className="mt-3 text-3xl font-bold tracking-tight text-slate-950 dark:text-white sm:text-4xl">Elyra Suite website design &amp; development</h3>
+              <p className="mt-5 text-base leading-relaxed text-slate-600 dark:text-slate-300">
+                Eragonova Enterprise designed and launched a responsive website for Elyra Suite, giving the independent beauty and business brand a polished online presence. The project brought its services, brand story and customer pathways together in one place.
+              </p>
+              <div className="mt-7">
+                <p className="text-xs font-bold uppercase tracking-[0.15em] text-blue-700 dark:text-blue-300">Project scope</p>
+                <ul className="mt-3 grid gap-2 text-sm text-slate-700 dark:text-slate-300 sm:grid-cols-2">
+                  <li>• Responsive visual design and implementation</li>
+                  <li>• Beauty, bridal, business and Academy pages</li>
+                  <li>• Portfolio, resources and partnership sections</li>
+                  <li>• Contact pathways, policies and search metadata</li>
+                </ul>
+              </div>
+              <p className="mt-6 text-sm text-slate-500 dark:text-slate-400">
+                Brief received 11 October 2026 · Work began 12 October · Completed 13 October 2026
+              </p>
+              <a href="https://edward-wonder-mordey.github.io/elyra-suite-website/#/home" target="_blank" rel="noopener noreferrer" className="primary-button mt-7 inline-flex items-center gap-2 px-5 py-3">
+                View the Elyra Suite website <ArrowUpRight size={17}/>
+              </a>
+            </div>
+            <aside className="flex flex-col justify-center border-t border-blue-100 bg-blue-50/70 p-7 dark:border-slate-800 dark:bg-slate-900/70 sm:p-10 lg:border-l lg:border-t-0">
+              <p className="eyebrow">Client testimonial</p>
+              <blockquote className="mt-4 text-xl leading-relaxed text-slate-800 dark:text-slate-100">
+                “Eragonova Enterprise created a website for Elyra Suite that presents our brand and services clearly and professionally. It gives our business a polished online presence and helps visitors understand what we offer. We appreciate the care Eragonova put into bringing Elyra Suite online.”
+              </blockquote>
+              <p className="mt-5 font-bold text-slate-950 dark:text-white">— Elyra Suite</p>
+            </aside>
+          </div>
+        </article>
       </div>
     </section>
   );
