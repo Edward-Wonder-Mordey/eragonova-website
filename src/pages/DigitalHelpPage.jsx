@@ -349,6 +349,16 @@ export default function DigitalHelpPage() {
     }))
     .filter((category) => category.guides.length > 0), [normalizedQuery, selectedCategory]);
   const resultCount = filteredCategories.reduce((total, category) => total + category.guides.length, 0);
+  const allGuides = categories.flatMap((category) => category.guides.map((guide) => ({ guide, categoryTitle: category.title })));
+  const featuredIds = ["windows-11-usb", "microsoft-account-recovery", "slow-windows", "printer-not-printing", "business-email"];
+  const featuredGuides = featuredIds.map((id) => allGuides.find((entry) => entry.guide.id === id)).filter(Boolean);
+  const totalGuideCount = allGuides.length;
+
+  function openGuide(entry) {
+    setQuery(entry.guide.title);
+    setSelectedCategory(entry.categoryTitle);
+    window.setTimeout(() => document.getElementById("guide-results")?.scrollIntoView({ behavior: "smooth", block: "start" }), 80);
+  }
 
   function clearSearch() {
     setQuery("");
@@ -366,11 +376,29 @@ export default function DigitalHelpPage() {
           <a href="/Eragonova_Quick_Technology_Health_Check.pdf" download className="inline-flex items-center gap-2 rounded-xl bg-white px-5 py-3 font-bold text-slate-950 hover:bg-blue-50"><Download size={18}/> Download health-check PDF</a>
         </div>
         <p className="mt-5 text-sm leading-6 text-white/60">If a step could erase data, affect a work-managed device or put personal information at risk, stop before continuing and get qualified help.</p>
+        <div className="mt-6 max-w-3xl border-t border-white/15 pt-4 text-sm leading-6 text-white/65">
+          <p><strong className="text-white">Developed and maintained by Eragonova Enterprise.</strong> Guides are reviewed periodically against official vendor documentation and relevant industry guidance. Follow current official instructions for your device or service.</p>
+          <p className="mt-2">Last updated: 21 October 2026</p>
+        </div>
       </div>
     </section>
     <section className="py-16 bg-slate-50 dark:bg-slate-900/40">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         <div className="mb-8 flex items-center gap-3"><ShieldCheck className="text-blue-600 dark:text-blue-300"/><h2 className="text-3xl font-bold text-slate-950 dark:text-white">Browse the free guides</h2></div>
+        <div className="mb-8 rounded-3xl border border-blue-200 bg-white p-5 shadow-sm dark:border-blue-500/20 dark:bg-slate-950 sm:p-7">
+          <p className="text-xs font-bold uppercase tracking-[0.18em] text-blue-700 dark:text-blue-300">Knowledge Centre snapshot</p>
+          <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-5">
+            <div className="rounded-2xl bg-slate-50 p-4 dark:bg-white/5"><strong className="block text-2xl text-slate-950 dark:text-white">{totalGuideCount}</strong><span className="text-sm text-slate-600 dark:text-slate-300">Free guides</span></div>
+            <div className="rounded-2xl bg-slate-50 p-4 dark:bg-white/5"><strong className="block text-2xl text-slate-950 dark:text-white">{expandedCategories.length}</strong><span className="text-sm text-slate-600 dark:text-slate-300">Topic categories</span></div>
+            <div className="rounded-2xl bg-slate-50 p-4 dark:bg-white/5"><strong className="block text-2xl text-slate-950 dark:text-white">{printableChecklists.length}</strong><span className="text-sm text-slate-600 dark:text-slate-300">Printable checklists</span></div>
+            <div className="rounded-2xl bg-slate-50 p-4 dark:bg-white/5"><strong className="block text-lg text-slate-950 dark:text-white">Free</strong><span className="text-sm text-slate-600 dark:text-slate-300">Access</span></div>
+            <div className="rounded-2xl bg-slate-50 p-4 dark:bg-white/5"><strong className="block text-lg text-slate-950 dark:text-white">No signup</strong><span className="text-sm text-slate-600 dark:text-slate-300">Required</span></div>
+          </div>
+          <div className="mt-6 border-t border-slate-200 pt-5 dark:border-white/10">
+            <h2 className="text-lg font-bold text-slate-950 dark:text-white">Featured guides</h2>
+            <div className="mt-3 flex flex-wrap gap-2">{featuredGuides.map((entry) => <button key={entry.guide.id} type="button" onClick={() => openGuide(entry)} className="rounded-full border border-blue-200 px-3 py-2 text-left text-sm font-semibold text-blue-800 hover:bg-blue-50 focus:outline-none focus:ring-4 focus:ring-blue-100 dark:border-blue-500/30 dark:text-blue-200 dark:hover:bg-blue-500/10">{entry.guide.title}</button>)}</div>
+          </div>
+        </div>
         <div className="mb-10 rounded-3xl border border-slate-200 bg-white p-5 shadow-sm dark:border-white/10 dark:bg-slate-950 sm:p-7">
           <label htmlFor="technology-help-search" className="mb-3 block text-lg font-bold text-slate-950 dark:text-white">What do you need help with?</label>
           <div className="flex flex-col gap-3 lg:flex-row">
@@ -396,6 +424,12 @@ export default function DigitalHelpPage() {
           <div className="mb-5"><h2 className="text-3xl font-bold text-slate-950 dark:text-white">{category.title}</h2><p className="mt-2 text-slate-600 dark:text-slate-300">{category.description}</p></div>
           <div className="grid gap-6 lg:grid-cols-2">{category.guides.map((guide, index) => { const relatedGuides = category.guides.length > 1 ? [category.guides[(index + 1) % category.guides.length], category.guides[(index + 2) % category.guides.length]].filter((item) => item.id !== guide.id).slice(0, 2) : []; return <GuideCard key={guide.id} guide={guide} relatedGuides={relatedGuides} onRelatedSelect={(related) => { setQuery(related.title); setSelectedCategory(category.title); window.setTimeout(() => document.getElementById("guide-results")?.scrollIntoView({ behavior: "smooth", block: "start" }), 80); }}/>; })}</div>
         </section>) : <div className="rounded-3xl border border-dashed border-slate-300 bg-white p-8 text-center dark:border-white/15 dark:bg-slate-950"><h3 className="text-xl font-bold text-slate-950 dark:text-white">No matching guide yet</h3><p className="mx-auto mt-2 max-w-2xl leading-7 text-slate-600 dark:text-slate-300">Try a shorter search term or choose All categories. If you cannot find the answer, ask Eragonova and describe the device and problem.</p><div className="mt-5 flex flex-wrap justify-center gap-3"><button type="button" onClick={clearSearch} className="rounded-xl bg-blue-700 px-5 py-3 font-bold text-white hover:bg-blue-800">Clear search</button><a href="/contact/" className="rounded-xl border border-slate-300 px-5 py-3 font-bold text-slate-800 hover:bg-slate-50 dark:border-white/15 dark:text-white">Ask Eragonova</a></div></div>}</div>
+        <section className="mt-14 rounded-3xl border border-violet-200 bg-white p-7 dark:border-violet-500/20 dark:bg-slate-950 sm:p-9">
+          <p className="text-xs font-bold uppercase tracking-[0.18em] text-violet-700 dark:text-violet-300">Planned topics · no release dates</p>
+          <h2 className="mt-2 text-2xl font-bold text-slate-950 dark:text-white">Resource roadmap</h2>
+          <p className="mt-2 max-w-3xl text-sm leading-6 text-slate-600 dark:text-slate-300">These are possible future additions, not published guides yet.</p>
+          <ul className="mt-5 grid gap-3 text-sm font-semibold text-slate-700 dark:text-slate-200 sm:grid-cols-2 lg:grid-cols-3">{["AI Productivity Basics","Microsoft Copilot Fundamentals","Digital Marketing Basics","Project Documentation Templates","Small Business Compliance Resources"].map((topic) => <li key={topic} className="rounded-xl bg-slate-50 px-4 py-3 dark:bg-white/5">{topic}</li>)}</ul>
+        </section>
         <div className="mt-14 rounded-3xl bg-blue-950 p-8 text-white sm:p-10">
           <div className="flex items-start gap-4"><AlertTriangle className="mt-1 shrink-0 text-amber-300"/><div><h2 className="text-2xl font-bold">When to stop and ask for help</h2><p className="mt-3 max-w-3xl leading-7 text-white/75">Stop before troubleshooting if you suspect ransomware, see a swollen battery or burning smell, risk losing irreplaceable files, or are working on a device managed by an employer or school. Contact the device owner or a qualified technician.</p><div className="mt-5 flex flex-wrap gap-3"><a href="/contact/" className="inline-flex items-center gap-2 rounded-xl bg-white px-5 py-3 font-bold text-blue-950">Ask Eragonova / Contact <ArrowRight size={17}/></a><a href="https://wa.me/233505374537" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-xl border border-white/30 px-5 py-3 font-bold text-white hover:bg-white/10">WhatsApp Eragonova <ArrowRight size={17}/></a><a href="mailto:eragonovaenterprise@gmail.com" className="inline-flex items-center gap-2 rounded-xl border border-white/30 px-5 py-3 font-bold text-white hover:bg-white/10">Email us</a></div></div></div>
         </div>
