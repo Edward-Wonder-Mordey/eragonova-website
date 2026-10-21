@@ -94,7 +94,7 @@ export default function ResourcesPage() {
             <p className="text-blue-300 text-xs font-bold uppercase tracking-[0.22em]">Resources</p>
             <h1 className="mt-4 text-4xl sm:text-5xl lg:text-7xl font-bold tracking-[-0.045em] leading-[1.02]">Practical knowledge designed to be used.</h1>
             <p className="mt-6 max-w-3xl text-base sm:text-lg leading-8 text-white/70">Guides, checklists and resource areas focused on technology, engineering, operations, data, documentation, training and organisational growth.</p>
-            <div className="mt-8"><a href="/contact" className="primary-button px-6 py-3.5">Request a Resource <ArrowRight size={18}/></a></div>
+            <div className="mt-8 flex flex-wrap gap-3"><a href="/free-tech-help/" className="primary-button px-6 py-3.5">Browse free technology help <ArrowRight size={18}/></a><a href="/contact/" className="inline-flex items-center gap-2 rounded-xl border border-white/30 px-6 py-3.5 font-bold text-white hover:bg-white/10">Request a Resource</a></div>
           </div>
         </div>
       </section>
