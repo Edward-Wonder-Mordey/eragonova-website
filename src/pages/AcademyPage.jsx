@@ -81,6 +81,51 @@ const futurePathways = [
   ["3 Years", "Professional Career Pathway", "A comprehensive future pathway combining technical depth, professional development, entrepreneurship, projects and workplace preparation."],
 ];
 
+const learningExamples = [
+  {
+    track: "Technology & IT",
+    title: "Heritage Vault 2.0",
+    type: "Academic case study",
+    description: "A Linux-centred infrastructure architecture case study exploring availability, security, scalable storage, search, disaster recovery and controlled automation.",
+    focus: ["Linux", "PostgreSQL", "Ansible", "High availability"],
+  },
+  {
+    track: "Cloud & Infrastructure",
+    title: "PromisedLand Data Center",
+    type: "Architecture proposal",
+    description: "A hybrid Azure and AWS deployment proposal designed around resilience, scalability and clear operating needs.",
+    focus: ["Azure", "AWS", "Hybrid cloud"],
+  },
+  {
+    track: "Data & Analytics",
+    title: "Data Analytics & Reporting",
+    type: "Academic coursework",
+    description: "SQL analysis, relational modelling, Excel reporting and business intelligence work across several datasets.",
+    focus: ["SQL", "Excel", "Power BI", "Tableau"],
+  },
+  {
+    track: "Business & Documentation",
+    title: "Kumasi YSA Quick Start Guide",
+    type: "Community resource",
+    description: "An audience-focused guide that turns community orientation into clear first-week actions, routines and a practical checklist.",
+    focus: ["Technical writing", "Documentation", "Onboarding"],
+  },
+  {
+    track: "Entrepreneurship & Digital Presence",
+    title: "Eragonova Enterprise Website",
+    type: "Founder project",
+    description: "A digital enterprise platform that presents services, capabilities and practical resources in a clear, organised way.",
+    focus: ["Digital strategy", "Service design", "Web"],
+  },
+  {
+    track: "Engineering & Technical Skills",
+    title: "Electrical & Electronic Engineering Studies",
+    type: "Academic studies",
+    description: "Formal engineering study that complements systems learning with a foundation in electrical and electronic principles.",
+    focus: ["Electrical fundamentals", "Electronics", "Technical problem-solving"],
+  },
+];
+
 const learningModel = [
   [BookOpenCheck, "Guided learning", "Structured instruction with clear learning outcomes and practical examples."],
   [Monitor, "Practical exercises", "Hands-on labs, tasks and guided practice built around real tools and workplace scenarios."],
@@ -219,6 +264,30 @@ export default function AcademyPage() {
                 <a href={`/free-tech-help/?q=${encodeURIComponent(pathway.query)}`} className="relative z-10 mt-5 inline-flex items-center gap-2 font-semibold text-sm accent-kicker">Explore free guides <ArrowRight size={16}/></a>
               </article>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-24 bg-slate-50 dark:bg-slate-900/40 border-y border-slate-200 dark:border-white/10">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+          <div className="max-w-3xl">
+            <p className="text-violet-600 dark:text-violet-300 text-xs font-bold uppercase tracking-[0.22em]">Applied Learning Examples</p>
+            <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-bold tracking-[-0.035em] text-slate-950 dark:text-white">See how learning connects to practical work.</h2>
+            <p className="mt-5 text-base sm:text-lg leading-8 text-slate-600 dark:text-slate-300">These selected portfolio examples show how skills can be applied in academic, founder, proposal and community contexts. They are illustrative examples, not a promise that every item is an Academy assignment or client engagement.</p>
+          </div>
+          <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+            {learningExamples.map((example) => (
+              <article key={example.title} className="accent-card rounded-3xl p-6" data-accent="violet">
+                <div className="relative z-10 flex flex-wrap items-center justify-between gap-2"><span className="accent-kicker text-xs font-bold uppercase tracking-[0.12em]">{example.track}</span><span className="rounded-full border border-slate-200 bg-white px-3 py-1 text-[11px] font-semibold text-slate-600 dark:border-white/10 dark:bg-white/5 dark:text-slate-300">{example.type}</span></div>
+                <h3 className="relative z-10 mt-5 text-xl font-bold text-slate-950 dark:text-white">{example.title}</h3>
+                <p className="relative z-10 mt-3 text-sm leading-7 text-slate-600 dark:text-slate-300">{example.description}</p>
+                <div className="relative z-10 mt-4 flex flex-wrap gap-2">{example.focus.map((skill) => <span key={skill} className="accent-chip">{skill}</span>)}</div>
+                <a href="https://edward-wonder-mordey.github.io/portfolio/#work" target="_blank" rel="noopener noreferrer" className="relative z-10 mt-5 inline-flex items-center gap-2 font-semibold text-sm accent-kicker">View portfolio examples <ArrowRight size={16}/></a>
+              </article>
+            ))}
+          </div>
+          <div className="mt-8 rounded-2xl border border-violet-200 bg-violet-50 p-5 dark:border-violet-500/20 dark:bg-violet-500/10">
+            <p className="text-sm leading-7 text-violet-950 dark:text-violet-100"><strong>Learning context:</strong> Examples are labelled by their context. Programme modules, projects, assessments and certificates will be defined separately for each published Academy pathway.</p>
           </div>
         </div>
       </section>
