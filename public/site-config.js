@@ -1,5 +1,5 @@
 // Eragonova public site configuration.
-// Add a real Google Analytics 4 Measurement ID here when available, for example: G-XXXXXXXXXX
+// Google Analytics 4 Measurement ID for the Eragonova web stream.
 window.ERAGONOVA_CONFIG = {
-  gaMeasurementId: "G-D93FQV644GC",
+  gaMeasurementId: "G-D93FQV644G",
 };
