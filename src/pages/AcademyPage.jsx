@@ -273,7 +273,7 @@ export default function AcademyPage() {
           <div className="max-w-3xl">
             <p className="text-violet-600 dark:text-violet-300 text-xs font-bold uppercase tracking-[0.22em]">Applied Learning Examples</p>
             <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-bold tracking-[-0.035em] text-slate-950 dark:text-white">See how learning connects to practical work.</h2>
-            <p className="mt-5 text-base sm:text-lg leading-8 text-slate-600 dark:text-slate-300">These selected portfolio examples show how skills can be applied in academic, founder, proposal and community contexts. They are illustrative examples, not a promise that every item is an Academy assignment or client engagement.</p>
+            <p className="mt-5 text-base sm:text-lg leading-8 text-slate-600 dark:text-slate-300">These selected portfolio examples show how skills are applied across academic, founder-led, proposal and community work, connecting learning with practical challenges and useful outcomes.</p>
           </div>
           <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
             {learningExamples.map((example) => (
@@ -287,7 +287,7 @@ export default function AcademyPage() {
             ))}
           </div>
           <div className="mt-8 rounded-2xl border border-violet-200 bg-violet-50 p-5 dark:border-violet-500/20 dark:bg-violet-500/10">
-            <p className="text-sm leading-7 text-violet-950 dark:text-violet-100"><strong>Learning context:</strong> Examples are labelled by their context. Programme modules, projects, assessments and certificates will be defined separately for each published Academy pathway.</p>
+            <p className="text-sm leading-7 text-violet-950 dark:text-violet-100"><strong>Learning through application:</strong> Explore how technical foundations, problem-solving, documentation and service connect to practical work.</p>
           </div>
         </div>
       </section>
@@ -346,7 +346,7 @@ export default function AcademyPage() {
       <section className="py-20 bg-white dark:bg-slate-950">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <div className="rounded-2xl border border-violet-200 bg-violet-50 p-5 sm:p-6 dark:border-violet-500/20 dark:bg-violet-500/10">
-            <p className="text-sm leading-7 text-violet-950 dark:text-violet-100"><strong>Programme status:</strong> Eragonova Academy programmes are professional training and career-development programmes. They are not represented as university degrees. Programme-specific certification, recognition, entry requirements, fees and delivery details will be clearly stated before enrolment.</p>
+            <p className="text-sm leading-7 text-violet-950 dark:text-violet-100"><strong>Programme status:</strong> Eragonova Academy programmes are professional training and career-development programmes; they are not represented as university degrees. The portfolio examples on this page demonstrate applied skills in their stated contexts. Each Academy pathway’s curriculum, projects, assessments, certification, recognition, entry requirements, fees and delivery details will be provided before enrolment.</p>
           </div>
 
           <div className="graphic-panel mt-10 rounded-[2rem] bg-gradient-to-br from-slate-950 via-violet-950 to-slate-950 p-8 sm:p-10 lg:p-12 text-white flex flex-col lg:flex-row lg:items-center justify-between gap-8">
