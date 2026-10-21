@@ -9,27 +9,13 @@ from pathlib import Path
 from PIL import Image, ImageDraw, ImageFont
 
 OUT = 'docs/Eragonova_Enterprise_Website_Owners_Handbook.docx'
-BADGE = 'docs/.eragonova_handbook_badge.png'
+BADGE = 'docs/Eragonova_Enterprise_Logo.jpg'
 
 NAVY='0F172A'; BLUE='2563EB'; CYAN='0EA5E9'; INDIGO='4F46E5'; SLATE='334155'; MUTED='64748B'
 LIGHT='F8FAFC'; LIGHTBLUE='EFF6FF'; WHITE='FFFFFF'; GREEN='ECFDF5'; AMBER='FFFBEB'; RED='FEF2F2'; BORDER='CBD5E1'; TEAL='0F766E'
 
-# Simple branded badge for cover (does not replace the official logo)
-img=Image.new('RGB',(900,360),'white'); d=ImageDraw.Draw(img)
-try:
-    f1=ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf',94)
-    f2=ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf',52)
-    f3=ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf',30)
-except:
-    f1=f2=f3=None
-# blue mark
-d.rounded_rectangle((36,45,260,315),radius=42,fill='#0F172A')
-d.ellipse((78,85,218,225),fill='#2563EB')
-d.text((121,95),'E',font=f1,fill='white',anchor='ma')
-d.text((305,92),'ERAGONOVA',font=f2,fill='#0F172A')
-d.text((306,162),'ENTERPRISE',font=f3,fill='#2563EB')
-d.text((306,222),'Technology • Engineering • Growth',font=f3,fill='#475569')
-img.save(BADGE)
+if not Path(BADGE).exists():
+    raise FileNotFoundError(f'Official Eragonova logo missing: {BADGE}')
 
 def font(run,name='Liberation Sans'):
     run.font.name=name
@@ -122,7 +108,7 @@ for s in doc.sections: page_number(s.footer.paragraphs[0])
 
 # Cover
 p=doc.add_paragraph(); p.alignment=WD_ALIGN_PARAGRAPH.CENTER; p.paragraph_format.space_before=Pt(26)
-run=p.add_run(); run.add_picture(BADGE,width=Inches(5.3))
+run=p.add_run(); run.add_picture(BADGE,width=Inches(2.7))
 p=doc.add_paragraph(); p.alignment=WD_ALIGN_PARAGRAPH.CENTER; p.paragraph_format.space_before=Pt(10)
 r=p.add_run('WEBSITE OWNER’S HANDBOOK'); font(r,'Liberation Serif'); r.bold=True; r.font.size=Pt(26); r.font.color.rgb=RGBColor.from_string(NAVY)
 p=doc.add_paragraph(); p.alignment=WD_ALIGN_PARAGRAPH.CENTER
