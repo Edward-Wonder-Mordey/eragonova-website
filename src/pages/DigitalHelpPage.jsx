@@ -329,7 +329,7 @@ function printChecklist(checklist) {
 }
 
 export default function DigitalHelpPage() {
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState(() => new URLSearchParams(window.location.search).get("q") || "");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const categories = [
     { title: "Quick technology health checks", description: "Twelve safe first checks for common device, file, update and account problems.", guides: helpGuides },
