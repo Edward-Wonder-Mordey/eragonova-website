@@ -6,6 +6,7 @@ import ServicesPage from "./pages/ServicesPage";
 import AcademyPage from "./pages/AcademyPage";
 import ResourcesPage from "./pages/ResourcesPage";
 import DigitalHealthGuidePage from "./pages/DigitalHealthGuidePage";
+import DigitalHelpPage from "./pages/DigitalHelpPage";
 import { ContactPage, LegalPage } from "./pages/CorporatePages";
 import { ProjectsPage, CommunityPage, CareersPage } from "./pages/ClientFacingPages";
 import PartnersPage from "./pages/PartnersPage";
@@ -23,6 +24,7 @@ const routes = {
   academy: AcademyPage,
   resources: ResourcesPage,
   "digital-health-guide": DigitalHealthGuidePage,
+  "free-tech-help": DigitalHelpPage,
   community: CommunityPage,
   partners: PartnersPage,
   careers: CareersPage,
