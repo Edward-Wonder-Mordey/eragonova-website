@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Menu, X, Sun, Moon, ArrowUpRight, ChevronDown } from "lucide-react";
+import { Menu, X, Sun, Moon, ArrowUpRight, ChevronDown, Search } from "lucide-react";
 import LOGO from "../assets/headerLogo";
 
 const primaryItems = [
@@ -64,6 +64,11 @@ export default function Header({ currentRoute = "home" }) {
           </nav>
 
           <div className="flex items-center gap-2">
+            <form action="/free-tech-help/" method="get" role="search" className="hidden 2xl:flex items-center overflow-hidden rounded-xl border border-slate-200 bg-white/80 shadow-sm focus-within:border-blue-500 focus-within:ring-4 focus-within:ring-blue-100 dark:border-white/10 dark:bg-slate-900/70 dark:focus-within:ring-blue-500/20">
+              <label htmlFor="header-guide-search" className="sr-only">Search free technology guides</label>
+              <input id="header-guide-search" name="q" type="search" placeholder="Search guides" autoComplete="off" className="w-36 bg-transparent py-2.5 pl-3 text-sm text-slate-900 outline-none placeholder:text-slate-400 dark:text-white" />
+              <button type="submit" className="px-3 py-2.5 text-slate-500 transition hover:text-blue-700 dark:text-slate-300 dark:hover:text-blue-300" aria-label="Search free technology guides"><Search size={17} aria-hidden="true" /></button>
+            </form>
             <button type="button" onClick={toggleTheme} className="icon-button" aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}>{darkMode ? <Sun size={18}/> : <Moon size={18}/>}</button>
             <a href="/contact" className="hidden md:inline-flex primary-button py-2.5 px-4 text-sm">Start a Project <ArrowUpRight size={16}/></a>
             <button type="button" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="icon-button xl:hidden" aria-label="Toggle navigation" aria-expanded={isMobileMenuOpen} aria-controls="mobile-navigation">{isMobileMenuOpen ? <X size={21}/> : <Menu size={21}/>}</button>
@@ -74,6 +79,11 @@ export default function Header({ currentRoute = "home" }) {
       {isMobileMenuOpen && (
         <div id="mobile-navigation" className="glass-nav mt-2 rounded-2xl p-3 xl:hidden max-h-[76vh] overflow-y-auto">
           <nav className="grid sm:grid-cols-2 gap-1" aria-label="Mobile navigation">
+            <form action="/free-tech-help/" method="get" role="search" className="relative sm:col-span-2 mb-2">
+              <label htmlFor="mobile-guide-search" className="sr-only">Search free technology guides</label>
+              <Search size={18} aria-hidden="true" className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" />
+              <input id="mobile-guide-search" name="q" type="search" placeholder="Search free technology guides" autoComplete="off" className="w-full rounded-xl border border-slate-300 bg-white py-3 pl-11 pr-4 text-sm text-slate-950 outline-none focus:border-blue-600 focus:ring-4 focus:ring-blue-100 dark:border-white/15 dark:bg-slate-900 dark:text-white dark:focus:ring-blue-500/20" />
+            </form>
             {[...primaryItems, ...moreItems].map((item) => <a key={item.name} href={item.href} onClick={closeMobileMenu} className={`${linkClass(item.route)} rounded-xl px-4 py-3`} aria-current={currentRoute === item.route ? "page" : undefined}>{item.name}</a>)}
             <a href="/contact" onClick={closeMobileMenu} className="primary-button mt-2 sm:col-span-2 justify-center py-3">Start a Project <ArrowUpRight size={17}/></a>
           </nav>
