@@ -88,5 +88,11 @@
     "label": "Terms",
     "title": "Website & Engagement Terms | Eragonova Enterprise",
     "description": "Read the general website and engagement terms that guide scope, responsibilities, delivery expectations and authorised use of Eragonova services."
+  },
+  "free-tech-help": {
+    "path": "/free-tech-help/",
+    "label": "Free Technology Help",
+    "title": "Free Windows 11, Computer & Wi-Fi Help | Eragonova",
+    "description": "Free step-by-step technology guides from Eragonova Enterprise: install or reinstall Windows 11, troubleshoot slow computers, Wi-Fi and printers, free phone storage, back up files, and respond to suspicious messages. No signup or payment."
   }
 }
