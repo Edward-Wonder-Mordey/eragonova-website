@@ -129,7 +129,7 @@ p=doc.add_paragraph(); p.alignment=WD_ALIGN_PARAGRAPH.CENTER
 r=p.add_run('A plain-language guide to updating, maintaining and growing the Eragonova Enterprise website'); font(r); r.font.size=Pt(11); r.font.color.rgb=RGBColor.from_string(MUTED)
 p=doc.add_paragraph(); p.alignment=WD_ALIGN_PARAGRAPH.CENTER; p.paragraph_format.space_before=Pt(12)
 r=p.add_run('Practical Technology. Reliable Infrastructure. Sustainable Growth.'); font(r,'Liberation Serif'); r.bold=True; r.font.size=Pt(14); r.font.color.rgb=RGBColor.from_string(BLUE)
-cover=[('Live website','https://eragonova.com/'),('GitHub repository','Edward-Wonder-Mordey/eragonova-website'),('Phone','+233 50 537 4537'),('Email','Eragonovaenterprise@gmail.com'),('Handbook version','Version 1.2 — 13 October 2026')]
+cover=[('Live website','https://eragonova.com/'),('GitHub repository','Edward-Wonder-Mordey/eragonova-website'),('Phone','+233 505 374 537'),('Email','Eragonovaenterprise@gmail.com'),('Handbook version','Version 1.2 — 13 October 2026')]
 t=doc.add_table(rows=len(cover),cols=2); t.alignment=WD_TABLE_ALIGNMENT.CENTER
 for i,(a,b) in enumerate(cover):
     t.cell(i,0).text=a; t.cell(i,1).text=b; shade(t.cell(i,0),'EFF6FF'); shade(t.cell(i,1),WHITE); borders(t.cell(i,0),'BFDBFE'); borders(t.cell(i,1),'BFDBFE'); style_runs(t.cell(i,0).paragraphs[0],size=8.3,bold=True,color=NAVY); style_runs(t.cell(i,1).paragraphs[0],size=8.3)
@@ -157,7 +157,7 @@ rows=[
 ('Where contact-form messages are sent','src/components/ContactSection.jsx','Form uses a Formspree endpoint. Change only if the Formspree account/form changes.'),
 ('Main menu','src/components/Header.jsx','Edit primaryItems or moreItems.'),
 ('Page routes','src/AppRouter.jsx','Maps a route such as services or academy to the page component.'),
-('Homepage content','src/pages/HomePage.jsx','Controls most homepage sections and Elyra partnership panel.'),
+('Homepage content','src/pages/HomePage.jsx','Controls homepage sections and partner panel.'),
 ('Homepage hero','src/components/HeroSection.new.jsx','This is the hero actually imported by HomePage.'),
 ('About page','src/pages/AboutPage.jsx','Mission, vision, values, positioning and operating model.'),
 ('Service divisions / service lists','src/data/siteData.js','Main shared source for the 16 divisions.'),
@@ -167,8 +167,8 @@ rows=[
 ('Academy','src/pages/AcademyPage.jsx + src/data/siteData.js','Page layout in AcademyPage; track names in siteData.'),
 ('Resources','src/pages/ResourcesPage.jsx','Starter guides and practical checklists are maintained here.'),
 ('Community / Careers','src/pages/ClientFacingPages.jsx','These two pages are exported from this file.'),
-('Elyra partnership / first-client history','src/pages/PartnersPage.jsx, src/pages/HomePage.jsx and Supabase Client Portal','Public partnership wording remains independent; the private portal separately records Elyra Suite as Client 001 / Founding Client.'),
-('Client Portal','src/pages/PortalPage.jsx + src/components/PortalAdminConsole.jsx + PortalAdminExtras.jsx + PortalClientExtras.jsx','Secure Supabase-backed portal, client workspace, administrator controls, staff operations and profile tools.'),
+('Elyra partnership / first-client history','src/pages/PartnersPage.jsx, src/pages/HomePage.jsx and secure portal','Public partnership is independent; portal records Elyra as Client 001.'),
+('Client Portal','src/pages/PortalPage.jsx + portal components','Secure Supabase portal for clients, administrators and staff.'),
 ('Contact page','src/pages/CorporatePages.jsx + ContactSection.jsx','Router uses ContactPage from CorporatePages; actual form/contact details are in ContactSection.'),
 ('Legal page','src/pages/CorporatePages.jsx','Router uses LegalPage from this file.'),
 ('Privacy policy','src/pages/PrivacyPage.jsx','Edit public privacy wording here.'),
@@ -180,7 +180,7 @@ rows=[
 ('Organisation/social SEO shell','public/index.html','Base metadata, organisation schema and social image.'),
 ('Search engine sitemap','public/sitemap.xml','Update when major public routes change.'),
 ('Google Search Console verification','Spaceship DNS + Google Search Console','Use Google Domain verification and add only the TXT record Google supplies.'),
-('Deployment',' .github/workflows/deploy-pages.yml','Builds the React site and publishes build/ to gh-pages.'),
+('Deployment','.github/workflows/deploy-pages.yml','Builds and publishes to GitHub Pages.'),
 ]
 table(doc,['What you want to update','Main file','Plain-language note'],rows,widths=[Cm(4.5),Cm(5.4),Cm(7.5)],small=True)
 
@@ -206,7 +206,7 @@ table(doc,['Item','Current public value','Where to update'],[
 ('Business name','Eragonova Enterprise','Several page headings; Header.jsx; public/index.html'),
 ('Tagline','Technology • Engineering • Growth','public/index.html and brand copy where used'),
 ('Direction line','Practical Technology. Reliable Infrastructure. Sustainable Growth.','HomePage.jsx / hero-related copy'),
-('Phone','+233 50 537 4537','ContactSection.jsx'),
+('Phone','+233 505 374 537','ContactSection.jsx'),
 ('Email','Eragonovaenterprise@gmail.com','ContactSection.jsx'),
 ('Location','Kumasi, Ghana','ContactSection.jsx'),
 ('Live URL','https://eragonova.com/','public/CNAME, package.json, public/index.html, sitemap/robots'),
@@ -406,7 +406,32 @@ heading(doc,'Appendix D. Final Owner Checklist',1)
 bullets(doc,['I know the main source branch is main.','I know gh-pages is generated deployment output.','I know the correct files for Home, About, Services, Academy, Partners and Portal.','I know shared service content belongs mainly in siteData.js.','I know contact details and the Formspree endpoint are in ContactSection.jsx.','I know CorporatePages.jsx contains both active Contact/Legal code and older duplicate code.','I know src/data/routeMeta.json controls page-specific SEO and static clean routes, while public/index.html contains the base organisation/social metadata.','I know .github/workflows/deploy-pages.yml controls automatic deployment.','I will not store passwords, secrets or client confidential data in the public repository.','After major site changes, I will update this handbook too.'])
 note(doc,'Handbook maintenance rule','Whenever the website structure, routes, contact system, services, portal, deployment or business model changes, update this handbook in the same period so it remains trustworthy.','brand')
 
+
+# 21 PUBLIC CLIENT FEEDBACK AND APPROVAL
+heading(doc,'21. Public Client Feedback and Approval',1)
+body(doc,'The Projects area now lets a real client submit feedback for Eragonova. A submission is not published immediately. Only feedback approved by an administrator and submitted with publication consent can appear publicly.')
+table(doc,['Area','Current location','What it does'],[
+('Public feedback section','src/components/TestimonialsSection.jsx','Loads only approved feedback with display consent; accepts a submission including client name, organisation, project, quote and consent.'),
+('Project presentation','src/pages/ClientFacingPages.jsx and src/components/ProjectsSection.new.jsx','Renders project content and the review section on the public Projects page. Confirm current imports before editing.'),
+('Admin review','src/pages/PortalPage.jsx','An administrator can review submissions, approve/publish, reject, return to review or unpublish approved feedback.'),
+('Database rules','supabase/migrations/20261020164433_create_testimonial_moderation.sql','The Eragonova database applies its own testimonials table and Row Level Security rules. Never copy another company’s database credentials or migration blindly.')
+],widths=[Cm(3.6),Cm(6.1),Cm(7.8)],small=True)
+note(doc,'Publishing rule','Use real client feedback only. Ask permission to publish the quotation and the client’s name or organisation. Do not create, edit into a false claim, or publish testimonial screenshots without consent. A submission stays unpublished until an administrator approves it.','safe')
+steps(doc,['Sign in to the Eragonova portal with an authorized administrator account.','Open the Testimonials or Client Feedback area.','Read each pending submission and check that publication consent is recorded.','Approve only genuine feedback that Eragonova has permission to publish. Reject unsuitable submissions; unpublish a previously approved item if permission is withdrawn.','Confirm the public Projects page displays only the approved item.'])
+body(doc,'Backend project reference: Eragonova Supabase project ref mlhtzglvoyhdpqoqugam. The site uses the public browser key from its environment/configuration; never expose a service-role key. Keep this database separate from Elyra Suite.')
+# 22 RELEASE VERIFICATION
+heading(doc,'22. Updated Release Checks',1)
+body(doc,'Eragonova deploys from main to GitHub Pages. The custom domain eragonova.com is configured by public/CNAME. A successful repository commit does not by itself prove that the public build succeeded.')
+bullets(doc,['After a content change, verify the latest Actions deployment finishes successfully.','Check the intended clean URL directly, including /projects/ and /portal/.','Test feedback submission without entering invented client evidence; verify the public list is still limited to approved submissions.','For portal or Supabase changes, verify an authorized administrator can sign in and the role restrictions remain in place.','Keep the handbook and docs/generate_handbook.py aligned when routes, forms, portal capabilities or database behavior change.'])
+
 # metadata
 props=doc.core_properties; props.title='Eragonova Enterprise Website Owner’s Handbook'; props.subject='Plain-language website ownership, update and maintenance guide'; props.author='Eragonova Enterprise'; props.keywords='Eragonova, website handbook, GitHub, maintenance, owner guide'
+for _tbl in doc.tables:
+    for _ri, _row in enumerate(_tbl.rows):
+        _trpr=_row._tr.get_or_add_trPr()
+        _cant=OxmlElement('w:cantSplit')
+        _trpr.append(_cant)
+        if _ri==0:
+            _hdr=OxmlElement('w:tblHeader'); _hdr.set(qn('w:val'),'true'); _trpr.append(_hdr)
 doc.save(OUT)
 print(OUT)
