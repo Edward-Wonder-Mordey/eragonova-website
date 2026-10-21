@@ -1,5 +1,5 @@
-import React from "react";
-import { ArrowRight, AlertTriangle, CheckCircle2, Download, ExternalLink, ShieldCheck } from "lucide-react";
+import React, { useMemo, useState } from "react";
+import { ArrowRight, AlertTriangle, CheckCircle2, Download, ExternalLink, ShieldCheck, Search, X } from "lucide-react";
 
 const helpGuides = [
   {
@@ -218,6 +218,32 @@ function GuideCard({ guide }) {
 }
 
 export default function DigitalHelpPage() {
+  const [query, setQuery] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("all");
+  const categories = [
+    { title: "Quick technology health checks", description: "Twelve safe first checks for common device, file, update and account problems.", guides: helpGuides },
+    ...expandedCategories,
+  ];
+  const normalizedQuery = query.trim().toLocaleLowerCase();
+  const filteredCategories = useMemo(() => categories
+    .filter((category) => selectedCategory === "all" || category.title === selectedCategory)
+    .map((category) => ({
+      ...category,
+      guides: category.guides.filter((guide) => {
+        if (!normalizedQuery) return true;
+        const searchable = [guide.title, guide.summary, guide.caution, ...(guide.steps || []), ...(guide.links || []).map((link) => link.label)]
+          .filter(Boolean).join(" ").toLocaleLowerCase();
+        return searchable.includes(normalizedQuery);
+      }),
+    }))
+    .filter((category) => category.guides.length > 0), [normalizedQuery, selectedCategory]);
+  const resultCount = filteredCategories.reduce((total, category) => total + category.guides.length, 0);
+
+  function clearSearch() {
+    setQuery("");
+    setSelectedCategory("all");
+  }
+
   return <>
     <section className="accent-band relative overflow-hidden text-white pt-36 pb-20 sm:pt-40 sm:pb-24">
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12">
@@ -234,11 +260,26 @@ export default function DigitalHelpPage() {
     <section className="py-16 bg-slate-50 dark:bg-slate-900/40">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         <div className="mb-8 flex items-center gap-3"><ShieldCheck className="text-blue-600 dark:text-blue-300"/><h2 className="text-3xl font-bold text-slate-950 dark:text-white">Browse the free guides</h2></div>
-        <div className="mb-14"><h3 className="mb-5 text-xl font-bold text-slate-950 dark:text-white">Quick technology health checks</h3><div className="grid gap-6 lg:grid-cols-2">{helpGuides.map((guide) => <GuideCard key={guide.id} guide={guide}/>)}</div></div>
-        {expandedCategories.map((category) => <section key={category.title} className="mt-14 scroll-mt-24" aria-label={category.title}>
+        <div className="mb-10 rounded-3xl border border-slate-200 bg-white p-5 shadow-sm dark:border-white/10 dark:bg-slate-950 sm:p-7">
+          <label htmlFor="technology-help-search" className="mb-3 block text-lg font-bold text-slate-950 dark:text-white">What do you need help with?</label>
+          <div className="flex flex-col gap-3 lg:flex-row">
+            <div className="relative min-w-0 flex-1">
+              <Search size={19} aria-hidden="true" className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"/>
+              <input id="technology-help-search" type="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Try “Windows update”, “printer”, “WhatsApp” or “PDF”" autoComplete="off" className="w-full rounded-xl border border-slate-300 bg-white py-3.5 pl-12 pr-4 text-base text-slate-950 outline-none transition placeholder:text-slate-400 focus:border-blue-600 focus:ring-4 focus:ring-blue-100 dark:border-white/15 dark:bg-slate-900 dark:text-white dark:focus:ring-blue-500/20"/>
+            </div>
+            <label className="sr-only" htmlFor="technology-help-category">Filter by category</label>
+            <select id="technology-help-category" value={selectedCategory} onChange={(event) => setSelectedCategory(event.target.value)} className="rounded-xl border border-slate-300 bg-white px-4 py-3.5 text-base text-slate-900 outline-none focus:border-blue-600 focus:ring-4 focus:ring-blue-100 dark:border-white/15 dark:bg-slate-900 dark:text-white">
+              <option value="all">All categories</option>
+              {categories.map((category) => <option key={category.title} value={category.title}>{category.title}</option>)}
+            </select>
+            {(query || selectedCategory !== "all") && <button type="button" onClick={clearSearch} className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-300 px-4 py-3 font-semibold text-slate-700 hover:bg-slate-50 focus:outline-none focus:ring-4 focus:ring-blue-100 dark:border-white/15 dark:text-white dark:hover:bg-white/5"><X size={17}/> Clear</button>}
+          </div>
+          <p className="mt-3 text-sm text-slate-600 dark:text-slate-300" role="status" aria-live="polite">{normalizedQuery || selectedCategory !== "all" ? `${resultCount} ${resultCount === 1 ? "guide" : "guides"} found` : `Search across ${categories.reduce((n, category) => n + category.guides.length, 0)} practical guides. Results update as you type.`}</p>
+        </div>
+        {resultCount > 0 ? filteredCategories.map((category) => <section key={category.title} className="mt-12 scroll-mt-24" aria-label={category.title}>
           <div className="mb-5"><h2 className="text-3xl font-bold text-slate-950 dark:text-white">{category.title}</h2><p className="mt-2 text-slate-600 dark:text-slate-300">{category.description}</p></div>
           <div className="grid gap-6 lg:grid-cols-2">{category.guides.map((guide) => <GuideCard key={guide.id} guide={guide}/>)}</div>
-        </section>)}
+        </section>) : <div className="rounded-3xl border border-dashed border-slate-300 bg-white p-8 text-center dark:border-white/15 dark:bg-slate-950"><h3 className="text-xl font-bold text-slate-950 dark:text-white">No matching guide yet</h3><p className="mx-auto mt-2 max-w-2xl leading-7 text-slate-600 dark:text-slate-300">Try a shorter search term or choose All categories. If you cannot find the answer, ask Eragonova and describe the device and problem.</p><div className="mt-5 flex flex-wrap justify-center gap-3"><button type="button" onClick={clearSearch} className="rounded-xl bg-blue-700 px-5 py-3 font-bold text-white hover:bg-blue-800">Clear search</button><a href="/contact/" className="rounded-xl border border-slate-300 px-5 py-3 font-bold text-slate-800 hover:bg-slate-50 dark:border-white/15 dark:text-white">Ask Eragonova</a></div></div>}
         <div className="mt-14 rounded-3xl bg-blue-950 p-8 text-white sm:p-10">
           <div className="flex items-start gap-4"><AlertTriangle className="mt-1 shrink-0 text-amber-300"/><div><h2 className="text-2xl font-bold">When to stop and ask for help</h2><p className="mt-3 max-w-3xl leading-7 text-white/75">Stop before troubleshooting if you suspect ransomware, see a swollen battery or burning smell, risk losing irreplaceable files, or are working on a device managed by an employer or school. Contact the device owner or a qualified technician.</p><div className="mt-5 flex flex-wrap gap-3"><a href="/contact/" className="inline-flex items-center gap-2 rounded-xl bg-white px-5 py-3 font-bold text-blue-950">Ask Eragonova / Contact <ArrowRight size={17}/></a><a href="https://wa.me/233505374537" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-xl border border-white/30 px-5 py-3 font-bold text-white hover:bg-white/10">WhatsApp Eragonova <ArrowRight size={17}/></a><a href="mailto:eragonovaenterprise@gmail.com" className="inline-flex items-center gap-2 rounded-xl border border-white/30 px-5 py-3 font-bold text-white hover:bg-white/10">Email us</a></div></div></div>
         </div>
