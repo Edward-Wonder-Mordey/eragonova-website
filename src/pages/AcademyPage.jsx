@@ -198,6 +198,31 @@ export default function AcademyPage() {
         </div>
       </section>
 
+      <section className="py-24 bg-white dark:bg-slate-950 border-t border-slate-200 dark:border-white/10">
+        <div className="max-w-7xl mx-auto px-6 lg:px-12">
+          <div className="max-w-3xl">
+            <p className="text-violet-600 dark:text-violet-300 text-xs font-bold uppercase tracking-[0.22em]">Free self-study resources</p>
+            <h2 className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-bold tracking-[-0.035em] text-slate-950 dark:text-white">Start learning with Eragonova’s Knowledge Centre.</h2>
+            <p className="mt-5 text-base sm:text-lg leading-8 text-slate-600 dark:text-slate-300">Use these practical guides for independent learning, preparation or reference. They are free resources, separate from Academy programmes, assessments and certificates.</p>
+          </div>
+          <div className="mt-9 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+            {[
+              {title:"Digital Literacy Essentials",description:"Explore computer and Windows basics, safe internet use, account protection and backups.",query:"computer"},
+              {title:"Small Business Technology Essentials",description:"Find practical guides on business email, digital records, business data and office networking.",query:"business"},
+              {title:"Business Documentation Essentials",description:"Review proposal writing, record organisation, tender preparation and print-ready documents.",query:"proposal"},
+              {title:"Engineering Safety & Technical Foundations",description:"Start with electrical safety, solar and generator awareness, and energy-efficiency checks.",query:"electrical"},
+            ].map((pathway) => (
+              <article key={pathway.title} className="accent-card rounded-3xl p-6" data-accent="violet">
+                <div className="accent-icon"><BookOpenCheck size={22}/></div>
+                <h3 className="relative z-10 mt-5 text-xl font-bold text-slate-950 dark:text-white">{pathway.title}</h3>
+                <p className="relative z-10 mt-3 text-sm leading-7 text-slate-600 dark:text-slate-300">{pathway.description}</p>
+                <a href={`/free-tech-help/?q=${encodeURIComponent(pathway.query)}`} className="relative z-10 mt-5 inline-flex items-center gap-2 font-semibold text-sm accent-kicker">Explore free guides <ArrowRight size={16}/></a>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="py-24 bg-white dark:bg-slate-950">
         <div className="max-w-7xl mx-auto px-6 lg:px-12 grid lg:grid-cols-[.9fr_1.1fr] gap-12 items-start">
           <div>
