@@ -115,7 +115,7 @@ p=doc.add_paragraph(); p.alignment=WD_ALIGN_PARAGRAPH.CENTER
 r=p.add_run('A plain-language guide to updating, maintaining and growing the Eragonova Enterprise website'); font(r); r.font.size=Pt(11); r.font.color.rgb=RGBColor.from_string(MUTED)
 p=doc.add_paragraph(); p.alignment=WD_ALIGN_PARAGRAPH.CENTER; p.paragraph_format.space_before=Pt(12)
 r=p.add_run('Practical Technology. Reliable Infrastructure. Sustainable Growth.'); font(r,'Liberation Serif'); r.bold=True; r.font.size=Pt(14); r.font.color.rgb=RGBColor.from_string(BLUE)
-cover=[('Live website','https://eragonova.com/'),('GitHub repository','Edward-Wonder-Mordey/eragonova-website'),('Phone','+233 505 374 537'),('Email','Eragonovaenterprise@gmail.com'),('Handbook version','Version 1.2 — 13 October 2026')]
+cover=[('Live website','https://eragonova.com/'),('GitHub repository','Edward-Wonder-Mordey/eragonova-website'),('Phone','+233 505 374 537'),('Email','Eragonovaenterprise@gmail.com'),('Handbook version','Version 1.4 — 22 October 2026')]
 t=doc.add_table(rows=len(cover),cols=2); t.alignment=WD_TABLE_ALIGNMENT.CENTER
 for i,(a,b) in enumerate(cover):
     t.cell(i,0).text=a; t.cell(i,1).text=b; shade(t.cell(i,0),'EFF6FF'); shade(t.cell(i,1),WHITE); borders(t.cell(i,0),'BFDBFE'); borders(t.cell(i,1),'BFDBFE'); style_runs(t.cell(i,0).paragraphs[0],size=8.3,bold=True,color=NAVY); style_runs(t.cell(i,1).paragraphs[0],size=8.3)
@@ -308,7 +308,7 @@ body(doc,'SEO is split between the base page shell and the clean public routes. 
 table(doc,['Need','File','What to edit'],[
 ('Change a page search description','src/data/routeMeta.json','Edit the description for the relevant route. A new deployment regenerates the matching static route page.'),('Change a page browser/search title','src/data/routeMeta.json','Edit the title for the relevant route. A new deployment regenerates the matching static route page.'),('Change base social preview','public/index.html','Edit the default Open Graph/Twitter values used before route JavaScript loads.'),('Change social preview image','public/index.html','og:image and twitter:image'),('Update indexed routes','public/sitemap.xml','Add/remove public URLs when site structure changes'),('Control crawling','public/robots.txt','Usually leave as-is unless SEO strategy changes'),('Google Search Console','Spaceship DNS','Add the TXT verification value supplied by Google for the Domain property.')],widths=[Cm(4.2),Cm(5.7),Cm(7.6)],small=True)
 heading(doc,'17.1 Analytics',2)
-body(doc,'Google Analytics 4 support is prepared but intentionally disabled until a real Measurement ID is available. When one is created, put it in public/site-config.js. The site will then load GA4 and record page views, contact clicks and successful contact-form leads. Review the Privacy notice before enabling any analytics or cookie-dependent features.')
+body(doc,'Google Analytics 4 is configured in public/site-config.js with Measurement ID G-D93FQV644G. The site sends page-view events through src/analytics.js. Check the Eragonova GA4 property’s Realtime report after visiting the site; reports can take time to populate. Keep privacy wording aligned with the analytics enabled.')
 
 # 18 GitHub/deploy
 heading(doc,'18. Editing in GitHub and Publishing Changes',1)
@@ -409,6 +409,41 @@ body(doc,'Backend project reference: Eragonova Supabase project ref mlhtzglvoyhd
 heading(doc,'22. Updated Release Checks',1)
 body(doc,'Eragonova deploys from main to GitHub Pages. The custom domain eragonova.com is configured by public/CNAME. A successful repository commit does not by itself prove that the public build succeeded.')
 bullets(doc,['After a content change, verify the latest Actions deployment finishes successfully.','Check the intended clean URL directly, including /projects/ and /portal/.','Test feedback submission without entering invented client evidence; verify the public list is still limited to approved submissions.','For portal or Supabase changes, verify an authorized administrator can sign in and the role restrictions remain in place.','Keep the handbook and docs/generate_handbook.py aligned when routes, forms, portal capabilities or database behavior change.'])
+
+
+# 23 KNOWLEDGE CENTRE AND ACADEMY UPDATES
+heading(doc,'23. Current Knowledge Centre and Academy Updates',1)
+body(doc,'Release notes for the site as of 22 October 2026.')
+heading(doc,'Free Technology Help and Knowledge Centre',2)
+bullets(doc,[
+    'The Free Technology Help page is a public resource with no signup or payment. It contains about 90 practical guides across technology support, cybersecurity, business technology, website and digital presence, student resources, emergency response, engineering and business growth.',
+    'The guide search is available in the site header beside the display-mode switch on wide screens. On smaller screens, open the navigation menu and use Search free technology guides. Search opens the Knowledge Centre with the phrase entered; results update as the visitor types and can be narrowed by category.',
+    'The Knowledge Centre includes printable checklists, reading-time estimates, difficulty labels, related guides, safety guidance and links to Eragonova support. Quick Technology Health Check remains a separate free resource.'
+])
+heading(doc,'Where to maintain the guides and search',2)
+bullets(doc,[
+    'Edit guide content, categories, search fields, guide cards and related-guide behavior in src/pages/DigitalHelpPage.jsx. The header search control is in src/components/Header.jsx. Routes and page metadata are maintained through src/AppRouter.jsx and src/data/.',
+    'New guides should have a problem-focused title, concise summary, safe first steps, official-source links where appropriate, a caution or escalation point for risky actions, and a category. Do not recommend unknown downloads or destructive steps without a backup warning.'
+])
+heading(doc,'Academy connections and public examples',2)
+bullets(doc,[
+    'The Academy links four self-study pathways to free Knowledge Centre material: Digital Literacy Essentials, Small Business Technology Essentials, Business Documentation Essentials, and Engineering Safety & Technical Foundations. These are free learning pathways and remain separate from formal Academy programmes.',
+    'Applied Learning Examples identify their real context, such as an academic case study, founder project or community resource. Keep classifications and project descriptions accurate. Formal curriculum, assessments and certificates remain governed by the Academy page.'
+])
+heading(doc,'Analytics and search monitoring',2)
+bullets(doc,[
+    'Google Analytics 4 is configured through public/site-config.js with Measurement ID G-D93FQV644G. The public site sends page-view events through src/analytics.js. Search Console reports impressions, clicks, queries and indexing; results can take time and are not guaranteed by publishing a guide.',
+    'Keep website privacy wording aligned with analytics and other tracking. Never put passwords, private keys or service-role credentials in public files.'
+])
+heading(doc,'Release checks for the Knowledge Centre',2)
+bullets(doc,[
+    'After changing guide content, test /free-tech-help/ and searches such as printer or Windows 11 on desktop and mobile.',
+    'Check search results, count and category filters. Confirm a search opens with the requested phrase and clearing it restores the guide list.',
+    'Open a printable checklist, test its PDF or browser print action, and confirm official-source links work.',
+    'For Academy changes, test free-learning pathway links and formal programme information separately.',
+    'Use genuine project evidence and client feedback only; continue moderating public feedback before it appears.'
+])
+
 
 # metadata
 props=doc.core_properties; props.title='Eragonova Enterprise Website Owner’s Handbook'; props.subject='Plain-language website ownership, update and maintenance guide'; props.author='Eragonova Enterprise'; props.keywords='Eragonova, website handbook, GitHub, maintenance, owner guide'
