@@ -10,6 +10,7 @@ import {
   Loader2,
   Lock,
   LogOut,
+  Megaphone,
   MessageSquare,
   Monitor,
   ReceiptText,
@@ -19,6 +20,7 @@ import {
   UserCircle2,
 } from "lucide-react";
 import CapabilityVisual from "../components/CapabilityVisual";
+import PortalAnnouncements from "./PortalAnnouncements";
 import { supabase, PORTAL_STORAGE_BUCKETS } from "../lib/supabase";
 
 const publicFeatures = [
@@ -30,6 +32,7 @@ const publicFeatures = [
 
 const tabItems = [
   ["dashboard", BarChart3, "Dashboard"],
+  ["announcements", Megaphone, "Announcements"],
   ["projects", FolderKanban, "Projects"],
   ["documents", FileText, "Documents"],
   ["billing", ReceiptText, "Billing"],
@@ -323,6 +326,8 @@ export default function PortalPage() {
                 <div className="rounded-2xl border border-slate-200 dark:border-white/10 bg-white dark:bg-slate-900 p-6"><h2 className="font-bold text-slate-950 dark:text-white">Notifications</h2><div className="mt-4 space-y-4">{notifications.length ? notifications.slice(0,5).map((item) => <div key={item.id} className="flex gap-3"><Bell size={16} className={item.read_at ? "text-slate-300" : "text-indigo-500"}/><div><p className="text-sm font-semibold text-slate-900 dark:text-white">{item.title}</p>{item.body && <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">{item.body}</p>}</div></div>) : <p className="text-sm text-slate-500">No notifications yet.</p>}</div></div>
               </div>
             </div>}
+
+            {activeTab === "announcements" && <PortalAnnouncements profile={profile} session={session} onSent={() => loadPortalData(session)} />}
 
             {activeTab === "projects" && <div className="space-y-4"><div><h2 className="text-2xl font-bold text-slate-950 dark:text-white">Projects</h2><p className="mt-1 text-sm text-slate-500">Project status and agreed progress visible to your account.</p></div>{projects.length ? projects.map((project) => <article key={project.id} className="rounded-2xl border border-slate-200 dark:border-white/10 bg-white dark:bg-slate-900 p-6"><div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4"><div><p className="text-xs font-bold uppercase tracking-[0.14em] text-indigo-500">{project.code}</p><h3 className="mt-1 text-xl font-bold text-slate-950 dark:text-white">{project.name}</h3>{project.summary && <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">{project.summary}</p>}</div><StatusPill value={project.status}/></div><div className="mt-5"><div className="flex justify-between text-xs font-semibold text-slate-500"><span>Progress</span><span>{project.progress}%</span></div><div className="mt-2 h-2 rounded-full bg-slate-100 dark:bg-white/10 overflow-hidden"><div className="h-full rounded-full bg-indigo-600" style={{ width: `${project.progress}%` }} /></div></div><div className="mt-4 flex flex-wrap gap-x-6 gap-y-2 text-xs text-slate-500"><span>Start: {formatDate(project.start_date)}</span><span>Due: {formatDate(project.due_date)}</span>{project.service_division && <span>{project.service_division}</span>}</div></article>) : <p className="rounded-2xl border border-slate-200 dark:border-white/10 bg-white dark:bg-slate-900 p-6 text-sm text-slate-500">No client-visible projects are linked to this account yet.</p>}</div>}
 
